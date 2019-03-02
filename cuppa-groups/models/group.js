@@ -8,3 +8,5 @@ const groupSchema = new Schema({
     owner: Schema.Types.ObjectId,       // user IDs
     createdOn: { type: Date, default: Date.now }
 })
+
+module.exports = mongoose.model('Group', groupSchema);

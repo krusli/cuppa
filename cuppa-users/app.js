@@ -24,9 +24,9 @@ app.post('/users', controllers.newUser);
 app.post('/login', controllers.login);  // get a token too
 
 // users
-app.get('/me', jwtAuthenticator, controllers.getMe);
+app.get('/users/me', jwtAuthenticator, controllers.getMe);
 app.get('/users', jwtAuthenticator, controllers.getUsers);
-app.get('/users/:username', jwtAuthenticator, controllers.getUser)
+app.get('/users/:username', jwtAuthenticator, controllers.getUser); // TODO disallow users with restricted keywors ['me']
 
 // checks token validity
 // sends 200 if valid
