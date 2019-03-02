@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const roleSchema = require('./schemas/role');
 
-const roleAndUsersSchema = new Schema({
+const rolesAndUsersSchema = new Schema({
     role: Schema.Types.ObjectId,      // roleId (either in Base, Group or Meetup -> need to search all 3)
-    user: [ Schema.Types.ObjectId ],  // userId[]
+    users: [ Schema.Types.ObjectId ],  // userId[]
     // TODO strategy: [ ENROLLMENT | VOTING ] (assumed by default)
 });
 
@@ -14,7 +14,7 @@ const roleAndUsersSchema = new Schema({
 
 const teamSchema = new Schema({
     name: { type: String, required: true },
-    rolesAndUsers: { type: [ roleAndUsersSchema ], default: [] },
+    rolesAndUsers: { type: [ rolesAndUsersSchema ], default: [] },
 });
 
 const eventSchema = new Schema({

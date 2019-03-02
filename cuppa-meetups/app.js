@@ -24,8 +24,18 @@ app.post('/meetups/:meetupId/attendees', validateAndGetMeetup, meetupController.
 
 const teamsController = require('./controllers/teams');
 app.get('/meetups/:meetupId/teams', validateAndGetMeetup, teamsController.getTeams);
+app.get('/meetups/:meetupId/teams/:teamId', validateAndGetMeetup, teamsController.getTeam);
 app.post('/meetups/:meetupId/teams', validateAndGetMeetup, teamsController.newTeam);
 app.delete('/meetups/:meetupId/teams/:teamId', validateAndGetMeetup, teamsController.deleteTeam);
+app.post('/meetups/:meetupId/teams/:teamId/role', validateAndGetMeetupAndRole, teamsController.newrolesAndUsers);
+app.post('/meetups/:meetupId/teams/:teamId/member', validateAndGetMeetupAndRole, teamsController.newTeamMember);
+// TODO add people to the team (people must be attendees)
+// app.post('/meetups/:meetupId/teams/:teamId/member)
+/*
+{
+    role: ObjectId (Role ID)
+}
+*/
 
 const eventsController = require('./controllers/events');
 app.get('/meetups/:meetupId/events', validateAndGetMeetup, eventsController.getEvents);
