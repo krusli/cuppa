@@ -7,6 +7,10 @@ const getToken = require('./auth').getToken;
 
 module.exports = Model => {
     return {
+        getMe: (req, res) => {
+            res.json(getUserPublic(req.user));
+        },
+
         getUsers: async (req, res) => {
             const params = {};
             if (req.query.name) {
