@@ -7,7 +7,18 @@ const passportJwt = require('passport-jwt');
 const JWTStrategy = passportJwt.Strategy;
 const ExtractJWT = passportJwt.ExtractJwt;
 
+const jwt = require('jsonwebtoken');
 const JWT_SECRET = require('./consts').JWT_SECRET;
+const getToken = user => {
+    const payload = {
+        id: user.id,
+        issued: Date.now()
+    };
+
+    // TODO other variables in payload
+    return jwt.sign(payload, JWT_SECRET);
+};
+
 passport.use(new LocalStrategy(
     (username, password, done) => {
         User.findOne({ username })
@@ -45,4 +56,8 @@ passport.use(new JWTStrategy({
     }
 }));
 
-module.exports = passport;
+
+module.exports = {
+    passport,
+    getToken
+};

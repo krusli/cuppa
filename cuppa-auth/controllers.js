@@ -1,12 +1,25 @@
-const getToken = require('./common').getToken;
 const getUserPublic = require('./common').getUserPublic;
 const bcrypt = require('bcrypt');
 
 // configured Passport.js obj
-const passport = require('./auth');
+const passport = require('./auth').passport;
+const getToken = require('./auth').getToken;
 
 module.exports = Model => {
     return {
+        getUsers: async (req, res) => {
+            const params = {};
+            if (req.query.name) {
+                params.name = new RegExp(`${req.query.name}`, 'i');    // name can be somewhere in the middle + case insensitive
+            }
+            if (req.query.username) {
+                params.username = new RegExp(`^${req.query.username}$`, 'i');  // case insensitive
+            }
+            const matches = await Model.find(params);
+            const matchesPublic = matches.map(getUserPublic)
+            res.json(matchesPublic);
+        },
+
         newUser: async (req, res) => {
             const name = req.body.name;
             const username = req.body.username;
@@ -41,6 +54,7 @@ module.exports = Model => {
                     });
                 } 
                 else if (err.name == 'MongoError') {
+                    // e.g. duplicate keys
                     res.status(422).send({
                         error: 'validation_error',
                         message: err.message
@@ -92,9 +106,7 @@ module.exports = Model => {
                 return;
             }
 
-            // don't send back passwordHash
-            const { passwordHash, ...userPublic } = user._doc;
-            res.send(userPublic)
+            res.send(getUserPublic(user))
         }
     }
 }
