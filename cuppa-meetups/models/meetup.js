@@ -1,39 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// TODO Role as an object
-
-const roleAndUserSchema = new Schema({
-    role: { type: String, required: true },
-    user: Schema.Types.ObjectId,
-    // TODO strategy: [Poll, Provided]
+const roleAndUsersSchema = new Schema({
+    role: Schema.Types.ObjectId,      // roleId
+    user: [ Schema.Types.ObjectId ],  // userId[]
+    // TODO strategy: [ Enrol ] (assumed by default)
+        // voting is for later
+    // under poll status, show poll widget
+    // the actual user set is still null at that point -> admin sets it
 });
-
-// TODO
-const surveySchema = new Schema({
-    options: [String],
-    // votes: []    // TODO
-});
-
-const roleSchema = new Schema({
-    name: String,
-    requiredType: String,   // USER or SERVICE
-    roleWidget: String, // TODO
-})
-
-// under poll status, show poll widget
-// the actual user set is still null at that point -> admin sets it
 
 const teamSchema = new Schema({
-    requiredRoles: [String],    // TODO ObjectIDs
-    roleAndUsers: [roleAndUserSchema],
-    surveys: [surveySchema]
-})
+    rolesAndUsers: [ roleAndUsersSchema ],
+});
 
 const eventSchema = new Schema({
-    requiredRoles: [String],
+    requiredRoles: { type: [ Schema.Types.ObjectId ], defualt: [] },
     timeStart: { type: Date, required: true }
-})
+});
 
 const meetupSchema = new Schema({
     name: { type: String, required: true },
@@ -43,8 +27,10 @@ const meetupSchema = new Schema({
     createdOn: { type: Date, default: Date.now },
     group: Schema.Types.ObjectId,    // group ID
 
+    events: { type: [eventSchema], default: [] },
     teams: { type: [teamSchema], default: [] },
-    events: { type: [eventSchema], default: [] }
-})
+
+    // meetupSpecificRoles: []  // TODO
+});
 
 module.exports = mongoose.model('Group', meetupSchema);

@@ -107,8 +107,27 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-})
+});
 
+// app.post('/groups/:groupId/events', async (req, res, next) => {
+//     try {
+//         const user = await getUserMe(req);
+//         const group = await Group.findOne({ members: user._id, _id: req.params.groupId });
+
+//         if (!group) {
+//             res.status(404).send(); // no group found
+//             return;
+//         }
+
+//         // TODO validate body
+
+
+
+        
+//     } catch (err) {
+//         next(err);
+//     }
+// });
 // TODO get group (open) (only public-facing contents)
 
 app.listen(3001, () => {
