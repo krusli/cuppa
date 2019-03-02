@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const roleSchema = require('./schemas/role');
+
 const roleAndUsersSchema = new Schema({
-    role: Schema.Types.ObjectId,      // roleId
+    role: Schema.Types.ObjectId,      // roleId (either in Base, Group or Meetup -> need to search all 3)
     user: [ Schema.Types.ObjectId ],  // userId[]
     // TODO strategy: [ Enrol ] (assumed by default)
         // voting is for later
@@ -30,7 +32,7 @@ const meetupSchema = new Schema({
     events: { type: [eventSchema], default: [] },
     teams: { type: [teamSchema], default: [] },
 
-    // meetupSpecificRoles: []  // TODO
+    roles: { type: [roleSchema], default: [] }    // roles specific to *only* this meetup
 });
 
 module.exports = mongoose.model('Group', meetupSchema);
