@@ -17,7 +17,7 @@ describe('Controllers', () => {
                     return mockRes;
                 },
                 send: body => {
-                    expect(_code).to.equal(422);
+                    expect(_code).to.equal(400);
                     expect(body.error).to.equal('invalid_request');
                 }
             }

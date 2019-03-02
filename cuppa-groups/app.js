@@ -25,7 +25,7 @@ app.post('/groups', async (req, res, next) => {
     const description = req.body.description;
 
     if (!name) {
-        res.status(422).send({
+        res.status(400).send({
             error: 'invalid_request',
             message: 'Invalid request.'
         });

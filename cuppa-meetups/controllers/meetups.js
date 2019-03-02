@@ -1,6 +1,7 @@
 const interservice = require('../../common/interservice'); // inter-service comms
 const getGroup = interservice.getGroup;
 const getGroups = interservice.getGroups;
+const getUser = interservice.getUser;
 const getUserMe = interservice.getUserMe;
 
 const Meetup = require('../models/meetup');
@@ -13,7 +14,7 @@ module.exports = {
             const groupId = req.body.group;
 
             if (!groupId || !name) {
-                res.status(422).send({
+                res.status(400).send({
                     error: 'invalid_request',
                     message: 'Invalid request.'
                 });
@@ -72,5 +73,33 @@ module.exports = {
         catch (error) {
             next(error);
         }
+    },
+
+    newAttendee: async (req, res, next) => {
+        // check if username is in req.body
+        const username = req.body.username;
+        if (!username) {
+            res.status(400).send({
+                error: 'invalid_request',
+                message: 'Invalid request.'
+            });
+            return;
+        }
+
+        // try to get the user
+        const user = await getUser(req, res, username);
+        if (!user) {
+            res.status(400).send({
+                error: 'invalid_request',
+                message: 'Invalid username.'
+            });
+            return;
+        }
+
+        req.meetup.attendees.push(user._id);
+        const meetupSaved = await req.meetup.save();
+
+        // TODO Location
+        res.status(201).json(meetupSaved.attendees);
     }
 }

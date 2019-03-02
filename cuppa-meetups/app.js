@@ -19,6 +19,7 @@ const meetupController = require('./controllers/meetups');
 app.post('/meetups', meetupController.newMeetup);
 app.get('/meetups', meetupController.getMeetups);
 app.get('/meetups/:meetupId', validateAndGetMeetup, meetupController.getMeetup);
+app.post('/meetups/:meetupId/attendees', validateAndGetMeetup, meetupController.newAttendee);
 
 const teamsController = require('./controllers/teams');
 app.get('/meetups/:meetupId/teams', validateAndGetMeetup, teamsController.getTeams);
