@@ -39,6 +39,8 @@ const getUser = async req => {
     })
 }
 
+app.get('/healthCheck', (req, res) => res.send());
+
 app.post('/groups', async (req, res, next) => {
     // validate request
     const name = req.body.name;

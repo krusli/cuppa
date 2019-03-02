@@ -19,6 +19,8 @@ app.use(passport.initialize());
 const User = require('./models/user');
 const controllers = require('./controllers')(User);
 
+app.get('/healthCheck', (req, res) => res.send());
+
 // signup and login
 app.post('/users', controllers.newUser);
 app.post('/login', controllers.login);  // get a token too
