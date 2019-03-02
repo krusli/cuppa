@@ -83,7 +83,7 @@ module.exports = Model => {
                 if (err || !user) {
                     console.log('/login: failed, bad request');
                     console.log(err);
-                    res.status(400).send();
+                    res.status(401).send();
                 }
 
                 req.login(user, { session: false }, err => {
@@ -102,7 +102,7 @@ module.exports = Model => {
             middleware(req, res);   // call it (we don't need next though)
         },
 
-        getUser: async (req, res) => {
+        getUserMe: async (req, res) => {
             const user = await Model.findOne({ username: req.params.username })
 
             if (!user) {

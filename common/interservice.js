@@ -33,11 +33,15 @@ const getGroup = (req, groupId) =>
 const getGroups = req =>
     getPromiseForRequest(req, 'http://localhost:3001/groups');
 
-const getUser = req => 
+const getUser = (req, username) => 
+    getPromiseForRequest(req, `http://localhost:3000/users/${username}`);
+
+const getUserMe = req => 
     getPromiseForRequest(req, 'http://localhost:3000/users/me')
 
 module.exports = {
     getGroup,
     getGroups,
-    getUser
+    getUser,
+    getUserMe
 }

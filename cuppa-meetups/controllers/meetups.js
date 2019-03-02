@@ -1,7 +1,7 @@
 const interservice = require('../../common/interservice'); // inter-service comms
 const getGroup = interservice.getGroup;
 const getGroups = interservice.getGroups;
-const getUser = interservice.getUser;
+const getUserMe = interservice.getUserMe;
 
 const Meetup = require('../models/meetup');
 
@@ -23,7 +23,7 @@ module.exports = {
             // make sure user can access the group
             // TODO this should just be middleware.
             const group = await getGroup(req, groupId);
-            const user = await getUser(req);
+            const user = await getUserMe(req);
             if (!group) {
                 res.status(401).send({
                     error: 'unauthorized',
