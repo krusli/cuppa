@@ -33,7 +33,7 @@ app.post('/groups', async (req, res, next) => {
     }
 
     try {
-        const user = await getUserMe(req);
+        const user = await getUserMe(req, res);
 
         const owner = user._id;
         const group = await Group.create({
@@ -51,7 +51,7 @@ app.post('/groups', async (req, res, next) => {
 
 app.get('/groups', async (req, res, next) => {
     try {
-        const user = await getUserMe(req);
+        const user = await getUserMe(req, res);
         const groups = await Group.find({ members: user._id })    // contains userID
         res.json(groups);
     } catch(err) {
@@ -63,7 +63,7 @@ app.get('/groups', async (req, res, next) => {
 // gets a group, that the user is a member of
 app.get('/groups/:groupId', async (req, res, next) => {
     try {
-        const user = await getUserMe(req);
+        const user = await getUserMe(req, res);
         const group = await Group.findOne({ members: user._id, _id: req.params.groupId })
         res.json(group);
     } catch (err) {
@@ -81,7 +81,7 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
     }
 
     try {
-        const user = await getUserMe(req);
+        const user = await getUserMe(req, res);
         const group = await Group.findOne({ members: user._id, _id: req.params.groupId });
 
         if (!group) {
@@ -90,7 +90,7 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
         }
 
         // validate the other user
-        const invitedUser = await getUser(req, req.body.username);
+        const invitedUser = await getGroups(req, res, req.body.username);
         if (!invitedUser) {
             res.status(400).send({
                 error: 'bad_request',
@@ -111,7 +111,7 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
 
 // app.post('/groups/:groupId/events', async (req, res, next) => {
 //     try {
-//         const user = await getUserMe(req);
+//         const user = await getUserMe(req, res);
 //         const group = await Group.findOne({ members: user._id, _id: req.params.groupId });
 
 //         if (!group) {

@@ -1,7 +1,7 @@
 const request = require('request');
 
 // req: for getting headers
-const getPromiseForRequest = async (req, url) =>
+const getPromiseForRequest = async (req, res, url) =>
     new Promise((resolve, reject) => {
         // set up teh request
         const options = {
@@ -21,6 +21,10 @@ const getPromiseForRequest = async (req, url) =>
                     // TODO: if JSON.parse fails, should NOT be internal server error but unauthorized
                     resolve(JSON.parse(body));
                 } catch (error) {
+                    res.status(401).send({
+                        error: 'unauthorized',
+                        message: 'You are not authorized to perform this action.'
+                    })
                     reject(error);
                 }
             }
@@ -28,17 +32,17 @@ const getPromiseForRequest = async (req, url) =>
     })
    
 
-const getGroup = (req, groupId) => 
-    getPromiseForRequest(req, `http://localhost:3001/groups/${groupId}`);
+const getGroup = (req, res, groupId) => 
+    getPromiseForRequest(req, res, `http://localhost:3001/groups/${groupId}`);
 
-const getGroups = req =>
-    getPromiseForRequest(req, 'http://localhost:3001/groups');
+const getGroups = (req, res) =>
+    getPromiseForRequest(req, res, 'http://localhost:3001/groups');
 
-const getUser = (req, username) => 
-    getPromiseForRequest(req, `http://localhost:3000/users/${username}`);
+const getUser = (req, res, username) => 
+    getPromiseForRequest(req, res, `http://localhost:3000/users/${username}`);
 
-const getUserMe = req => 
-    getPromiseForRequest(req, 'http://localhost:3000/users/me')
+const getUserMe = (req, res) => 
+    getPromiseForRequest(req, res, 'http://localhost:3000/users/me')
 
 module.exports = {
     getGroup,

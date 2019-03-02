@@ -22,8 +22,8 @@ module.exports = {
 
             // make sure user can access the group
             // TODO this should just be middleware.
-            const group = await getGroup(req, groupId);
-            const user = await getUserMe(req);
+            const group = await getGroup(req, res, groupId);
+            const user = await getUserMe(req, res);
             if (!group) {
                 res.status(401).send({
                     error: 'unauthorized',
@@ -50,16 +50,7 @@ module.exports = {
 
     getMeetup: async (req, res, next) => {
         try {
-            const groups = await getGroups(req);
-            const groupIds = groups.map(x => x._id);
-
-            const meetup = await Meetup.findOne({
-                _id: req.params.meetupId, 
-                group: {
-                    $in: groupIds
-                }
-            });
-            res.json(meetup);
+            res.json(req.meetup);
         }
         catch (error) {
             next(error);
@@ -68,7 +59,7 @@ module.exports = {
 
     getMeetups: async (req, res, next) => {
         try {
-            const groups = await getGroups(req);
+            const groups = await getGroups(req, res);
             const groupIds = groups.map(x => x._id);
 
             const meetups = await Meetup.find({
