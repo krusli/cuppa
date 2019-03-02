@@ -82,6 +82,19 @@ app.get('/groups', async (req, res, next) => {
     
 })
 
+// gets a group, that the user is a member of
+app.get('/groups/:groupId', async (req, res, next) => {
+    try {
+        const user = await getUser(req);
+        const group = await Group.findOne({ members: user._id, _id: req.params.groupId })
+        res.json(group);
+    } catch (err) {
+        next(err);
+    }
+})
+
+// TODO get group (open) (only public-facing contents)
+
 app.listen(3001, () => {
     console.log('Server listening on port 3001.')
 })

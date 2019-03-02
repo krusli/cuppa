@@ -32,6 +32,7 @@ const meetupSchema = new Schema({
     attendees: [Schema.Types.ObjectId],   // user IDs
     owner: { type: Schema.Types.ObjectId, required: true },       // user IDs
     createdOn: { type: Date, default: Date.now },
+    group: Schema.Types.ObjectId,    // group ID
 
     teams: { type: [teamSchema], default: [] },
     events: { type: [eventSchema], default: [] }
