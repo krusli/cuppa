@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const passport = require('./auth'); // configured
+const jwtAuthenticator = passport.authenticate('jwt', { session: false });
 
 // mongoose
 const mongoose = require('mongoose');
@@ -99,7 +100,7 @@ app.post('/login', (req, res, next) => {
     middleware(req, res);   // call it (we don't need next though)
 })
 
-app.get('/users/:username', async (req, res) => {
+app.get('/users/:username', jwtAuthenticator, async (req, res) => {
     const user = await User.findOne({ username: req.params.username })
 
     if (!user) {

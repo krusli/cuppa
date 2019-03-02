@@ -52,7 +52,7 @@ passport.use(new JWTStrategy({
 }, async (jwtPayload, next) => {
     // find the user in DB if needed
     try {
-        const user = await User.findById(jwtPayload);
+        const user = await User.findById(jwtPayload.id);
         next(null, user);
     } catch (err) {
         next(err);
