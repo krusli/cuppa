@@ -1,10 +1,9 @@
-// const Role = require('../models/role');
-// const Meetup = require('../models/meetup');
 
 module.exports = {
     getTeams: async (req, res) => {
         res.json(req.meetup.teams);
     },
+
     newTeam: async (req, res, next) => {
         const name = req.body.name;
         if (!name) {
@@ -27,7 +26,6 @@ module.exports = {
             next(error);
         }
     },
-
 
     deleteTeam: async (req, res, next) => {
         try {

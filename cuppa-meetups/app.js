@@ -13,17 +13,23 @@ mongoose.connect('mongodb://localhost:27017/cuppa-meetups', { useNewUrlParser: t
 app.get('/healthCheck', (req, res) => res.send());
 
 // TODO unify with implementation in meetups.js (controllers)
-const validateMeetup = require('./controllers/middleware').validateMeetup;
+const validateAndGetMeetup = require('./controllers/middleware').validateAndGetMeetup;
 
 const meetupController = require('./controllers/meetups');
 app.post('/meetups', meetupController.newMeetup);
 app.get('/meetups', meetupController.getMeetups);
-app.get('/meetups/:meetupId', validateMeetup, meetupController.getMeetup);
+app.get('/meetups/:meetupId', validateAndGetMeetup, meetupController.getMeetup);
 
 const teamsController = require('./controllers/teams');
-app.get('/meetups/:meetupId/teams', validateMeetup, teamsController.getTeams);
-app.post('/meetups/:meetupId/teams', validateMeetup, teamsController.newTeam);
-app.delete('/meetups/:meetupId/teams/:teamId', validateMeetup, teamsController.deleteTeam);
+app.get('/meetups/:meetupId/teams', validateAndGetMeetup, teamsController.getTeams);
+app.post('/meetups/:meetupId/teams', validateAndGetMeetup, teamsController.newTeam);
+app.delete('/meetups/:meetupId/teams/:teamId', validateAndGetMeetup, teamsController.deleteTeam);
+
+const eventsController = require('./controllers/events');
+app.get('/meetups/:meetupId/events', validateAndGetMeetup, eventsController.getEvents);
+app.post('/meetups/:meetupId/events', validateAndGetMeetup, eventsController.newEvent);
+app.delete('/meetups/:meetupId/events/:eventId', validateAndGetMeetup, eventsController.deleteEvent);
+
 
 const rolesController = require('./controllers/roles');
 app.post('/roles', rolesController.newRole);

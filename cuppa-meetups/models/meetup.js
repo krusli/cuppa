@@ -6,11 +6,11 @@ const roleSchema = require('./schemas/role');
 const roleAndUsersSchema = new Schema({
     role: Schema.Types.ObjectId,      // roleId (either in Base, Group or Meetup -> need to search all 3)
     user: [ Schema.Types.ObjectId ],  // userId[]
-    // TODO strategy: [ Enrol ] (assumed by default)
-        // voting is for later
-    // under poll status, show poll widget
-    // the actual user set is still null at that point -> admin sets it
+    // TODO strategy: [ ENROLLMENT | VOTING ] (assumed by default)
 });
+
+// TODO TeamTemplate
+// TODO EventTemplate
 
 const teamSchema = new Schema({
     name: { type: String, required: true },
@@ -18,8 +18,9 @@ const teamSchema = new Schema({
 });
 
 const eventSchema = new Schema({
-    requiredRoles: { type: [ Schema.Types.ObjectId ], defualt: [] },
-    timeStart: { type: Date, required: true }
+    name: { type: String, required: true },    
+    requiredRoles: { type: [Schema.Types.ObjectId], default: [] },
+    dateStart: { type: Date, required: true }
 });
 
 const meetupSchema = new Schema({
@@ -36,4 +37,4 @@ const meetupSchema = new Schema({
     roles: { type: [roleSchema], default: [] }    // roles specific to *only* this meetup
 });
 
-module.exports = mongoose.model('Group', meetupSchema);
+module.exports = mongoose.model('Meetup', meetupSchema);

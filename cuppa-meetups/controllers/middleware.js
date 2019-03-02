@@ -4,7 +4,7 @@ const getGroups = interservice.getGroups;
 const Meetup = require('../models/meetup');
 
 module.exports = {
-    validateMeetup: async (req, res, next) => {
+    validateAndGetMeetup: async (req, res, next) => {
         const groups = await getGroups(req, res);
         const groupIds = groups.map(x => x._id);
 
