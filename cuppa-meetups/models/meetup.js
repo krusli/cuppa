@@ -13,7 +13,7 @@ const roleAndUsersSchema = new Schema({
 });
 
 const teamSchema = new Schema({
-    rolesAndUsers: [ roleAndUsersSchema ],
+    rolesAndUsers: { type: [ roleAndUsersSchema ], default: [] },
 });
 
 const eventSchema = new Schema({

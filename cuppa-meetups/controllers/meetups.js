@@ -54,6 +54,24 @@ module.exports = {
             const groupIds = groups.map(x => x._id);
 
             const meetups = await Meetup.find({
+                _id: req.params.meetupId, 
+                group: {
+                    $in: groupIds
+                }
+            });
+            res.json(meetups);
+        }
+        catch (error) {
+            next(error);
+        }
+    },
+
+    getMeetups: async (req, res, next) => {
+        try {
+            const groups = await getGroups(req);
+            const groupIds = groups.map(x => x._id);
+
+            const meetups = await Meetup.find({
                 group: {
                     $in: groupIds
                 }
