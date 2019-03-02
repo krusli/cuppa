@@ -30,10 +30,14 @@ const getPromiseForRequest = async (req, url) =>
 const getGroup = (req, groupId) => 
     getPromiseForRequest(req, `http://localhost:3001/groups/${groupId}`);
 
+const getGroups = req =>
+    getPromiseForRequest(req, 'http://localhost:3001/groups');
+
 const getUser = req => 
     getPromiseForRequest(req, 'http://localhost:3000/users/me')
 
 module.exports = {
     getGroup,
+    getGroups,
     getUser
 }
