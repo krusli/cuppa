@@ -20,10 +20,10 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-const JWT_SECRET = 'naisho';
 // TODO use a better payload instead of just userID
 // issuer, subject, audience, expiresIn, algorithm
 // NOTE has to be kept light since it is sent every req
+const JWT_SECRET = require('./consts').JWT_SECRET;
 const getToken = user => {
     const payload = {
         id: user.id,
@@ -39,6 +39,7 @@ const getUserPublic = user => {
     return userPublic;
 }
 
+// new user
 app.post('/users', async (req, res) => {
     const name = req.body.name;
     const username = req.body.username;
@@ -74,6 +75,7 @@ app.post('/users', async (req, res) => {
     } 
 });
 
+// get a token
 app.post('/login', (req, res, next) => {
     // use passport.authenticate to generate custom middleware with Passport.js sugar
     const middleware = passport.authenticate('local', {session: false}, (err, user, info) => {
@@ -100,6 +102,7 @@ app.post('/login', (req, res, next) => {
     middleware(req, res);   // call it (we don't need next though)
 })
 
+// example protected route
 app.get('/users/:username', jwtAuthenticator, async (req, res) => {
     const user = await User.findOne({ username: req.params.username })
 
@@ -115,6 +118,12 @@ app.get('/users/:username', jwtAuthenticator, async (req, res) => {
     const { passwordHash, ...userPublic } = user._doc;
     res.send(userPublic)
 })
+
+// sends 200 if valid
+// 401 unauthorized if not (via middleware)
+app.get('/validation', jwtAuthenticator, (req, res) => {
+    res.send();
+});
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000.')

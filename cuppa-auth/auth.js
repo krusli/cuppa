@@ -7,21 +7,7 @@ const passportJwt = require('passport-jwt');
 const JWTStrategy = passportJwt.Strategy;
 const ExtractJWT = passportJwt.ExtractJwt;
 
-// setup passport
-// for use with browsers + cookies
-// passport.serializeUser((user, done) => {
-//     done(null, user.id);
-// });
-
-// passport.deserializeUser(async (id, done) => {
-//     try {
-//         let user = await User.findById(id);
-//         done(null, user);
-//     } catch (err) {
-//         done(err, null);
-//     }
-// });
-
+const JWT_SECRET = require('./consts').JWT_SECRET;
 passport.use(new LocalStrategy(
     (username, password, done) => {
         User.findOne({ username })
@@ -48,7 +34,7 @@ passport.use(new LocalStrategy(
 
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'naisho'   // TODO const
+    secretOrKey: JWT_SECRET
 }, async (jwtPayload, next) => {
     // find the user in DB if needed
     try {
