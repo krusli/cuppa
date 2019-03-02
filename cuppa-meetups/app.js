@@ -23,29 +23,6 @@ app.post('/meetups', meetupController.newMeetup);
 app.get('/meetups/:meetupId', meetupController.getMeetup);
 app.get('/meetups', meetupController.getMeetups);
 
-// app.post('/meetups/:meetupId/teams', async (req, res, next) => {
-//     try {
-//         // get all the users' groups
-//         const groups = await getGroups(req);
-//         const groupIds = groups.map(x => x._id);
-
-//         // get the meetup, check if the group it points to is in groupIds
-//         // req.params.meetupId IN groupIds (TODO)
-
-//         const meetup = await Meetup.findById(req.params.meetupId);
-//         meetup.teams.push(req.body) // TODO validation
-//         meetup
-//     }
-//     catch (error) {
-//         next(error);
-//     }
-// })
-
-// app.post('/meetups/:meetupId/events', async (req, res, next) => {
-
-// })
-
-
 app.post('/roles', async (req, res, next) => {
     // TODO verify token
     // TODO try catch
@@ -64,27 +41,55 @@ app.post('/roles', async (req, res, next) => {
     res.json(role);
 });
 
-app.post('/meetups/:meetupId/teams', async (req, res, next) => {
-    try {
-        // get all the user's groups
-        const groups = await getGroups(req);
-        const groupIds = groups.map(x => x._id);
+// TODO unify with implementation in meetups.js (controllers)
+const validateMeetup = async (req, res, next) => {
+    const groups = await getGroups(req);
+    const groupIds = groups.map(x => x._id);
 
-        // get the meetup, check if the group it points to is in groupids
-        const meetup = await Meetup.findById(req.params.meetupId);
-        if (!meetup) {
-            res.status(404).send();
-            return;
+    const meetup = await Meetup.findOne({
+        _id: req.params.meetupId,
+        group: {
+            $in: groupIds
         }
+    });
+    
+    if (!meetup) {
+        res.status(404).send();
+        return;
+    }
 
-        const groupIdsFiltered = groupIds.filter(x => x == meetup.group);
-        if (groupIdsFiltered.length === 0) {
-            res.status(401).send();
-            return;
-        } 
+    req.meetup = meetup;
+    next();
+}
 
+app.delete('/meetups/:meetupId/teams/:teamId', validateMeetup, async (req, res, next) => {
+    try {
+        const meetup = req.meetup;
+        meetup.teams = meetup.teams.filter(x => x._id != req.params.teamId);
+
+        await meetup.save();
+        res.send();
+    } catch (err) {
+        next(err);
+    }
+})
+
+
+app.post('/meetups/:meetupId/teams', validateMeetup, async (req, res, next) => {
+    const name = req.body.name;
+    if (!name) {
+        res.status(400).send({
+            error: 'bad_request',
+            message: 'missing param: name'
+        });
+    }
+
+    try {
+        const meetup = req.meetup;
         // now authenticated, can add a new team
-        meetup.teams.push({})
+        meetup.teams.push({
+            name
+        })
         const meetupSaved = await meetup.save();
 
         res.status(201).location(`/meetups/${meetup._id}/teams`).json(meetupSaved.teams);

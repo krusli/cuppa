@@ -18,6 +18,7 @@ const getPromiseForRequest = async (req, url) =>
             }
             else {
                 try {
+                    // TODO: if JSON.parse fails, should NOT be internal server error but unauthorized
                     resolve(JSON.parse(body));
                 } catch (error) {
                     reject(error);

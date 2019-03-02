@@ -13,6 +13,7 @@ const roleAndUsersSchema = new Schema({
 });
 
 const teamSchema = new Schema({
+    name: { type: String, required: true },
     rolesAndUsers: { type: [ roleAndUsersSchema ], default: [] },
 });
 
