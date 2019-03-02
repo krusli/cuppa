@@ -2,6 +2,9 @@ const getToken = require('./common').getToken;
 const getUserPublic = require('./common').getUserPublic;
 const bcrypt = require('bcrypt');
 
+// configured Passport.js obj
+const passport = require('./auth');
+
 module.exports = Model => {
     return {
         newUser: async (req, res) => {
