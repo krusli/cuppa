@@ -21,6 +21,7 @@ module.exports = {
             }
 
             // make sure user can access the group
+            // TODO this should just be middleware.
             const group = await getGroup(req, groupId);
             const user = await getUser(req);
             if (!group) {
@@ -51,8 +52,6 @@ module.exports = {
         try {
             const groups = await getGroups(req);
             const groupIds = groups.map(x => x._id);
-
-            console.log(groupIds);
 
             const meetups = await Meetup.find({
                 group: {

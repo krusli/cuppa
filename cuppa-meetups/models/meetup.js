@@ -15,8 +15,17 @@ const surveySchema = new Schema({
     // votes: []    // TODO
 });
 
+const roleSchema = new Schema({
+    name: String,
+    requiredType: String,   // USER or SERVICE
+    roleWidget: String, // TODO
+})
+
+// under poll status, show poll widget
+// the actual user set is still null at that point -> admin sets it
+
 const teamSchema = new Schema({
-    requiredRoles: [String],
+    requiredRoles: [String],    // TODO ObjectIDs
     roleAndUsers: [roleAndUserSchema],
     surveys: [surveySchema]
 })
