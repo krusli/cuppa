@@ -30,7 +30,7 @@ module.exports = Model => {
             const password = req.body.password;
             if (!username || !password) {
                 res.status(400).send({
-                    error: 'invalid_request',
+                    error: 'bad_request',
                     message: 'Invalid request.'
                 })
                 return;

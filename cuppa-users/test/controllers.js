@@ -18,7 +18,7 @@ describe('Controllers', () => {
                 },
                 send: body => {
                     expect(_code).to.equal(400);
-                    expect(body.error).to.equal('invalid_request');
+                    expect(body.error).to.equal('bad_request');
                 }
             }
 

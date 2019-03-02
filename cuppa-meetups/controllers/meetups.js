@@ -15,7 +15,7 @@ module.exports = {
 
             if (!groupId || !name) {
                 res.status(400).send({
-                    error: 'invalid_request',
+                    error: 'bad_request',
                     message: 'Invalid request.'
                 });
                 return;
@@ -80,7 +80,7 @@ module.exports = {
         const username = req.body.username;
         if (!username) {
             res.status(400).send({
-                error: 'invalid_request',
+                error: 'bad_request',
                 message: 'Invalid request.'
             });
             return;
@@ -90,7 +90,7 @@ module.exports = {
         const user = await getUser(req, res, username);
         if (!user) {
             res.status(400).send({
-                error: 'invalid_request',
+                error: 'bad_request',
                 message: 'Invalid username.'
             });
             return;
