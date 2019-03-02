@@ -43,19 +43,22 @@ module.exports = Model => {
 
                 const token = getToken(user);
 
-                res.location(`/users/${user.username}`).send({ user: getUserPublic(user), token });
+                res
+                .status(201)    // 201 created
+                .location(`/users/${user.username}`)
+                .send({ user: getUserPublic(user), token });
             }
             catch (err) {
                 console.error(err);
                 if (err.name === 'ValidationError') {
-                    res.status(422).send({
+                    res.status(400).send({
                         error: 'validation_error',
                         message: err.message
                     });
                 } 
                 else if (err.name == 'MongoError') {
                     // e.g. duplicate keys
-                    res.status(422).send({
+                    res.status(400).send({
                         error: 'validation_error',
                         message: err.message
                     });
