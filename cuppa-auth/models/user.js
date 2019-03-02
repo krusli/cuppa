@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-    username: { type: String, required: true, uniquee: true },
+    username: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     passwordHash: { type: String, required: true }
 });
