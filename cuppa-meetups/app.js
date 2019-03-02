@@ -2,7 +2,9 @@ const express = require('express');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
-const request = require('request');
+const interservice = require('../common/interservice'); // inter-service comms
+const getGroup = interservice.getGroup;
+const getUser = interservice.getUser;
 
 const Meetup = require('./models/meetup');
 
@@ -18,53 +20,6 @@ app.get('/healthCheck', (req, res) => res.send());
 
 // TODO refactor to single common file
 // TODO refactor newRequest(url, req)
-const getGroup = async (req, groupId) => {
-    const options = {
-        url: `http://localhost:3001/groups/${groupId}`,
-        headers: {
-            authorization: req.headers.authorization
-        }
-    }
-
-    return new Promise((resolve, reject) => {
-        request(options, (error, response, body) => {
-            if (error) {
-                reject(error);
-            }
-            else {
-                try {
-                    resolve(JSON.parse(body));
-                } catch (error) {
-                    reject(error);
-                }
-            }
-        })
-    })
-}
-
-const getUser = async req => {
-    const options = {
-        url: 'http://localhost:3000/users/me',
-        headers: {
-            authorization: req.headers.authorization
-        }
-    }
-
-    return new Promise((resolve, reject) => {
-        request(options, (error, response, body) => {
-            if (error) {
-                reject(error);
-            }
-            else {
-                try {
-                    resolve(JSON.parse(body));
-                } catch (error) {
-                    reject(error);
-                }
-            }
-        })
-    })
-}
 
 app.post('/meetups', async (req, res, next) => {
     const name = req.body.name;

@@ -1,14 +1,17 @@
 const request = require('request');
 
-const getGroup = async (req, groupId) => {
-    const options = {
-        url: `http://localhost:3001/groups/${groupId}`,
-        headers: {
-            authorization: req.headers.authorization
+// req: for getting headers
+const getPromiseForRequest = async (req, url) =>
+    new Promise((resolve, reject) => {
+        // set up teh request
+        const options = {
+            url,
+            headers: {
+                authorization: req.headers.authorization
+            }
         }
-    }
 
-    return new Promise((resolve, reject) => {
+        // do the request
         request(options, (error, response, body) => {
             if (error) {
                 reject(error);
@@ -22,31 +25,13 @@ const getGroup = async (req, groupId) => {
             }
         })
     })
-}
+   
 
-const getUser = async req => {
-    const options = {
-        url: 'http://localhost:3000/users/me',
-        headers: {
-            authorization: req.headers.authorization
-        }
-    }
+const getGroup = (req, groupId) => 
+    getPromiseForRequest(req, `http://localhost:3001/groups/${groupId}`);
 
-    return new Promise((resolve, reject) => {
-        request(options, (error, response, body) => {
-            if (error) {
-                reject(error);
-            }
-            else {
-                try {
-                    resolve(JSON.parse(body));
-                } catch (error) {
-                    reject(error);
-                }
-            }
-        })
-    })
-}
+const getUser = req => 
+    getPromiseForRequest(req, 'http://localhost:3000/users/me')
 
 module.exports = {
     getGroup,

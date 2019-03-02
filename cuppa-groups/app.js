@@ -2,8 +2,6 @@ const express = require('express');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
-const request = require('request');
-
 const Group = require('./models/group');
 
 const app = express();
@@ -15,29 +13,8 @@ mongoose.connect('mongodb://localhost:27017/cuppa-groups', { useNewUrlParser: tr
     .then(() => console.log('Connected to MongoDB'), err => console.log(err));
 
 
-const getUser = async req => {
-    const options = {
-        url: 'http://localhost:3000/users/me',
-        headers: {
-            authorization: req.headers.authorization
-        }
-    }
-
-    return new Promise((resolve, reject) => {
-        request(options, (error, response, body) => {
-            if (error) {
-                reject(error);
-            }
-            else {
-                try {
-                    resolve(JSON.parse(body));
-                } catch (error) {
-                    reject(error);
-                }
-            }
-        })
-    })
-}
+const interservice = require('../common/interservice'); // inter-service comms
+const getUser = interservice.getUser;
 
 app.get('/healthCheck', (req, res) => res.send());
 
