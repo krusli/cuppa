@@ -1,0 +1,23 @@
+.grid {
+  display: grid;
+}
+
+.item {
+  grid-area: 1/1;
+}
+
+.horizontal-scroll {
+  z-index: -1;
+}
+
+.btn {
+  z-index: 0;
+
+  &.left {
+    margin-left: -20px;
+  }
+
+  &.right {
+    margin-right: -20px;
+  }
+}
