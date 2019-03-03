@@ -8,7 +8,9 @@
   </button>
 
   <div class="collapse navbar-collapse" [ngbCollapse]="!toggleNavbar" id="navbarSupportedContent"
-   [@collapse]="navbarState">
+   >
+  <!-- [@collapse]="navbarState"> -->
+
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}" (click)="toggle()">
