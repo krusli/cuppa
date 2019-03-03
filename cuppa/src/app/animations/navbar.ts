@@ -1,6 +1,7 @@
 import { trigger, style, animate, transition, state } from '@angular/animations';
 
 // https://angularfirebase.com/lessons/bootstrap-4-collapsable-navbar-work-with-angular/
+// TODO also affecting desktop
 export const navbarAnimation = trigger('collapse', [
   state('open', style({
     opacity: '1',

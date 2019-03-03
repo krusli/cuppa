@@ -5,7 +5,7 @@ import { navbarAnimation } from '../animations/navbar';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  animations: [navbarAnimation]
+  // animations: [navbarAnimation]  // TODO disabled for now
 })
 export class NavbarComponent implements OnInit {
 

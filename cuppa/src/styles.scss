@@ -31,23 +31,6 @@ label {
   }
 }
 
-.horizontal-scroll {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar { 
-    display: none; 
-  }
-
-  -webkit-overflow-scrolling: touch;
-
-  .item {
-    flex: 0 0 auto; 
-  }
-}
-
 .navbar {
   .nav-item.active > .nav-link {
     font-weight: 400;
@@ -60,5 +43,22 @@ label {
   }
 }
 
+// either has to be in global styles, or using ::ng-deep (deprecated)
+.horizontal-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 
+  scrollbar-width: none;  // Firefox 64+
+  &::-webkit-scrollbar { 
+    display: none; 
+  }
+
+
+  // only 1 level down
+  > * {
+    flex: 0 0 auto; 
+  }
+}
 
