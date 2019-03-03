@@ -8,9 +8,8 @@
 
 @media (min-width: 768px) {
   // compensate for sidebar
-  // NOTE number was found through trial and error
   .content {
-      margin-left: -6.125vw;
+    padding-right: 25vw;
   }
 }
 
