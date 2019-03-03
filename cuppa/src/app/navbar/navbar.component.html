@@ -11,20 +11,20 @@
    [@collapse]="navbarState">
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">
+      <li class="nav-item" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}" (click)="toggle()">
         <a class="nav-link" routerLink="/">
           Home
         </a>
       </li>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/groups">
+        <a class="nav-link" routerLink="/groups" (click)="toggle()">
           Groups
         </a>
       </li>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/meetups">
+        <a class="nav-link" routerLink="/meetups" (click)="toggle()">
           Meetups
         </a>
       </li>
