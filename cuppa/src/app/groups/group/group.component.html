@@ -7,13 +7,13 @@
         <label class="secondary">Members</label>
     
         <ul class="group-list">
-          <li *ngFor="let member of group.members.slice(0, LIMIT)">
-            {{ member }}
+          <li *ngFor="let member of group.members.slice(0, LIMIT)" class="d-flex">
+            <div class="avatar"></div>
+            <div class="ml-1 my-auto">{{ member }}</div>
           </li>
-    
-          <li>
-            <span *ngIf="group.members.length > LIMIT">+ {{group.members.length - LIMIT}} more</span>
-          </li>
+
+          <div class="d-flex"></div>
+            <span class="more-text ml-1 my-auto" *ngIf="group.members.length > LIMIT">+ {{group.members.length - LIMIT}} more</span>
         </ul>
     
       </div>
@@ -21,7 +21,7 @@
       <div class="col-12 col-md-6">
         <label class="secondary">Meetups</label>
     
-        <ul class="group-list pl-0">
+        <ul class="group-list">
           <li *ngFor="let meetup of group.meetups.slice(0, LIMIT)">
             <div class="d-flex flex-direction-row">
     
@@ -57,7 +57,7 @@
       <div class="col-12 col-md-3">
         <label class="secondary">Actions</label>
     
-        <ul class="group-list actions pl-0">
+        <ul class="group-list actions">
           <li>View Group</li>
           <li>Plan a Meetup</li>
           <li>Invite</li>
