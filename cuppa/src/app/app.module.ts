@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { GroupsComponent } from './groups/groups.component';
+import { MeetupsComponent } from './meetups/meetups.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    GroupsComponent
+    GroupsComponent,
+    MeetupsComponent
   ],
   imports: [
     BrowserModule,
