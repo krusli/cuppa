@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { GroupsComponent } from './groups/groups.component';
 import { MeetupsComponent } from './meetups/meetups.component';
 import { GroupsTabBarComponent } from './groups/groups-tab-bar/groups-tab-bar.component';
+import { GroupsSidebarComponent } from './groups/groups-sidebar/groups-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GroupsTabBarComponent } from './groups/groups-tab-bar/groups-tab-bar.co
     HomeComponent,
     GroupsComponent,
     MeetupsComponent,
-    GroupsTabBarComponent
+    GroupsTabBarComponent,
+    GroupsSidebarComponent
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,13 @@ body {
     font-weight: 300;
 }
 
+// label style: all-caps accent color
+label {
+  color: map-get($colors, "accent");
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
 // Aileron doesn't have font-weight 500
 // for h1 -> h6
 @for $i from 1 through 6 {

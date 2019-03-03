@@ -18,12 +18,6 @@
   z-index: -1;
 }
 
-label {
-  color: map-get($colors, "accent");
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
 .container {
   max-width: 768px;
 }
