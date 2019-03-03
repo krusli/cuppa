@@ -1,3 +1,32 @@
-input {
-  border-width: 0 0 1px 0;
+@import '../../colors.scss';
+
+#homeComponent::after {
+  content: "";
+  background: url('/assets/img/hero.jpg');
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+#homeComponent {
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
+}
+
+// input {
+//   border-width: 0 0 1px 0;
+// }
+
+label {
+  color: map-get($colors, "accent");
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.container {
+  max-width: 768px;
 }

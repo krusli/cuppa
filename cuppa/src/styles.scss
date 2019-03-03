@@ -23,3 +23,15 @@ body {
     font-weight: 400;
   }
 }
+
+.horizontal-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+
+  .item {
+    flex: 0 0 auto; 
+  }
+}
+
+
