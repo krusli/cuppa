@@ -21,14 +21,26 @@
         <!-- TODO refactor to own component with < and > buttons -->
         <!-- Inject content via transclusion -->
         <app-shelf>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
-          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
+            <span class="ml-auto mt-auto mr-2">
+              <h6>Mech Keys</h6>
+            </span>
+          </div>
+          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
+            <span class="ml-auto mt-auto mr-2">
+              <h6>Headphones</h6>
+            </span>
+          </div>
+          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
+            <span class="ml-auto mt-auto mr-2">
+              <h6>Anime</h6>
+            </span>
+          </div>
+          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
+            <span class="ml-auto mt-auto mr-2">
+              <h6>Manga</h6>
+            </span>
+          </div>
         </app-shelf>
 
         <div class="w-100 text-right">
@@ -37,8 +49,7 @@
   
         <div class="mt-4">
           <label>My Groups</label>
-          <div class="card w-100 mb-3" style="height: 240px;">
-          </div>
+          <app-group></app-group>
   
         </div>
       </div>

@@ -13,6 +13,10 @@ import { MeetupsComponent } from './meetups/meetups.component';
 import { GroupsTabBarComponent } from './groups/groups-tab-bar/groups-tab-bar.component';
 import { GroupsSidebarComponent } from './groups/groups-sidebar/groups-sidebar.component';
 import { ShelfComponent } from './shelf/shelf.component';
+import { GroupsListComponent } from './groups/groups-list/groups-list.component';
+import { CommunitiesListComponent } from './groups/communities-list/communities-list.component';
+import { FriendsListComponent } from './groups/friends-list/friends-list.component';
+import { GroupComponent } from './groups/group/group.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { ShelfComponent } from './shelf/shelf.component';
     MeetupsComponent,
     GroupsTabBarComponent,
     GroupsSidebarComponent,
-    ShelfComponent
+    ShelfComponent,
+    GroupsListComponent,
+    CommunitiesListComponent,
+    FriendsListComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,

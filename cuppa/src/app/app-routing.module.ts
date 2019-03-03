@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GroupsComponent } from './groups/groups.component';
 import { MeetupsComponent } from './meetups/meetups.component';
+import { GroupsListComponent } from './groups/groups-list/groups-list.component';
+import { CommunitiesListComponent } from './groups/communities-list/communities-list.component';
+import { FriendsListComponent } from './groups/friends-list/friends-list.component';
 
 const routes: Routes = [
   {
@@ -11,7 +14,21 @@ const routes: Routes = [
   },
   {
     path: 'groups',
-    component: GroupsComponent
+    component: GroupsComponent,
+    children: [
+      {
+        path: '',
+        component: GroupsListComponent
+      },
+      {
+        path: 'communities',
+        component: CommunitiesListComponent
+      },
+      {
+        path: 'friends',
+        component: FriendsListComponent
+      }
+    ]
   },
   {
     path: 'meetups',

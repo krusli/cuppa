@@ -1,0 +1,35 @@
+@import '../../../colors.scss';
+
+ul.group-list {
+    list-style: none;
+    
+    margin-bottom: 0;   // already got margin from contents
+
+    &.actions > * {
+        padding-top: 0px;
+        padding-bottom: 5px;
+    }
+
+    li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
+label.secondary {
+    margin-bottom: 5px;
+}
+
+.avatar {
+    height: 36px;
+    width: 36px;
+    margin-right: 5px;
+    display: inline-block;
+    border-radius: 100%;
+    border: 2px solid map-get($colors, "secondary");
+    // background-image: url('https://i.ytimg.com/vi/ao_rfnlwUWk/hqdefault_live.jpg?sqp=CNiB7eMF-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCFu3VA53FbwK96yQ7_p6dsGyd58g')
+}

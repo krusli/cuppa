@@ -23,6 +23,27 @@ label {
   font-weight: 600;
 }
 
+.card {
+  border-radius: 8px;
+  // margin-bottom: 4px;  // for shadow
+  // https://www.cssmatic.com/box-shadow
+  // -webkit-box-shadow: 2px 02x 5px 0px rgba(0,0,0,0.19);
+  // -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.19);
+  // box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.19);
+}
+
+label.secondary {
+  color: map-get($colors, "secondary");
+  text-transform: none;
+}
+
+label.highlight {
+  color: map-get($colors, "accent");
+  text-transform: none;
+  font-weight: 300;
+  font-size: 1.6em;
+}
+
 // Aileron doesn't have font-weight 500
 // for h1 -> h6
 @for $i from 1 through 6 {
