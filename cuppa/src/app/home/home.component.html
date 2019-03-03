@@ -1,41 +1,43 @@
-<div id="homeComponent">
-
-  <div class="container mt-5 mb-5">
-    <div class="text-center display-4">
-      Find and plan meetups.<br>
-      Do fun stuff.
-    </div>
-
-    <form class="mt-4">
-      <!-- TODO: prevent default-->
-      <div class="form-group">
-        <label for="search">Search</label>
-        <input type="text" class="form-control" 
-          id="search" name="search"
-          autocomplete="name"
-          placeholder="Location, activity, group or community">
+<div class="d-grid">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="container mt-5 mb-5">
+      <div class="text-center display-4">
+        Find and plan meetups.<br>
+        Do fun stuff.
       </div>
-    </form>
-
-    <div class="mt-4">
-      <label>Find your interests</label>
-      <div class="horizontal-scroll">
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-        <div class="card item mr-3 my-2" style="height: 200px; width: 200px"></div>
-      </div>
-
-      <div class="mt-4">
-        <label>My Groups</label>
-        <div class="card w-100 mb-3" style="height: 240px;">
+  
+      <form class="mt-4">
+        <!-- TODO: prevent default-->
+        <div class="form-group">
+          <label for="search">Search</label>
+          <input type="text" class="form-control" id="search" name="search" autocomplete="name"
+            placeholder="Location, activity, group or community">
         </div>
-      
+      </form>
+  
+      <div class="mt-4">
+        <label>Find your interests</label>
+        <!-- TODO refactor to own component with < and > buttons -->
+        <!-- Inject content via transclusion -->
+        <div class="horizontal-scroll">
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+          <div class="card item mr-3" style="height: 200px; width: 200px"></div>
+        </div>
+  
+        <div class="mt-4">
+          <label>My Groups</label>
+          <div class="card w-100 mb-3" style="height: 240px;">
+          </div>
+  
+        </div>
+      </div>
     </div>
-  </div>
 
 </div>

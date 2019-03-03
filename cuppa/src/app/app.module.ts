@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { GroupsComponent } from './groups/groups.component';
 import { MeetupsComponent } from './meetups/meetups.component';
+import { GroupsTabBarComponent } from './groups/groups-tab-bar/groups-tab-bar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MeetupsComponent } from './meetups/meetups.component';
     NavbarComponent,
     HomeComponent,
     GroupsComponent,
-    MeetupsComponent
+    MeetupsComponent,
+    GroupsTabBarComponent
   ],
   imports: [
     BrowserModule,
