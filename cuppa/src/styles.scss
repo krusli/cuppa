@@ -1,19 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
-
-$colors: (
-    "accent": #79A7A8,
-    "main": #2C3E50,
-    "navbar": #BAE0E2,
-    "secondary": #8499A5
-);
+@import url('https://reinhart1010.github.io/aileron/aileron.css');
+@import './colors.scss';
 
 /* Bootstrap overrides */
 $theme-colors: (
     "primary": map-get($colors, "accent")
 );
 
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
+$font-family-sans-serif: 'Aileron', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+    
 body {
-    color: map-get($colors, "main")
+    color: map-get($colors, "main");
+    font-weight: 300;
+}
+
+// Aileron doesn't have font-weight 500
+// for h1 -> h6
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-weight: 400;
+  }
 }

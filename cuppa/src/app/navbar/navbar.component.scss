@@ -1,0 +1,17 @@
+@import '../../colors.scss';
+
+.navbar {
+    &.navbar-light {
+        .nav-item {
+            .nav-link {
+                color: map-get($colors, "main");
+            }
+        }
+
+        .nav-item.active > .nav-link {
+            color: map-get($colors, "accent");
+        }
+    }
+
+    background-color: map-get($colors, "navbar");
+}
