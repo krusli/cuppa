@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+$colors: (
+    "accent": #79A7A8,
+    "main": #2C3E50,
+    "navbar": #BAE0E2,
+    "secondary": #8499A5
+);
+
+/* Bootstrap overrides */
+$theme-colors: (
+    "primary": map-get($colors, "accent")
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+body {
+    color: map-get($colors, "main")
+}
