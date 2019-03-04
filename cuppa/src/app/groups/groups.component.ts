@@ -11,7 +11,8 @@ export class GroupsComponent implements OnInit {
 
   faPlus = faPlus
 
-  constructor(private router: Router) { }
+  // TODO private router
+  constructor(public router: Router) { }
 
   ngOnInit() {
   }
