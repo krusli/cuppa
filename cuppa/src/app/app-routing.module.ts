@@ -23,12 +23,12 @@ const routes: Routes = [
         component: GroupsListComponent
       },
       {
-        path: ':groupId',
-        component: GroupPageComponent
-      },
-      {
         path: 'new',
         component: NewGroupComponent
+      },
+      {
+        path: ':groupId',
+        component: GroupPageComponent
       },
       {
         path: 'communities',
