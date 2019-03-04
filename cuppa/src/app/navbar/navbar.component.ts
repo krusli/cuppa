@@ -11,9 +11,18 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class NavbarComponent implements OnInit {
 
   toggleNavbar = false;
+  isLogin = true;
   navbarState = 'closed'; // closed or open
 
   closeResult: string;
+
+  login() {
+    console.log('login');
+  }
+
+  toggleSignupLogin() {
+    this.isLogin = !this.isLogin;
+  }
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
