@@ -8,8 +8,10 @@
   
   <div class="groups list">
     <label class="emphasis">Groups</label>
-    <ul class="nav">
-      <li *ngFor="let group of myGroups.groups" [routerLink]="'/groups/' + group._id" routerLinkActive="active">
+    <ul class="nav" *ngIf="myGroups">
+      <!-- routerLinkActive for dynamic links -->
+      <!-- https://stackoverflow.com/a/42295902 -->
+      <li class="nav-item" *ngFor="let group of myGroups.groups" [routerLink]="['/groups', group._id]" routerLinkActive="active">
         <a class="nav-link">
           {{ group.name }}
         </a>
