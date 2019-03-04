@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { GroupsService } from '../groups.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   title = 'cuppa';
 
-  constructor() { }
+  groups: any[];
 
-  ngOnInit() { }
+  constructor(private groupsService: GroupsService) { }
+
+  ngOnInit() {
+    this.groupsService.getGroups()
+    .subscribe((groups: any[]) => {
+      this.groups = groups;
+    });
+
+  }
 
   ngOnDestroy() {
     document.body.style.backgroundImage = 'none';
