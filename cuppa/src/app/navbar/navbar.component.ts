@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { navbarAnimation } from '../animations/navbar';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   // animations: [navbarAnimation]  // TODO disabled for now
 })
 export class NavbarComponent implements OnInit {
+
+  @Input() user: any; // TODO
 
   toggleNavbar = false;
   isLogin = true;
@@ -24,7 +27,10 @@ export class NavbarComponent implements OnInit {
   password: string;
 
   login() {
-    console.log('login');
+    this.authService.login(this.username, this.password)
+    .subscribe(x => {
+      console.log(x);
+    });
   }
 
   toggleSignupLogin() {
@@ -55,7 +61,7 @@ export class NavbarComponent implements OnInit {
     this.navbarState = this.toggleNavbar ? 'open' : 'closed';
   }
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private authService: AuthService) { }
 
   ngOnInit() {
   }

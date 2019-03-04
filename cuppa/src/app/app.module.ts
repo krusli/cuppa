@@ -18,6 +18,7 @@ import { CommunitiesListComponent } from './groups/communities-list/communities-
 import { FriendsListComponent } from './groups/friends-list/friends-list.component';
 import { GroupComponent } from './groups/group/group.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule
   ],

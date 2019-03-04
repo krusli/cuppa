@@ -40,9 +40,13 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
 
-    <div class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-2 my-lg-0" *ngIf="!user; else profile">
       <button (click)="open(content)" class="btn btn-outline-primary my-2 my-sm-0">Log in</button>
     </div>
+
+    <ng-template #profile>
+      {{ user.name }}
+    </ng-template>
 
     <ng-template #content let-modal>
       <div class="d-grid">
@@ -87,7 +91,7 @@
           </div>
 
           <div class="w-100 text-center">
-            <button type="button" class="btn btn-outline-dark" (click)="login()">Login</button>
+            <button type="button" class="btn btn-primary" (click)="login()">Login</button>
           </div>
 
           <div class="w-100" *ngIf="isLogin">
