@@ -31,7 +31,7 @@ import { GroupComponent } from './groups/group/group.component';
     GroupsListComponent,
     CommunitiesListComponent,
     FriendsListComponent,
-    GroupComponent
+    GroupComponent,
   ],
   imports: [
     BrowserModule,
