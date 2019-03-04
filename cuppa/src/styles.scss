@@ -62,9 +62,10 @@ label.highlight {
   }
 
   &.navbar-light {
-      .nav-item.active > .nav-link {
-          color: map-get($colors, "accent");
-      }
+    .nav-item.active > .nav-link {
+      color: map-get($colors, "accent");
+      border-bottom: 3px solid map-get($colors, "accent");
+    }
   }
 }
 

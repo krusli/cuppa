@@ -7,6 +7,7 @@ import { GroupsListComponent } from './groups/groups-list/groups-list.component'
 import { CommunitiesListComponent } from './groups/communities-list/communities-list.component';
 import { FriendsListComponent } from './groups/friends-list/friends-list.component';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
+import { GroupPageComponent } from './groups/group-page/group-page.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: '',
         component: GroupsListComponent
+      },
+      {
+        path: ':groupId',
+        component: GroupPageComponent
       },
       {
         path: 'new',

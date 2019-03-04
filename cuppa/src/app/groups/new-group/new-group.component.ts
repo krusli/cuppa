@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { GroupsService } from 'src/app/groups.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-group',
@@ -14,7 +15,7 @@ export class NewGroupComponent implements OnInit {
   name: string;
   description: string;
   
-  constructor(private groupsService: GroupsService) { }
+  constructor(private groupsService: GroupsService, private router: Router) { }
 
   ngOnInit() {
   }

@@ -18,10 +18,11 @@ app.use(bodyParser.json());
  * Aggregates contents from the different services for presentation on the client.
  */
 
+const sendData = (req, res) => res.json(req.data);
+
 const middleware = require('./middleware');
-app.get('/groups', middleware.getGroups, (req, res) => {
-  res.json(req.data);
-});
+app.get('/groups/', middleware.getGroups, sendData);
+app.get('/groups/:groupId', middleware.getGroup, sendData);
 
 app.get('/communities/featured', (req, res) => {
   res.json([

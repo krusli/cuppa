@@ -21,6 +21,7 @@ import { GroupComponent } from './groups/group/group.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
+import { GroupPageComponent } from './groups/group-page/group-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { NewGroupComponent } from './groups/new-group/new-group.component';
     FriendsListComponent,
     GroupComponent,
     NewGroupComponent,
+    GroupPageComponent,
   ],
   imports: [
     BrowserModule,
