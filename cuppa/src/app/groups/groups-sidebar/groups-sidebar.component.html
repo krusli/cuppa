@@ -1,15 +1,17 @@
-<div class="pl-4">
-  <div class="favourites list">
+<div class="pl-4" *ngIf="myGroups">
+  <!-- <div class="favourites list">
     <label class="emphasis">Favourites</label>
     <ul class="nav">
       <li class="nav-link">Secret Society BLANKET</li>
     </ul>
-  </div>
+  </div> -->
   
   <div class="groups list">
     <label class="emphasis">Groups</label>
     <ul class="nav">
-      <li class="nav-link">Houkago Tea Time</li>
+      <li *ngFor="let group of myGroups.groups" class="nav-link">
+        {{ group.name }}
+      </li>
     </ul>
   </div>
 

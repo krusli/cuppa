@@ -1,4 +1,5 @@
-<div class="container">
-  <label class="emphasis">My Groups</label>
-  <app-group></app-group>
+<label class="emphasis">My Groups</label>
+
+<div *ngIf="myGroups">
+  <app-group [group]="group" [users]="myGroups.users" *ngFor="let group of myGroups.groups"></app-group>
 </div>

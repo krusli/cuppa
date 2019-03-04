@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Group } from 'src/app/models/Group';
+import { UserMap } from 'src/app/models/User';
+import { GroupsService } from 'src/app/groups.service';
+
+interface GroupsAndUsers {
+  groups: Group[];
+  users: UserMap;
+}
 
 @Component({
   selector: 'app-groups-list',
@@ -7,9 +15,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupsListComponent implements OnInit {
 
-  constructor() { }
+  myGroups: GroupsAndUsers;
+
+  constructor(private groupsService: GroupsService) { }
 
   ngOnInit() {
+    this.groupsService.getGroups()
+    .subscribe((data: GroupsAndUsers) => {
+      this.myGroups = data;
+    });
   }
 
 }

@@ -2,11 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GroupsService } from '../groups.service';
 import { Group } from '../models/Group';
 import { UserMap } from '../models/User';
-
-interface GroupsAndUsers {
-  groups: Group[];
-  users: UserMap;
-}
+import { ContentService } from '../content.service';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +13,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   title = 'cuppa';
 
-  myGroups: GroupsAndUsers;
+  featured: any;
 
-  constructor(private groupsService: GroupsService) { }
+  constructor(private contentService: ContentService) { }
 
   ngOnInit() {
-    this.groupsService.getGroups()
-    .subscribe((data: GroupsAndUsers) => {
-      this.myGroups = data;
+    this.contentService.getFeaturedCommunities()
+    .subscribe(data => {
+      this.featured = data;
     });
   }
 

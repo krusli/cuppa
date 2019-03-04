@@ -22,24 +22,10 @@
         <!-- TODO refactor to own component with < and > buttons -->
         <!-- Inject content via transclusion -->
         <app-shelf>
-          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
+          <div class="card item d-flex mr-3" style="height: 200px; width: 200px" 
+              *ngFor="let feature of featured">
             <span class="ml-auto mt-auto mr-2">
-              <h6>Mech Keys</h6>
-            </span>
-          </div>
-          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
-            <span class="ml-auto mt-auto mr-2">
-              <h6>Headphones</h6>
-            </span>
-          </div>
-          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
-            <span class="ml-auto mt-auto mr-2">
-              <h6>Anime</h6>
-            </span>
-          </div>
-          <div class="card item d-flex mr-3" style="height: 200px; width: 200px">
-            <span class="ml-auto mt-auto mr-2">
-              <h6>Manga</h6>
+              <h6>{{ feature.name }}</h6>
             </span>
           </div>
         </app-shelf>
@@ -49,12 +35,7 @@
         </div>
   
         <div class="mt-4">
-          <label class="emphasis">My Groups</label>
-
-          <div *ngIf="myGroups">
-            <app-group [group]="group" [users]="myGroups.users" *ngFor="let group of myGroups.groups"></app-group>
-          </div>
-  
+          <app-groups-list></app-groups-list>
         </div>
       </div>
     </div>

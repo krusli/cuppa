@@ -23,6 +23,26 @@ app.get('/groups', middleware.getGroups, (req, res) => {
   res.json(req.data);
 });
 
+app.get('/communities/featured', (req, res) => {
+  res.json([
+    {
+      name: "DIY"
+    },
+    {
+      name: "Mech Keys"
+    },
+    {
+      name: "Headphones"
+    },
+    {
+      name: "Manga"
+    },
+    {
+      name: "Anime"
+    }
+  ]);
+});
+
 app.listen(3003, () => {
   console.log('Server listening on port 3003.');
 });
