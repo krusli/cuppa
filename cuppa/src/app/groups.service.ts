@@ -13,6 +13,6 @@ export class GroupsService {
     // get auth header
     const headers = this.authService.getHeaders();
 
-    return this.http.get('http://localhost:3001/groups', { headers });
+    return this.http.get('http://localhost:3003/groups', { headers });
   }
 }

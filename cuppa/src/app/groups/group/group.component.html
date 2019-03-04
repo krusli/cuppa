@@ -9,7 +9,7 @@
         <ul class="group-list">
           <li *ngFor="let member of group.members.slice(0, LIMIT)" class="d-flex">
             <div class="avatar"></div>
-            <div class="ml-1 my-auto">{{ member }}</div>
+            <div class="ml-1 my-auto">{{ users[member].name }}</div>
           </li>
 
           <div class="d-flex"></div>
@@ -27,21 +27,21 @@
     
               <div style="width: 96px;" class="mt-auto pr-3 d-flex">
                 <label class="highlight mb-0 pb-0 ml-auto">
-                  {{ meetup.dateFormatted }}
+                  12 Mar
                 </label>
               </div>
     
               <div style="width: 120px;" class="mt-auto pr-3">
-                {{ meetup.timeFormatted }}<br>
-                at {{ meetup.venue }}
+                13.00<br>
+                at Krossroadz
               </div>
     
               <div class="d-flex mt-auto">
-                <span *ngFor="let attendee of meetup.attending.slice(0, LIMIT_ATTENDEE)">
+                <span *ngFor="let attendee of meetup.attendees.slice(0, LIMIT_ATTENDEE)">
                   <div class="avatar sm"></div>
                 </span>
-                <div class="my-auto" *ngIf="meetup.attending.length > LIMIT_ATTENDEE">
-                  +{{meetup.attending.length - LIMIT_ATTENDEE}}</div>
+                <div class="my-auto" *ngIf="meetup.attendees.length > LIMIT_ATTENDEE">
+                  +{{meetup.attendees.length - LIMIT_ATTENDEE}}</div>
               </div>
     
             </div>
