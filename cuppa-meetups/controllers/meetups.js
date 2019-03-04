@@ -6,6 +6,23 @@ const getUserMe = interservice.getUserMe;
 
 const Meetup = require('../models/meetup');
 
+const getMeetupsForGroup = async (req, res, next) => {
+    try {
+        const group = await getGroup(req, res, req.query.groupId);
+        if (!group) {
+            // wrong group
+            res.status(404).send();
+            return;
+        }
+        const meetups = await Meetup.find({
+            group: group._id
+        });
+        res.json(meetups);
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     newMeetup: async (req, res, next) => {
         try {
@@ -58,8 +75,14 @@ module.exports = {
         }
     },
 
+    getMeetupsForGroup,
+
     getMeetups: async (req, res, next) => {
         try {
+            if (req.query.groupId) {
+                return getMeetupsForGroup(req, res, next);
+            }
+
             const groups = await getGroups(req, res);
             const groupIds = groups.map(x => x._id);
 

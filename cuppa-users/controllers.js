@@ -19,8 +19,19 @@ module.exports = Model => {
             if (req.query.username) {
                 params.username = new RegExp(`^${req.query.username}$`, 'i');  // case insensitive
             }
+
+            // console.log(req.query);
+            if (req.query._id.length) {
+                // => _id is an array
+                params._id = {
+                    $in: req.query._id
+                };
+            } else if (req.query._id) {
+                params._id = req.query._id;
+            }
+
             const matches = await Model.find(params);
-            const matchesPublic = matches.map(getUserPublic)
+            const matchesPublic = matches.map(getUserPublic);
             res.json(matchesPublic);
         },
 

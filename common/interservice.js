@@ -18,6 +18,7 @@ const getPromiseForRequest = async (req, res, url) =>
             }
             else {
                 try {
+                    // console.log(response, body);
                     // TODO: if JSON.parse fails, should NOT be internal server error but unauthorized
                     resolve(JSON.parse(body));
                 } catch (error) {
@@ -42,11 +43,24 @@ const getUser = (req, res, username) =>
     getPromiseForRequest(req, res, `http://localhost:3000/users/${username}`);
 
 const getUserMe = (req, res) => 
-    getPromiseForRequest(req, res, 'http://localhost:3000/users/me')
+    getPromiseForRequest(req, res, 'http://localhost:3000/users/me');
+
+const getUsers = (req, res, userIds) => {
+    const queryString = userIds.map(x => `_id=${x}`).join('&');
+    return getPromiseForRequest(req, res, `http://localhost:3000/users?${queryString}`);
+}
+
+const getMeetupsForGroup = (req, res, groupId) =>
+    getPromiseForRequest(req, res, `http://localhost:3002/meetups?groupId=${groupId}`);
+
+// const getMeetup = (req, res, meetupId) =>
+//     getPromiseForRequest(req, res, 'http://localhost:3002/meetups/${meetupId}')
 
 module.exports = {
     getGroup,
     getGroups,
     getUser,
-    getUserMe
+    getUsers,
+    getUserMe,
+    getMeetupsForGroup
 }
