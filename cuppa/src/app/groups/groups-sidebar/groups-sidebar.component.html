@@ -15,7 +15,9 @@
         <li class="nav-item" *ngFor="let group of myGroups.groups" [routerLink]="['/groups/view', group._id]"
           routerLinkActive="active">
           <a class="nav-link">
-            {{ group.name }}
+            <span>
+              {{ group.name }}
+            </span>
           </a>
         </li>
       </ul>
