@@ -24,3 +24,7 @@ export interface Group {
   meetups: Meetup[];
 }
 
+export interface GroupDTO {
+  name: string;
+  description: string;
+}

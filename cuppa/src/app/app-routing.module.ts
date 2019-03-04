@@ -6,6 +6,7 @@ import { MeetupsComponent } from './meetups/meetups.component';
 import { GroupsListComponent } from './groups/groups-list/groups-list.component';
 import { CommunitiesListComponent } from './groups/communities-list/communities-list.component';
 import { FriendsListComponent } from './groups/friends-list/friends-list.component';
+import { NewGroupComponent } from './groups/new-group/new-group.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: '',
         component: GroupsListComponent
+      },
+      {
+        path: 'new',
+        component: NewGroupComponent
       },
       {
         path: 'communities',
