@@ -4,6 +4,7 @@ import { GroupsService } from 'src/app/groups.service';
 
 import { switchMap } from 'rxjs/operators';
 import { Group } from 'src/app/models/Group';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-group-page',
@@ -11,6 +12,8 @@ import { Group } from 'src/app/models/Group';
   styleUrls: ['./group-page.component.scss']
 })
 export class GroupPageComponent implements OnInit {
+
+  faChevronLeft = faChevronLeft;
 
   group: Group;
 

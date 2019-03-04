@@ -9,8 +9,10 @@
   <div class="groups list">
     <label class="emphasis">Groups</label>
     <ul class="nav">
-      <li *ngFor="let group of myGroups.groups" class="nav-link">
-        {{ group.name }}
+      <li *ngFor="let group of myGroups.groups" [routerLink]="'/groups/' + group._id" routerLinkActive="active">
+        <a class="nav-link">
+          {{ group.name }}
+        </a>
       </li>
     </ul>
   </div>

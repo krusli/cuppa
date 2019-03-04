@@ -16,4 +16,8 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
   }
 
+  showAsContainer() {
+    return this.router.url == '/groups' || this.router.url == '/groups/new';
+  }
+
 }
