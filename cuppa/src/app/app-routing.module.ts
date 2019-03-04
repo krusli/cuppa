@@ -27,7 +27,7 @@ const routes: Routes = [
         component: NewGroupComponent
       },
       {
-        path: ':groupId',
+        path: 'view/:groupId',
         component: GroupPageComponent
       },
       {
