@@ -12,9 +12,16 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar = false;
   isLogin = true;
+
+  // used for animations (IIRC)
   navbarState = 'closed'; // closed or open
 
+  // reason modal (login modal) was closed
   closeResult: string;
+
+  // form inputs
+  username: string;
+  password: string;
 
   login() {
     console.log('login');

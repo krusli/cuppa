@@ -16,8 +16,12 @@ body {
     font-weight: 300;
 }
 
+.d-grid {
+  display: grid;
+}
+
 // label style: all-caps accent color
-label {
+label.emphasis {
   color: map-get($colors, "accent");
   text-transform: uppercase;
   font-weight: 600;

@@ -17,6 +17,7 @@ import { GroupsListComponent } from './groups/groups-list/groups-list.component'
 import { CommunitiesListComponent } from './groups/communities-list/communities-list.component';
 import { FriendsListComponent } from './groups/friends-list/friends-list.component';
 import { GroupComponent } from './groups/group/group.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GroupComponent } from './groups/group/group.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     AppRoutingModule,
     NgbModule
   ],
