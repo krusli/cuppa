@@ -1,32 +1,36 @@
-<div class="pl-4" *ngIf="myGroups">
-  <!-- <div class="favourites list">
-    <label class="emphasis">Favourites</label>
-    <ul class="nav">
-      <li class="nav-link">Secret Society BLANKET</li>
-    </ul>
-  </div> -->
-  
-  <div class="groups list">
-    <label class="emphasis">Groups</label>
-    <ul class="nav" *ngIf="myGroups">
-      <!-- routerLinkActive for dynamic links -->
-      <!-- https://stackoverflow.com/a/42295902 -->
-      <li class="nav-item" *ngFor="let group of myGroups.groups" [routerLink]="['/groups', group._id]" routerLinkActive="active">
-        <a class="nav-link">
-          {{ group.name }}
-        </a>
-      </li>
-    </ul>
+<div class="pl-4 w-100 d-flex" *ngIf="myGroups">
+  <div class="ml-auto">
+    <!-- <div class="favourites list">
+        <label class="emphasis">Favourites</label>
+        <ul class="nav">
+          <li class="nav-link">Secret Society BLANKET</li>
+        </ul>
+      </div> -->
+    
+    <div class="groups list">
+      <label class="emphasis">Groups</label>
+      <ul class="nav" *ngIf="myGroups">
+        <!-- routerLinkActive for dynamic links -->
+        <!-- https://stackoverflow.com/a/42295902 -->
+        <li class="nav-item" *ngFor="let group of myGroups.groups" [routerLink]="['/groups', group._id]"
+          routerLinkActive="active">
+          <a class="nav-link">
+            {{ group.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="groups list">
+      <label class="emphasis">Communities</label>
+      <ul class="nav">
+        <li class="nav-link">Mech Keys</li>
+        <li class="nav-link">Headphones</li>
+    
+      </ul>
+    </div>
   </div>
-
-  <div class="groups list">
-    <label class="emphasis">Communities</label>
-    <ul class="nav">
-      <li class="nav-link">Mech Keys</li>
-      <li class="nav-link">Headphones</li>
-
-    </ul>
-  </div>
+ 
 
   
 </div>
