@@ -28,12 +28,16 @@ export class AuthService {
     .pipe(this.saveToken);
   }
 
-  getUser() {
+  getHeaders() {
     const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  }
+
+  getUser() {
     return this.http.get('http://localhost:3000/users/me', {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`
-      })
+      headers: this.getHeaders()
     });
   }
 }
