@@ -51,8 +51,9 @@
         <div class="mt-4">
           <label class="emphasis">My Groups</label>
 
-          <br>
-          <app-group></app-group>
+          <div *ngIf="myGroups">
+            <app-group [group]="group" [users]="myGroups.users" *ngFor="let group of myGroups.groups"></app-group>
+          </div>
   
         </div>
       </div>
