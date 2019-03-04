@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
 // security layer
+const cors = require('cors');
 const passport = require('./auth').passport; // pre-configured
 const jwtAuthenticator = passport.authenticate('jwt', { session: false });
 
@@ -13,6 +14,7 @@ mongoose.connect('mongodb://localhost:27017/cuppa-users', {useNewUrlParser: true
 
 const app = express();
 app.use(helmet());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(passport.initialize());
 

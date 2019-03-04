@@ -10,6 +10,10 @@ const ExtractJWT = passportJwt.ExtractJwt;
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = require('./consts').JWT_SECRET;
 const getToken = user => {
+    if (!user) {
+        return null;
+    }
+
     const payload = {
         id: user.id,
         issued: Date.now()
