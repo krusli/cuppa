@@ -23,13 +23,26 @@ export class NavbarComponent implements OnInit {
   closeResult: string;
 
   // form inputs
+  name: string;
   username: string;
   password: string;
+
+  // naming it signUp gives us a JIT error?
+  signUpAction() {
+    this.authService.signUp(this.name, this.username, this.password)
+      .subscribe(x => {
+        this.user = x.user;
+        this.modalService.dismissAll('Logged in');
+        // TODO emit event to parent, perhaps same function as subscriber
+      });
+  }
 
   login() {
     this.authService.login(this.username, this.password)
     .subscribe(x => {
-      console.log(x);
+      this.user = x.user;
+      this.modalService.dismissAll('Logged in');
+      // TODO emit event to parent
     });
   }
 
