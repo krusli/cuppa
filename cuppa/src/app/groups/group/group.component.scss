@@ -1,12 +1,12 @@
 @import '../../../colors.scss';
 
 $avatarSize: 36px;
+$avatarSmSize: 24px;
 
 ul.group-list {
     list-style: none;
     
     margin-bottom: 0;   // already got margin from contents
-
     padding-left: 0;    // don't want padding
 
     &.actions > * {
@@ -35,6 +35,12 @@ label.secondary {
 .avatar {
     height: $avatarSize;
     width: $avatarSize;
+
+    &.sm {
+        height: $avatarSmSize;
+        width: $avatarSmSize;
+    }
+
     margin-right: 5px;
     display: inline-block;
     border-radius: 100%;

@@ -25,7 +25,7 @@
           <li *ngFor="let meetup of group.meetups.slice(0, LIMIT)">
             <div class="d-flex flex-direction-row">
     
-              <div style="width: 75px;" class="mt-auto pr-3 d-flex">
+              <div style="width: 96px;" class="mt-auto pr-3 d-flex">
                 <label class="highlight mb-0 pb-0 ml-auto">
                   {{ meetup.dateFormatted }}
                 </label>
@@ -37,11 +37,11 @@
               </div>
     
               <div class="d-flex mt-auto">
-                <span class="" *ngFor="let attendee of meetup.attending.slice(0, LIMIT_ATTENDEE)">
-                  <div class="avatar"></div>
+                <span *ngFor="let attendee of meetup.attending.slice(0, LIMIT_ATTENDEE)">
+                  <div class="avatar sm"></div>
                 </span>
-                <span class="my-auto" *ngIf="meetup.attending.length > LIMIT_ATTENDEE">+
-                  {{meetup.attending.length - LIMIT_ATTENDEE}}</span>
+                <div class="my-auto" *ngIf="meetup.attending.length > LIMIT_ATTENDEE">
+                  +{{meetup.attending.length - LIMIT_ATTENDEE}}</div>
               </div>
     
             </div>
