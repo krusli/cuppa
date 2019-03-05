@@ -20,12 +20,17 @@ const getPromiseForRequest = async (req, res, url) =>
                 try {
                     // console.log(body);
                     // TODO: if JSON.parse fails, should NOT be internal server error but unauthorized
-                    resolve(JSON.parse(body));
+
+                    console.log(response.headers);
+
+                    if (response.statusCode === 200) {
+                        resolve(JSON.parse(body));
+                    } else {
+                        res.status(response.statusCode).send();
+                        reject(response);
+                    }
+
                 } catch (error) {
-                    res.status(401).send({
-                        error: 'unauthorized',
-                        message: 'You are not authorized to perform this action.'
-                    })
                     reject(error);
                 }
             }

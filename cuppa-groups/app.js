@@ -54,9 +54,11 @@ app.post('/groups', async (req, res, next) => {
 app.get('/groups', async (req, res, next) => {
     try {
         const user = await getUserMe(req, res);
-        const groups = await Group.find({ members: user._id })    // contains userID
+        const groups = await Group.find({ members: user._id });    // contains userID
+
         res.json(groups);
     } catch(err) {
+        console.log(err);
         next(err);
     }
     
