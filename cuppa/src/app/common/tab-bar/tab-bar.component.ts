@@ -1,35 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-interface NavItem {
+export interface NavItem {
   name: string;
   link: string;
   routerLinkActiveOptions: any;
   additionalTest: (x: string) => boolean; // for the 'active' class to be added
 }
-
-const navItems = [
-  {
-    name: 'Groups',
-    link: '/groups',
-    routerLinkActiveOptions: {},
-    additionalTest: (x: string) => {
-      return x.startsWith('/groups') && !x.includes('communities') && !x.includes('friends');
-    }
-  },
-  {
-    name: 'Communities',
-    link: '/groups/communities',
-    routerLinkActiveOptions: {},
-    additionalTest: () => false // noop
-  },
-  {
-    name: 'Friends',
-    link: '/groups/friends',
-    routerLinkActiveOptions: {},
-    additionalTest: () => false // noop
-  }
-];
 
 @Component({
   selector: 'app-tab-bar',
@@ -38,7 +15,7 @@ const navItems = [
 })
 export class TabBarComponent implements OnInit {
 
-  @Input() navItems: NavItem[] = navItems;
+  @Input() navItems: NavItem[];
 
   constructor(private router: Router) { }
 
