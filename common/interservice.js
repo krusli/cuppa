@@ -1,7 +1,7 @@
 const request = require('request');
 
 // req: for getting headers
-const getPromiseForRequest = async (req, res, url) =>
+const getPromiseForRequest = async (req, res, url, ) =>
     new Promise((resolve, reject) => {
         // set up teh request
         const options = {
@@ -54,6 +54,32 @@ const getUsers = (req, res, userIds) => {
 
 const getMeetupsForGroup = (req, res, groupId) =>
     getPromiseForRequest(req, res, `http://localhost:3002/meetups?groupId=${groupId}`);
+
+// TODO untested
+const joinGroup = (req, res, groupId) => new Promise(async (resolve, reject) => {
+    const user = await getUserMe(req, res);
+
+    request.post(`http://localhost:3002/groups/${groupId}/members`, { headers: { authorization: req.headers.authorization } }, (err, resp, body) => {
+        if (err) {
+            reject(err);
+            return;
+        }
+
+        try {
+            // console.log(body);
+            // TODO: if JSON.parse fails, should NOT be internal server error but unauthorized
+            if (response.statusCode === 200) {
+                resolve(JSON.parse(body));
+            } else {
+                res.status(response.statusCode).send();
+                reject(response);
+            }
+
+        } catch (error) {
+            reject(error);
+        }
+    })
+})
 
 // const getMeetup = (req, res, meetupId) =>
 //     getPromiseForRequest(req, res, 'http://localhost:3002/meetups/${meetupId}')
