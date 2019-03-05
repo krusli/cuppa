@@ -2,9 +2,9 @@
 <div class="d-flex" style="flex-direction: row;">
   <!-- <div style="width: auto"></div> -->
 
-  <app-groups-sidebar class="width: 300px d-none d-md-block"></app-groups-sidebar>
+  <app-groups-sidebar class="sidebar d-none d-md-block"></app-groups-sidebar>
 
-  <div class="width: 100%; content mb-5" [ngClass]="showAsContainer() ? 'container' : ''">
+  <div class="content mb-5" [ngClass]="showAsContainer() ? 'container' : ''">
     <div [ngClass]="showAsContainer() ? 'container' : ''">
       <div class="text-right">
         <a routerLink="/groups/new"><button class="btn btn-outline-primary" [hidden]="this.router.url !== '/groups'">
