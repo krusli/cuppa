@@ -33,7 +33,7 @@ export class GroupPageComponent implements OnInit {
     .subscribe((group: Group) => {
       console.log(group);
       this.group = group;
-    })
+    });
   }
 
 }
