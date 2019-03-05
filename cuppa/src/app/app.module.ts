@@ -23,6 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
 import { GroupPageComponent } from './groups/group-page/group-page.component';
 import { TabBarComponent } from './common/tab-bar/tab-bar.component';
+import { GroupActivityComponent } from './groups/group-page/group-activity/group-activity.component';
+import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
+import { GroupMembersComponent } from './groups/group-page/group-members/group-members.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { TabBarComponent } from './common/tab-bar/tab-bar.component';
     NewGroupComponent,
     GroupPageComponent,
     TabBarComponent,
+    GroupActivityComponent,
+    GroupMeetupsComponent,
+    GroupMembersComponent,
   ],
   imports: [
     BrowserModule,

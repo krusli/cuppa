@@ -20,9 +20,6 @@ const getPromiseForRequest = async (req, res, url) =>
                 try {
                     // console.log(body);
                     // TODO: if JSON.parse fails, should NOT be internal server error but unauthorized
-
-                    console.log(response.headers);
-
                     if (response.statusCode === 200) {
                         resolve(JSON.parse(body));
                     } else {

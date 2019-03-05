@@ -59,8 +59,8 @@
     
         <ul class="group-list actions">
           <li><a [routerLink]="'/groups/view/' + group._id">View Group</a></li>
-          <li>Plan a Meetup</li>
-          <li>Invite</li>
+          <li><a [routerLink]="['/groups/view', group._id, 'meetups']">Plan a Meetup</a></li>
+          <li><a>Invite</a></li>
         </ul>
     
       </div>

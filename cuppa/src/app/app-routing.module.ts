@@ -8,6 +8,9 @@ import { CommunitiesListComponent } from './groups/communities-list/communities-
 import { FriendsListComponent } from './groups/friends-list/friends-list.component';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
 import { GroupPageComponent } from './groups/group-page/group-page.component';
+import { GroupActivityComponent } from './groups/group-page/group-activity/group-activity.component';
+import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
+import { GroupMembersComponent } from './groups/group-page/group-members/group-members.component';
 
 const routes: Routes = [
   {
@@ -28,7 +31,21 @@ const routes: Routes = [
       },
       {
         path: 'view/:groupId',
-        component: GroupPageComponent
+        component: GroupPageComponent,
+        children: [
+          {
+            path: '',
+            component: GroupActivityComponent
+          },
+          {
+            path: 'meetups',
+            component: GroupMeetupsComponent
+          },
+          {
+            path: 'members',
+            component: GroupMembersComponent
+          }
+        ]
       },
       {
         path: 'communities',

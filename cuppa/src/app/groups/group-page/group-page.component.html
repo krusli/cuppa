@@ -2,7 +2,7 @@
 <div class="d-grid w-100 h-100">
   <div class="background h-400"></div>
   <div class="overlay h-400"></div>
-  <div class="jumbotron h-400 content">
+  <div class="jumbotron h-400 content mb-0">
     <div class="row h-100">
       <div class="col-12 col-md-11 h-100">
         <div class="h-100 d-flex">
@@ -21,7 +21,8 @@
 
   </div>
 </div>
-
-<div class="mt-3">
+<app-tab-bar [navItems]="navItems" [alignLeft]="true"></app-tab-bar>
+<router-outlet></router-outlet>
+<!-- <div class="mt-3">
   {{ group | json }}
-</div>
+</div> -->
