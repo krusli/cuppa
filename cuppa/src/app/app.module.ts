@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
 import { GroupPageComponent } from './groups/group-page/group-page.component';
+import { TabBarComponent } from './common/tab-bar/tab-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { GroupPageComponent } from './groups/group-page/group-page.component';
     GroupComponent,
     NewGroupComponent,
     GroupPageComponent,
+    TabBarComponent,
   ],
   imports: [
     BrowserModule,

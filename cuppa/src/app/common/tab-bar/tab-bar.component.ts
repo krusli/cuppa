@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 interface NavItem {
   name: string;
   link: string;
-  routerLinkActiveOptions?: any;
+  routerLinkActiveOptions: any;
 }
 
 const navItems = [
@@ -14,11 +14,13 @@ const navItems = [
   },
   {
     name: 'Communities',
-    link: '/groups/communities'
+    link: '/groups/communities',
+    routerLinkActiveOptions: {}
   },
   {
     name: 'Friends',
-    link: '/groups/friends'
+    link: '/groups/friends',
+    routerLinkActiveOptions: {}
   }
 ];
 
