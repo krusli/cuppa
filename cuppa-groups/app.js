@@ -18,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/cuppa-groups', { useNewUrlParser: tr
 const interservice = require('../common/interservice'); // inter-service comms
 const getUser = interservice.getUser;
 const getUserMe = interservice.getUserMe;
+const getGroups = interservice.getGroups;
 
 app.get('/healthCheck', (req, res) => res.send());
 
@@ -76,6 +77,9 @@ app.get('/groups/:groupId', async (req, res, next) => {
 })
 
 app.post('/groups/:groupId/members', async (req, res, next) => {
+    console.log('New member');
+    console.log(req.body);
+
     if (!req.body.username) {
         res.status(400).send({
             error: 'bad_request',
@@ -94,7 +98,7 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
         }
 
         // validate the other user
-        const invitedUser = await getGroups(req, res, req.body.username);
+        const invitedUser = await getUser(req, res, req.body.username);
         if (!invitedUser) {
             res.status(400).send({
                 error: 'bad_request',
@@ -102,6 +106,9 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
             });
         }
 
+        console.log(invitedUser);
+
+        // TODO check, don't push extras
         group.members.push(invitedUser._id);
         const groupNew = await group.save();
         res.json(groupNew);

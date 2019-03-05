@@ -1,18 +1,27 @@
 const request = require('request');
 
 // req: for getting headers
-const getPromiseForRequest = async (req, res, url, ) =>
+const getPromiseForRequest = async (req, res, url, method, body) => 
     new Promise((resolve, reject) => {
-        // set up teh request
+
+        if (!method) {
+            method = 'GET';
+        }
+
+        // set up the request
         const options = {
-            url,
+            // url,
             headers: {
                 authorization: req.headers.authorization
             }
         }
 
-        // do the request
-        request(options, (error, response, body) => {
+        if (body) {
+            options.body = JSON.stringify(body);
+            options.headers['content-type'] = 'application/json';
+        }
+
+        const callback = (error, response, body) => {
             if (error) {
                 reject(error);
             }
@@ -23,15 +32,24 @@ const getPromiseForRequest = async (req, res, url, ) =>
                     if (response.statusCode === 200) {
                         resolve(JSON.parse(body));
                     } else {
+                        console.log('Not 200')
                         res.status(response.statusCode).send();
-                        reject(response);
+                        reject(body);
                     }
 
                 } catch (error) {
+                    console.log('Error')
                     reject(error);
                 }
             }
-        })
+        }
+
+        // do the request
+        if (method == 'GET') {
+            request.get(url, options, callback);
+        } else if (method == 'POST') {
+            request.post(url, options, callback);
+        }
     })
    
 
@@ -56,30 +74,10 @@ const getMeetupsForGroup = (req, res, groupId) =>
     getPromiseForRequest(req, res, `http://localhost:3002/meetups?groupId=${groupId}`);
 
 // TODO untested
-const joinGroup = (req, res, groupId) => new Promise(async (resolve, reject) => {
+const joinGroup = async (req, res, groupId) => {
     const user = await getUserMe(req, res);
-
-    request.post(`http://localhost:3002/groups/${groupId}/members`, { headers: { authorization: req.headers.authorization } }, (err, resp, body) => {
-        if (err) {
-            reject(err);
-            return;
-        }
-
-        try {
-            // console.log(body);
-            // TODO: if JSON.parse fails, should NOT be internal server error but unauthorized
-            if (response.statusCode === 200) {
-                resolve(JSON.parse(body));
-            } else {
-                res.status(response.statusCode).send();
-                reject(response);
-            }
-
-        } catch (error) {
-            reject(error);
-        }
-    })
-})
+    return await getPromiseForRequest(req, res, `http://localhost:3001/groups/${groupId}/members`, 'POST', { username: user.username });
+}
 
 // const getMeetup = (req, res, meetupId) =>
 //     getPromiseForRequest(req, res, 'http://localhost:3002/meetups/${meetupId}')
@@ -90,5 +88,6 @@ module.exports = {
     getUser,
     getUsers,
     getUserMe,
-    getMeetupsForGroup
+    getMeetupsForGroup,
+    joinGroup
 }

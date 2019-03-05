@@ -27,6 +27,7 @@ app.get('/groups/:groupId', middleware.getGroup, sendData);
 
 // TODO move to controllers
 const getGroup = require('../common/interservice').getGroup;
+const joinGroup = require('../common/interservice').joinGroup;
 app.post('/me/groups', async (req, res, next) => {
   if (!req.body.group) {
     res.status(400).send({
@@ -40,8 +41,8 @@ app.post('/me/groups', async (req, res, next) => {
     const group = await getGroup(req, res, groupId);
 
     
-
-    res.json(group);
+    const joined = await joinGroup(req, res, group._id);
+    res.json(joined);
   } catch (err) {
     next(err);
   }
