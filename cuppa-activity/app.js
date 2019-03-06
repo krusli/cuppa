@@ -45,8 +45,8 @@ const errorHandler = (res, err, next) => {
 
 app.get('/activity', async (req, res, next) => {
   try {
-    console.log('GET /activity');
-    console.log(req.query);
+    // console.log('GET /activity');
+    // console.log(req.query);
     res.json(await Activity.find(req.query));
   } catch (err) {
     errorHandler(res, err, next);
