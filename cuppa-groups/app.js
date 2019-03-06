@@ -20,9 +20,16 @@ const groupsService = new GroupsService(UsersService, Group);
 
 const errorHandler = (res, err, next) => {
     if (err.name === 'CastError') {
-        console.log('CastError');
-        res.status(400).send();
-    } else {
+        res.status(400).send(err.message);
+        return;
+    } 
+    
+    else if (err.name === 'ValidationError') {
+        res.status(400).send(err.message);
+        return;
+    }
+    
+    else {
         console.error(err);
         if (next) {
             next(err);
