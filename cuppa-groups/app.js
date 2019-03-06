@@ -48,7 +48,7 @@ app.post('/groups', async (req, res, next) => {
 
     try {
         // get own profile (also, validates token by delegating to the Auth/Users server)
-        const user = await this.getUserMe(req, res);
+        const user = await UsersService.getUserMe(req, res);
 
         const group = await groupsService.newGroup(user, name, description);
 
@@ -94,7 +94,6 @@ app.get('/groups/:groupId', async (req, res, next) => {
 });
 
 app.get('/me/groups', async (req, res, next) => {
-    console.log('/me/groups');
     try {
         const groups = await groupsService.getGroupsMe(req, res);
         res.json(groups);

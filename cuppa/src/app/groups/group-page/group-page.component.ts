@@ -34,9 +34,9 @@ export class GroupPageComponent implements OnInit {
         return this.groupsService.getGroup(groupId);
       })
     )
-    .subscribe((group: Group) => {
-      console.log(group);
-      this.group = group;
+    .subscribe((groupAndUsers: any) => {
+      console.log(groupAndUsers);
+      this.group = groupAndUsers.group;
 
       this.updateNavItems();
     });

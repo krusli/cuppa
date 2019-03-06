@@ -1,7 +1,24 @@
 <div class="container">
   <div *ngIf="group">
-    <div *ngFor="let activity of group.activity">
-      {{ activity | json}}
+    <div class="card" height="3em" *ngFor="let activity of group.activity">
+
+      <div class="card-body">
+        <div class="d-flex" style="flex-direction: row">
+          <div class="avatar"></div>
+          <div class="ml-1 my-auto">
+            {{ users[activity.user].name }}
+          </div>
+          
+          <div class="my-auto ml-3 my-auto" *ngIf="activity.action === 'Joined'">
+            Joined the group
+          </div>
+
+          <div class="ml-auto my-auto">
+            {{ differenceInSeconds(now, toDate(activity.createdOn)) | myTime }}
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -10,9 +10,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 module.exports = Model => {
     return {
         getMe: (req, res) => {
-            console.log('getMe');
             const userPublic = getUserPublic(req.user);
-            console.log(userPublic);
             res.json(userPublic);
         },
 
@@ -27,7 +25,6 @@ module.exports = Model => {
 
             
             let ids = [];
-            console.log(req.query);
             if (Array.isArray(req.query._id)) {
                 // NOTE need to filter out null values and non ObjectId
                 ids = req.query._id
