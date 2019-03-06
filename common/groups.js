@@ -11,7 +11,12 @@ const getMeetupsForGroup = (req, res, groupId) =>
 
 const joinGroup = async (req, res, groupId) => {
   const user = await getUserMe(req, res);
-  return await getPromiseForRequest(req, res, `http://localhost:3001/groups/${groupId}/members`, 'POST', { username: user.username });
+
+  // wait for the result, then return it
+  return await getPromiseForRequest(req, res, 
+                                    `http://localhost:3001/groups/${groupId}/members`, 
+                                    'POST', 
+                                    { username: user.username });
 };
 
 module.exports = {

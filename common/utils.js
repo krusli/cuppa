@@ -31,13 +31,14 @@ const getPromiseForRequest = async (req, res, url, method, body) =>
           if (response.statusCode === 200) {
             resolve(JSON.parse(body));
           } else {
+            // TODO don't depend on res
             console.log('Not 200')
             res.status(response.statusCode).send();
             reject(body);
           }
 
         } catch (error) {
-          console.log('Error')
+          console.log('Error');
           reject(error);
         }
       }

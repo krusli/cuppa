@@ -14,11 +14,12 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/cuppa-groups', { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB'), err => console.log(err));
 
+const UsersService = require('../common/users');
+const getUser = UsersService.getUser;
+const getUserMe = UsersService.getUserMe;
 
-const interservice = require('../common/interservice'); // inter-service comms
-const getUser = interservice.getUser;
-const getUserMe = interservice.getUserMe;
-const getGroups = interservice.getGroups;
+const GroupsService = require('./services/groupsService');
+const groupsService = new GroupsService(UsersService, Group);
 
 app.get('/healthCheck', (req, res) => res.send());
 
@@ -27,28 +28,20 @@ app.post('/groups', async (req, res, next) => {
     const name = req.body.name;
     const description = req.body.description;
 
-    if (!name) {
-        res.status(400).send({
-            error: 'bad_request',
-            message: 'Invalid request.'
-        });
-        return;
-    }
-
     try {
-        const user = await getUserMe(req, res);
-
-        const owner = user._id;
-        const group = await Group.create({
-            name,
-            description,
-            members: [owner],
-            owner
-        })
-
+        const group = await groupsService.newGroup(name, description, req, res);
         res.json(group);
     } catch (err) {
         console.error(err);
+
+        if (err.message == 'missing_param_name') {
+            res.status(400).send({
+                error: 'bad_request',
+                message: 'Invalid request.'
+            });
+            return;
+        }
+
         next(err);
     }
 });
@@ -142,27 +135,6 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
     }
 });
 
-// app.post('/groups/:groupId/events', async (req, res, next) => {
-//     try {
-//         const user = await getUserMe(req, res);
-//         const group = await Group.findOne({ members: user._id, _id: req.params.groupId });
-
-//         if (!group) {
-//             res.status(404).send(); // no group found
-//             return;
-//         }
-
-//         // TODO validate body
-
-
-
-        
-//     } catch (err) {
-//         next(err);
-//     }
-// });
-// TODO get group (open) (only public-facing contents)
-
 app.listen(3001, () => {
-    console.log('Server listening on port 3001.')
+    console.log('Server listening on port 3001.');
 })
