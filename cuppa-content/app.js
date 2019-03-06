@@ -14,8 +14,11 @@ app.use(bodyParser.json());
 
 /**
  * Contents microservice.
+ * 
  * Point of contact for the SPA (except for auth, which goes directly to auth servers).
+ * 
  * Aggregates contents from the different services for presentation on the client.
+ * Also handles client services and forwards them to the right server(s).
  */
 
 const sendData = (req, res) => res.json(req.data);
