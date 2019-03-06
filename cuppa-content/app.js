@@ -27,10 +27,10 @@ const middleware = require('./middleware');
 app.get('/groups/', middleware.getGroups, sendData);
 app.get('/groups/:groupId', middleware.getGroup, sendData);
 
-
 // TODO move to controllers
-const getGroup = require('../common/interservice').getGroup;
-const joinGroup = require('../common/interservice').joinGroup;
+const getGroup = require('../common/groups').getGroup;
+const getGroupsMe = require('../common/groups').getGroupsMe;
+const joinGroup = require('../common/groups').joinGroup;
 
 app.post('/me/groups', async (req, res, next) => {
   if (!req.body.group) {

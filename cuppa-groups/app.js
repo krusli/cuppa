@@ -15,10 +15,7 @@ mongoose.connect('mongodb://localhost:27017/cuppa-groups', { useNewUrlParser: tr
     .then(() => console.log('Connected to MongoDB'), err => console.log(err));
 
 const UsersService = require('../common/users');
-const getUser = UsersService.getUser;
-const getUserMe = UsersService.getUserMe;
-
-const GroupsService = require('./services/groupsService');
+const GroupsService = require('./services/GroupsService');
 const groupsService = new GroupsService(UsersService, Group);
 
 const errorHandler = (res, err, next) => {

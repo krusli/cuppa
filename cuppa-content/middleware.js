@@ -1,8 +1,8 @@
-const interservice = require('../common/interservice'); // inter-service comms
-const getGroup = interservice.getGroup;
-const getGroups = interservice.getGroups;
-const getUsers = interservice.getUsers;
-const getMeetupsForGroup = interservice.getMeetupsForGroup;
+const getGroup = require('../common/groups').getGroup;
+const getGroupsMe = require('../common/groups').getGroupsMe;
+const getMeetupsForGroup = require('../common/groups').getMeetupsForGroup;
+
+const getUsers = require('../common/users').getUsers;
 
 /**
  * Hydrates Group with user data (and other information (later)).
@@ -34,7 +34,7 @@ module.exports = {
   getGroups: async (req, res, next) => {
     try {
       // const user = await getUserMe(req, res);
-      const groups = await getGroups(req, res);
+      const groups = await getGroupsMe(req, res);
       const users = {};
       const finalGroups = await Promise.all(groups.map(group => hydrateGroup(req, res, group, users)));
       
@@ -52,9 +52,7 @@ module.exports = {
 
   getGroup: async (req, res, next) => {
     try {
-      console.log(req.params.groupId);
       const group = await getGroup(req, res, req.params.groupId);
-      console.log(group);
       const users = {};
 
       if (!group) {
