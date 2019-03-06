@@ -48,25 +48,45 @@ app.post('/groups', async (req, res, next) => {
 
         res.json(group);
     } catch (err) {
+        console.error(err);
         next(err);
     }
-})
+});
 
 app.get('/groups', async (req, res, next) => {
+    try {
+        const groups = await Group.find();
+        res.json(groups);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+
+app.get('/groups/:groupId', async (req, res, next) => {
+    try {
+        const group = await Group.findOne({ _id: req.params.groupId });
+        res.json(group);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+
+app.get('/me/groups', async (req, res, next) => {
     try {
         const user = await getUserMe(req, res);
         const groups = await Group.find({ members: user._id });    // contains userID
 
         res.json(groups);
     } catch(err) {
-        console.log(err);
+        console.error(err);
         next(err);
     }
-    
-})
+});
 
 // gets a group, that the user is a member of
-app.get('/groups/:groupId', async (req, res, next) => {
+app.get('/me/groups/:groupId', async (req, res, next) => {
     try {
         const user = await getUserMe(req, res);
         const group = await Group.findOne({ members: user._id, _id: req.params.groupId })
@@ -76,10 +96,12 @@ app.get('/groups/:groupId', async (req, res, next) => {
     }
 })
 
+/**
+ * Adds a user to a group.
+ * 
+ * At this point in time, anyone can invite any valid user into a group.)
+ */
 app.post('/groups/:groupId/members', async (req, res, next) => {
-    console.log('New member');
-    console.log(req.body);
-
     if (!req.body.username) {
         res.status(400).send({
             error: 'bad_request',
@@ -106,10 +128,10 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
             });
         }
 
-        console.log(invitedUser);
-
         // TODO check, don't push extras
-        group.members.push(invitedUser._id);
+        if (!group.members.map(x => x.toString()).includes(invitedUser._id.toString())) {
+            group.members.push(invitedUser._id);
+        }
         const groupNew = await group.save();
         res.json(groupNew);
 

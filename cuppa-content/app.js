@@ -28,12 +28,13 @@ app.get('/groups/:groupId', middleware.getGroup, sendData);
 // TODO move to controllers
 const getGroup = require('../common/interservice').getGroup;
 const joinGroup = require('../common/interservice').joinGroup;
+
 app.post('/me/groups', async (req, res, next) => {
   if (!req.body.group) {
     res.status(400).send({
       error: 'bad_request',
       message: 'Missing parameter: group (ObjectId)'
-    })
+    });
   }
 
   try {
@@ -52,6 +53,9 @@ app.post('/me/groups', async (req, res, next) => {
 
 app.get('/communities/featured', (req, res) => {
   res.json([
+    {
+      name: "Writing"
+    },
     {
       name: "DIY"
     },

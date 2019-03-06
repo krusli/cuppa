@@ -4,6 +4,15 @@ const getGroups = interservice.getGroups;
 const getUsers = interservice.getUsers;
 const getMeetupsForGroup = interservice.getMeetupsForGroup;
 
+/**
+ * Hydrates Group with user data (and other information (later)).
+ * 
+ * Assumes group is a valid Group object
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} group 
+ * @param {*} users 
+ */
 const hydrateGroup = async (req, res, group, users) => {
   // look for all User entities in the group
   const members = await getUsers(req, res, group.members);
@@ -43,10 +52,17 @@ module.exports = {
 
   getGroup: async (req, res, next) => {
     try {
-      const hydrateGroupWithClosure = x => hydrateGroup(x); 
-
+      console.log(req.params.groupId);
       const group = await getGroup(req, res, req.params.groupId);
+      console.log(group);
       const users = {};
+
+      if (!group) {
+        res.status(404).send({
+          error: 'not_found',
+          message: `Group with ID ${req.params.groupId} not found.`
+        });
+      }
       const groupFinal = await hydrateGroup(req, res, group, users);
 
       req.data = groupFinal;
