@@ -16,9 +16,12 @@ const getUsers = require('../common/users').getUsers;
  * @param {*} users 
  */
 const hydrateGroup = async (req, res, group, users) => {
+  console.log('hydrateGroup for group ' + group.name)
   // look for all User entities in the group
   const members = await getUsers(req, res, group.members);
+  console.log('Got all members data ' + group.name);
   const ownerUsers = await getUsers(req, res, [group.owner]);
+  console.log('Got owner data ' + group.name);
   const owner = ownerUsers ? ownerUsers[0] : null;
 
   /* get group activity */
@@ -31,6 +34,7 @@ const hydrateGroup = async (req, res, group, users) => {
   users[owner._id] = owner;
 
   // get all meetups for the group
+  console.log('Getting meetups for group');
   group.meetups = await getMeetupsForGroup(req, res, group._id);
 
   return group;
@@ -38,11 +42,16 @@ const hydrateGroup = async (req, res, group, users) => {
 
 module.exports = {
   getGroups: async (req, res, next) => {
+    console.log('middleware.getGroups()')
     try {
       // const user = await getUserMe(req, res);
       const groups = await getGroupsMe(req, res);
       const users = {};
-      const finalGroups = await Promise.all(groups.map(group => hydrateGroup(req, res, group, users)));
+      const finalGroups = await Promise.all(
+        groups.map(group => hydrateGroup(req, res, group, users))
+      );
+
+      console.log('Got final');
       
       req.data = {
         groups: finalGroups,
@@ -52,6 +61,7 @@ module.exports = {
       // groups.members = 
 
     } catch (err) {
+      console.error(err);
       next(err);
     }
   },
@@ -72,6 +82,7 @@ module.exports = {
       req.data = groupFinal;
       next();
     } catch (err) {
+      console.error(err);
       next(err);
     }
   }

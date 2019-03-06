@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
  * An Action: any mutation in the data. Each Service is responsible for notifying
  * the Activity Microservice about new actions.
  * 
+ * Rule of thumb: any request that mutates state (i.e. POST/PUT/DELETE) will likely
+ * be "notable" and should probably be recorded as an Activity.
+ * e.g. creating a Group/joining a Group/leaving a Group
+ * 
  * An Activity is represented in the passive voice
  * (Subject was Action-ed by the User)
  * 
@@ -23,9 +27,10 @@ const activitySchema = new Schema({
   },  // USER, GROUP, MEETUP
   action: { 
     type: String, 
-    enum: ['Created', 'Joined'],
+    enum: ['Created', 'Joined', 'Left'],
     required: true 
-  }  // JOINED, INVITE
+  },  // JOINED, INVITE
+  createdOn: { type: Date, default: Date.now() }
 });
 
 module.exports = mongoose.model('Activity', activitySchema);

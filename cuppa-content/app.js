@@ -29,9 +29,9 @@ app.get('/groups/:groupId', middleware.getGroup, sendData);
 
 // TODO move to controllers
 const getGroup = require('../common/groups').getGroup;
-const getGroupsMe = require('../common/groups').getGroupsMe;
 const joinGroup = require('../common/groups').joinGroup;
 
+/* Join a group */
 app.post('/me/groups', async (req, res, next) => {
   if (!req.body.group) {
     res.status(400).send({
@@ -43,15 +43,12 @@ app.post('/me/groups', async (req, res, next) => {
   try {
     const groupId = req.body.group;
     const group = await getGroup(req, res, groupId);
-
-    
     const joined = await joinGroup(req, res, group._id);
     res.json(joined);
   } catch (err) {
+    console.error(err); // TODO use unified error handler
     next(err);
   }
-  // res.json(group);
-  // pass request to groups server
 })
 
 app.get('/communities/featured', (req, res) => {

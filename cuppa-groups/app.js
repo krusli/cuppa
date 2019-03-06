@@ -39,13 +39,27 @@ const errorHandler = (res, err, next) => {
 
 app.get('/healthCheck', (req, res) => res.send());
 
+const ActivityService = require('../common/activity');
+
 app.post('/groups', async (req, res, next) => {
     // validate request
     const name = req.body.name;
     const description = req.body.description;
 
     try {
-        const group = await groupsService.newGroup(name, description, req, res);
+        // get own profile (also, validates token by delegating to the Auth/Users server)
+        const user = await this.getUserMe(req, res);
+
+        const group = await groupsService.newGroup(user, name, description);
+
+        // notify Activity service (async)
+        ActivityService.newActivity(req, res, {
+            user: user._id,
+            subject: group._id,
+            subjectType: 'Group',
+            action: 'Created'
+        });
+
         res.json(group);
     } catch (err) {
 
@@ -80,6 +94,7 @@ app.get('/groups/:groupId', async (req, res, next) => {
 });
 
 app.get('/me/groups', async (req, res, next) => {
+    console.log('/me/groups');
     try {
         const groups = await groupsService.getGroupsMe(req, res);
         res.json(groups);
@@ -97,6 +112,9 @@ app.get('/me/groups/:groupId', async (req, res, next) => {
         errorHandler(res, err, next);
     }
 });
+
+// leave a group
+// app.delete('me/groups/:groupId')
 
 app.post('/groups/:groupId/members', async (req, res, next) => {
     if (!req.body.username) {

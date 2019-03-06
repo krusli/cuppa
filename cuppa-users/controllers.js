@@ -5,10 +5,15 @@ const bcrypt = require('bcrypt');
 const passport = require('./auth').passport;
 const getToken = require('./auth').getToken;
 
+const ObjectId = require('mongoose').Types.ObjectId;
+
 module.exports = Model => {
     return {
         getMe: (req, res) => {
-            res.json(getUserPublic(req.user));
+            console.log('getMe');
+            const userPublic = getUserPublic(req.user);
+            console.log(userPublic);
+            res.json(userPublic);
         },
 
         getUsers: async (req, res) => {
@@ -20,15 +25,20 @@ module.exports = Model => {
                 params.username = new RegExp(`^${req.query.username}$`, 'i');  // case insensitive
             }
 
-            // console.log(req.query);
-            if (req.query._id.length) {
-                // => _id is an array
-                params._id = {
-                    $in: req.query._id
-                };
+            
+            let ids = [];
+            console.log(req.query);
+            if (Array.isArray(req.query._id)) {
+                // NOTE need to filter out null values and non ObjectId
+                ids = req.query._id
+                .filter(ObjectId.isValid);
             } else if (req.query._id) {
-                params._id = req.query._id;
+                if (ObjectId.isValid(req.query._id)) {
+                    ids.push(req.query._id);
+                }
             }
+
+            params._id = ids;
 
             const matches = await Model.find(params);
             const matchesPublic = matches.map(getUserPublic);
