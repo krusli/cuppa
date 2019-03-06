@@ -24,12 +24,13 @@ const Activity = require('./models/activity');
 
 /* TODO de-duplicate between -activity and -groups */
 const errorHandler = (res, err, next) => {
-  if (err.name === 'CastError') {
+
+  if (err && err.name === 'CastError') {
     res.status(400).send(err.message);
     return;
   }
 
-  else if (err.name === 'ValidationError') {
+  else if (err && err.name === 'ValidationError') {
     res.status(400).send(err.message);
     return;
   }
@@ -42,13 +43,13 @@ const errorHandler = (res, err, next) => {
   }
 };
 
-
 app.get('/activity', async (req, res, next) => {
   try {
-    console.log('GET /activities');
-    res.json(await Activity.find());
+    console.log('GET /activity');
+    console.log(req.query);
+    res.json(await Activity.find(req.query));
   } catch (err) {
-    errorHandler(error);
+    errorHandler(res, err, next);
   }
 });
 
@@ -58,7 +59,7 @@ app.post('/activity', async (req, res, next) => {
 
     res.json(await activity.save());
   } catch (err) {
-    errorHandler(err);
+    errorHandler(res, err, next);
   }
 });
 

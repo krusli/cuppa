@@ -42,8 +42,8 @@ module.exports = Model => {
             if (!username || !password) {
                 res.status(400).send({
                     error: 'bad_request',
-                    message: 'Invalid request.'
-                })
+                    message: 'Missing keys in JSON: username and/or password.'
+                });
                 return;
             }
 
@@ -99,7 +99,7 @@ module.exports = Model => {
 
                 req.login(user, { session: false }, err => {
                     if (err) {
-                        console.log('/login: internal status error');
+                        console.log('/login: internal server error');
                         console.log(err);
                         res.status(500).send();
                     }

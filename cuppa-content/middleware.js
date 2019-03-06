@@ -2,6 +2,8 @@ const getGroup = require('../common/groups').getGroup;
 const getGroupsMe = require('../common/groups').getGroupsMe;
 const getMeetupsForGroup = require('../common/groups').getMeetupsForGroup;
 
+const getActivityForGroup = require('../common/activity').getActivityForGroup;
+
 const getUsers = require('../common/users').getUsers;
 
 /**
@@ -19,6 +21,10 @@ const hydrateGroup = async (req, res, group, users) => {
   const ownerUsers = await getUsers(req, res, [group.owner]);
   const owner = ownerUsers ? ownerUsers[0] : null;
 
+  /* get group activity */
+  // for actions, no need to fetch users anymore
+  // ASSUMPTION only users get to do actions inside the group.
+  group.activity = await getActivityForGroup(req, res, group._id);
 
   // fill in the map of IDs -> Users
   members.map(x => users[x._id] = x);

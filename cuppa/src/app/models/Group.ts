@@ -12,6 +12,15 @@ export interface Meetup {
   __v: number;
 }
 
+export interface Activity {
+  _id: string;
+  user: string;
+  subject: string;
+  subjectType: string;
+  action: string;
+  __v: number;
+}
+
 export interface Group {
   members: string[];
   _id: string;
@@ -22,8 +31,10 @@ export interface Group {
   __v: number;
   roles: any[];
   meetups: Meetup[];
+  activity: Activity[];
 }
 
+/* used during group creation */
 export interface GroupDTO {
   name: string;
   description: string;
