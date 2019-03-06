@@ -31,7 +31,7 @@ export class GroupActivityComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((groupAndUsers: any) => {
-        // console.log(group);
+        console.log(groupAndUsers);
         this.group = groupAndUsers.group;
         this.users = groupAndUsers.users;
       });
