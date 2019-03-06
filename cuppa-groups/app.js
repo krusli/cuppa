@@ -21,6 +21,18 @@ const getUserMe = UsersService.getUserMe;
 const GroupsService = require('./services/groupsService');
 const groupsService = new GroupsService(UsersService, Group);
 
+const errorHandler = (res, err, next) => {
+    if (err.name === 'CastError') {
+        console.log('CastError');
+        res.status(400).send();
+    } else {
+        console.error(err);
+        if (next) {
+            next(err);
+        }
+    }
+};
+
 app.get('/healthCheck', (req, res) => res.send());
 
 app.post('/groups', async (req, res, next) => {
@@ -32,7 +44,6 @@ app.post('/groups', async (req, res, next) => {
         const group = await groupsService.newGroup(name, description, req, res);
         res.json(group);
     } catch (err) {
-        console.error(err);
 
         if (err.message == 'missing_param_name') {
             res.status(400).send({
@@ -42,58 +53,47 @@ app.post('/groups', async (req, res, next) => {
             return;
         }
 
-        next(err);
+        errorHandler(res, err, next);
     }
 });
 
 app.get('/groups', async (req, res, next) => {
     try {
-        const groups = await Group.find();
+        const groups = await groupsService.getGroups();
         res.json(groups);
     } catch (err) {
-        console.error(err);
-        next(err);
+        errorHandler(res, err, next);
     }
 });
 
 app.get('/groups/:groupId', async (req, res, next) => {
     try {
-        const group = await Group.findOne({ _id: req.params.groupId });
+        const group = await groupsService.getGroupById(req.params.groupId);
         res.json(group);
     } catch (err) {
-        console.error(err);
-        next(err);
+        errorHandler(res, err, next);
     }
 });
 
 app.get('/me/groups', async (req, res, next) => {
     try {
-        const user = await getUserMe(req, res);
-        const groups = await Group.find({ members: user._id });    // contains userID
-
+        const groups = await groupsService.getGroupsMe(req, res);
         res.json(groups);
-    } catch(err) {
-        console.error(err);
-        next(err);
+    } catch (err) {
+        errorHandler(res, err, next);
     }
 });
 
 // gets a group, that the user is a member of
 app.get('/me/groups/:groupId', async (req, res, next) => {
     try {
-        const user = await getUserMe(req, res);
-        const group = await Group.findOne({ members: user._id, _id: req.params.groupId })
+        const group = await groupsService.getGroupByIdMe(req.params.groupId, req, res);
         res.json(group);
     } catch (err) {
-        next(err);
+        errorHandler(res, err, next);
     }
-})
+});
 
-/**
- * Adds a user to a group.
- * 
- * At this point in time, anyone can invite any valid user into a group.)
- */
 app.post('/groups/:groupId/members', async (req, res, next) => {
     if (!req.body.username) {
         res.status(400).send({
@@ -104,37 +104,21 @@ app.post('/groups/:groupId/members', async (req, res, next) => {
     }
 
     try {
-        const user = await getUserMe(req, res);
-        const group = await Group.findOne({ members: user._id, _id: req.params.groupId });
-
-        if (!group) {
+        const groupNew = await groupsService.newMember(req.params.groupId, req.body.username, req, res);
+        res.json(groupNew);
+    } catch (err) {
+        if (err.message === 'invalid_param_groupId') {
             res.status(404).send(); // no group found
             return;
         }
 
-        // validate the other user
-        const invitedUser = await getUser(req, res, req.body.username);
-        if (!invitedUser) {
-            res.status(400).send({
-                error: 'bad_request',
-                message: 'user to invite does not exist'
-            });
+        else {
+            errorHandler(res, err, next);
         }
 
-        // TODO check, don't push extras
-        if (!group.members.map(x => x.toString()).includes(invitedUser._id.toString())) {
-            group.members.push(invitedUser._id);
-        }
-        const groupNew = await group.save();
-        res.json(groupNew);
-
-        // otherwise, the group exists
-        // update it with the new member
-    } catch (err) {
-        next(err);
     }
 });
 
 app.listen(3001, () => {
     console.log('Server listening on port 3001.');
-})
+});
