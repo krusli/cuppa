@@ -22,7 +22,7 @@ export class NewGroupComponent implements OnInit {
 
   newGroup() {
     if (!this.name) {
-      console.log('TODO show alert');
+      alert('Please enter a name for the group.')
       return;
     }
 
@@ -32,6 +32,9 @@ export class NewGroupComponent implements OnInit {
     })
     .subscribe(x => {
       console.log(x);
+      // TODO: add an action to add a new group + users in the new group
+      // without replacing the existing items
+      // groups.actions.ts and groups.reducer.ts
     });
 
   }

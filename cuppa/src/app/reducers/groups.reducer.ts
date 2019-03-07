@@ -1,4 +1,4 @@
-import { Group, GroupsAndUsers } from "../models/Group";
+import { GroupsAndUsers } from "../models/Group";
 import { GroupsActions } from '../actions/groups.actions';
 import { ADD_GROUPS } from '../actions/groups.actions';
 
