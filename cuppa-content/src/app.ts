@@ -1,7 +1,7 @@
-const express = require('express');
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const express = require("express");
+const helmet = require("helmet");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 app.use(cors());
@@ -14,29 +14,29 @@ app.use(bodyParser.json());
 
 /**
  * Contents microservice.
- * 
+ *
  * Point of contact for the SPA (except for auth, which goes directly to auth servers).
- * 
+ *
  * Aggregates contents from the different services for presentation on the client.
  * Also handles client services and forwards them to the right server(s).
  */
 
 const sendData = (req, res) => res.json(req.data);
 
-const middleware = require('./middleware');
-app.get('/groups/', middleware.getGroups, sendData);
-app.get('/groups/:groupId', middleware.getGroup, sendData);
+const middleware = require("./middleware");
+app.get("/groups/", middleware.getGroups, sendData);
+app.get("/groups/:groupId", middleware.getGroup, sendData);
 
 // TODO move to controllers
-const getGroup = require('../common/groups').getGroup;
-const joinGroup = require('../common/groups').joinGroup;
+const getGroup = require("../../common/groups").getGroup;
+const joinGroup = require("../../common/groups").joinGroup;
 
 /* Join a group */
-app.post('/me/groups', async (req, res, next) => {
+app.post("/me/groups", async (req, res, next) => {
   if (!req.body.group) {
     res.status(400).send({
-      error: 'bad_request',
-      message: 'Missing parameter: group (ObjectId)'
+      error: "bad_request",
+      message: "Missing parameter: group (ObjectId)"
     });
   }
 
@@ -49,9 +49,9 @@ app.post('/me/groups', async (req, res, next) => {
     console.error(err); // TODO use unified error handler
     next(err);
   }
-})
+});
 
-app.get('/communities/featured', (req, res) => {
+app.get("/communities/featured", (req, res) => {
   res.json([
     {
       name: "Writing"
@@ -75,5 +75,5 @@ app.get('/communities/featured', (req, res) => {
 });
 
 app.listen(3003, () => {
-  console.log('Server listening on port 3003.');
+  console.log("Server listening on port 3003.");
 });
