@@ -25,20 +25,27 @@ export const getGroups = createFeatureSelector<GroupsAndUsers>('groups');
 export const getGroupAndUsers = createSelector(
     getGroups,
     (state: GroupsAndUsers, props): GroupsAndUsers => {
-        console.log(`groupId for search: ${props.groupId}`)
-        console.log(state);
-
-        if (!state) {
+        const group = state.groups.find(element => element._id === props.groupId);
+        if (!group) {
             return {
                 groups: [],
-                users: {}
+                users: state.users
             }
         }
-        const group = state.groups.find(element => element._id === props.groupId);
-
         return {
             groups: [group],
             users: state.users
         }
+    }
+)
+
+// NOTE assumes the group has already been 
+export const getMeetups = createSelector(
+    getGroupAndUsers,
+    (state: GroupsAndUsers): any => {
+        if (!state.groups.length) {
+            return [];
+        }
+        return state.groups[0].meetups;
     }
 )
