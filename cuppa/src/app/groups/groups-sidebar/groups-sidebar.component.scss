@@ -16,6 +16,6 @@
 // same rule in navbar scss
 .nav {
     .nav-item.active > .nav-link {
-        color: map-get($colors, "accent");
+        color: map-get($colors, "primary");
     }
 }

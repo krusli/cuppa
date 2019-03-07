@@ -2,6 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { navbarAnimation } from '../animations/navbar';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth.service';
+import { User } from '../models/User';
+import { Store } from '@ngrx/store';
+import { UserState } from '../state/user.state';
+import { Observable } from 'rxjs';
+import { AddUser } from '../actions/user.actions';
+
+interface ContainsUser {
+  user: User;
+}
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +20,7 @@ import { AuthService } from '../auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() user: any; // TODO
+  user: Observable<User>;
 
   toggleNavbar = false;
   isLogin = true;
@@ -27,23 +36,24 @@ export class NavbarComponent implements OnInit {
   username: string;
   password: string;
 
+  constructor(private modalService: NgbModal, private authService: AuthService, private store: Store<UserState>) {
+    this.user = store.select('user');
+  }
+
   // naming it signUp gives us a JIT error?
   signUpAction() {
     this.authService.signUp(this.name, this.username, this.password)
-      .subscribe(x => {
-        this.user = x.user;
-        this.modalService.dismissAll('Logged in');
-        // TODO emit event to parent, perhaps same function as subscriber
-      });
+      .subscribe(x => this.handleResult(x));
   }
 
   login() {
     this.authService.login(this.username, this.password)
-    .subscribe(x => {
-      this.user = x.user;
-      this.modalService.dismissAll('Logged in');
-      // TODO emit event to parent
-    });
+      .subscribe(x => this.handleResult(x));
+  }
+
+  handleResult(x: ContainsUser) {
+    this.store.dispatch(new AddUser(x.user));
+    this.modalService.dismissAll('Logged in');
   }
 
   toggleSignupLogin() {
@@ -73,8 +83,6 @@ export class NavbarComponent implements OnInit {
 
     this.navbarState = this.toggleNavbar ? 'open' : 'closed';
   }
-
-  constructor(private modalService: NgbModal, private authService: AuthService) { }
 
   ngOnInit() {
   }

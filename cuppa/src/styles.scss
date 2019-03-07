@@ -4,7 +4,7 @@
 
 /* Bootstrap overrides */
 $theme-colors: (
-    "primary": map-get($colors, "accent")
+    "primary": map-get($colors, "primary")
 );
 
 $font-family-sans-serif: 'Aileron', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -22,7 +22,7 @@ body {
 
 // label style: all-caps accent color
 label.emphasis {
-  color: map-get($colors, "accent");
+  color: map-get($colors, "primary");
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -42,7 +42,7 @@ label.secondary {
 }
 
 label.highlight {
-  color: map-get($colors, "accent");
+  color: map-get($colors, "primary");
   text-transform: none;
   font-weight: 300;
   font-size: 1.4em;
@@ -57,16 +57,20 @@ label.highlight {
 }
 
 .navbar {
-  .nav-item.active > .nav-link {
-    font-weight: 400;
-  }
+    &.navbar-light {
+        .nav-item {
+            .nav-link {
+                color: map-get($colors, "main");
+            }
+        }
 
-  &.navbar-light {
-    .nav-item.active > .nav-link {
-      color: map-get($colors, "accent");
-      border-bottom: 3px solid map-get($colors, "accent");
+        .nav-item.active > .nav-link {
+            color: map-get($colors, "primary");
+            border-bottom: 3px solid map-get($colors, "primary");
+        }
     }
-  }
+
+    background-color: map-get($colors, "navbar");
 }
 
 // either has to be in global styles, or using ::ng-deep (deprecated)

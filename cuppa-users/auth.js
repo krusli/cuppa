@@ -19,7 +19,7 @@ const getToken = user => {
         issued: Date.now()
     };
 
-    // TODO other variables in payload
+    // TODO put other variables in payload
     return jwt.sign(payload, JWT_SECRET);
 };
 

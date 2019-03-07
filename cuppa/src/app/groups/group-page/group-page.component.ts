@@ -3,9 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { GroupsService } from 'src/app/groups.service';
 
 import { switchMap } from 'rxjs/operators';
-import { Group } from 'src/app/models/Group';
+import { Group, GroupsAndUsers } from 'src/app/models/Group';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { GroupsState } from 'src/app/state/groups.state';
+import { getGroupAndUsers } from 'src/app/reducers/groups.reducer';
 
 @Component({
   selector: 'app-group-page',
@@ -18,35 +22,40 @@ export class GroupPageComponent implements OnInit {
 
   navItems: NavItem[];
 
+  groupsAndUsers: Observable<GroupsAndUsers>;
   group: Group;
 
-  constructor(private route: ActivatedRoute, private groupsService: GroupsService) { }
+  constructor(private route: ActivatedRoute, 
+              private groupsService: GroupsService, 
+              private groupsStore: Store<GroupsState>) { 
 
-  ngOnInit() {
-    // like map, but switches the original observable with the inner observable
-    // when the original observable emits again, the inner observable is reset
-    // (since the values of the inner observable depend on the outer observable (map))
-    // https://blog.angular-university.io/rxjs-switchmap-operator/
-    this.route.paramMap
-    .pipe(
-      switchMap(params => {
-        const groupId = params.get('groupId');
-        return this.groupsService.getGroup(groupId);
-      })
-    )
-    .subscribe((group: Group) => {
-      console.log(group);
-      this.group = group;
-
-      this.updateNavItems();
-    });
   }
 
-  updateNavItems() {
+  ngOnInit() {
+
+    this.route.paramMap
+    .subscribe(params => {
+      const groupId = params.get('groupId');
+      this.updateNavItems(groupId);
+
+      this.groupsAndUsers = this.groupsStore.pipe(
+        select(getGroupAndUsers, { groupId })
+      )
+
+      this.groupsAndUsers.subscribe((data: GroupsAndUsers) => {
+        this.group = data.groups[0];
+      })
+
+    })
+
+
+  }
+
+  updateNavItems(groupId: string) {
     this.navItems = [
-      new NavItemImpl('Activity', `/groups/view/${this.group._id}`, { exact: true }),
-      new NavItemImpl('Meetups', `/groups/view/${this.group._id}/meetups`),
-      new NavItemImpl('Members', `/groups/view/${this.group._id}/members`)
+      new NavItemImpl('Activity', `/groups/view/${groupId}`, { exact: true }),
+      new NavItemImpl('Meetups', `/groups/view/${groupId}/meetups`),
+      new NavItemImpl('Members', `/groups/view/${groupId}/members`)
     ];
   }
 

@@ -5,10 +5,13 @@ const bcrypt = require('bcrypt');
 const passport = require('./auth').passport;
 const getToken = require('./auth').getToken;
 
+const ObjectId = require('mongoose').Types.ObjectId;
+
 module.exports = Model => {
     return {
         getMe: (req, res) => {
-            res.json(getUserPublic(req.user));
+            const userPublic = getUserPublic(req.user);
+            res.json(userPublic);
         },
 
         getUsers: async (req, res) => {
@@ -20,15 +23,19 @@ module.exports = Model => {
                 params.username = new RegExp(`^${req.query.username}$`, 'i');  // case insensitive
             }
 
-            // console.log(req.query);
-            if (req.query._id.length) {
-                // => _id is an array
-                params._id = {
-                    $in: req.query._id
-                };
+            
+            let ids = [];
+            if (Array.isArray(req.query._id)) {
+                // NOTE need to filter out null values and non ObjectId
+                ids = req.query._id
+                .filter(ObjectId.isValid);
             } else if (req.query._id) {
-                params._id = req.query._id;
+                if (ObjectId.isValid(req.query._id)) {
+                    ids.push(req.query._id);
+                }
             }
+
+            params._id = ids;
 
             const matches = await Model.find(params);
             const matchesPublic = matches.map(getUserPublic);
@@ -42,8 +49,8 @@ module.exports = Model => {
             if (!username || !password) {
                 res.status(400).send({
                     error: 'bad_request',
-                    message: 'Invalid request.'
-                })
+                    message: 'Missing keys in JSON: username and/or password.'
+                });
                 return;
             }
 
@@ -99,7 +106,7 @@ module.exports = Model => {
 
                 req.login(user, { session: false }, err => {
                     if (err) {
-                        console.log('/login: internal status error');
+                        console.log('/login: internal server error');
                         console.log(err);
                         res.status(500).send();
                     }

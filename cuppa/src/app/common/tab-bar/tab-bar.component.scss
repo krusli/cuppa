@@ -1,5 +1,24 @@
+@import '../../../colors.scss';
+
+// .nav-item {
+//     .nav-link {
+//         color: map-get($colors, "main");
+//     }
+// }
+
+// .nav-item.active > .nav-link {
+//     color: map-get($colors, "accent");
+//     border-bottom: 3px solid map-get($colors, "accent");
+// }
+
+
 nav {
   // display: block;
+
+  &.navbar {
+    background-color: white;
+  }
+
 
   .navbar-nav {
     flex-direction: row;

@@ -1,29 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Group } from 'src/app/models/Group';
-import { UserMap } from 'src/app/models/User';
+import { GroupsAndUsers } from 'src/app/models/Group';
 import { GroupsService } from 'src/app/groups.service';
-interface GroupsAndUsers {
-  groups: Group[];
-  users: UserMap;
-}
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { GroupsState } from 'src/app/state/groups.state';
+
 
 @Component({
   selector: 'app-groups-sidebar',
   templateUrl: './groups-sidebar.component.html',
   styleUrls: ['./groups-sidebar.component.scss']
 })
-export class GroupsSidebarComponent implements OnInit {
+export class GroupsSidebarComponent implements OnInit, OnDestroy {
 
+  groups: Observable<GroupsAndUsers>;
   myGroups: GroupsAndUsers;
 
-  constructor(private groupsService: GroupsService) { }
+  subscription: Subscription;
+
+  constructor(private groupsService: GroupsService, private groupsStore: Store<GroupsState>) {
+    this.groups = groupsStore.select('groups');
+  }
 
   ngOnInit() {
-    this.groupsService.getGroups()
-      .subscribe((data: GroupsAndUsers) => {
-        this.myGroups = data;
-      });
+    this.subscription = this.groups.subscribe((data: GroupsAndUsers) => {
+      this.myGroups = data;
+    });
+  }
+
+  getLink(groupId: string) {
+    return `/groups/view/${groupId}`;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
