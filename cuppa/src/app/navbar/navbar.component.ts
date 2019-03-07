@@ -36,15 +36,19 @@ export class NavbarComponent implements OnInit {
   username: string;
   password: string;
 
+  constructor(private modalService: NgbModal, private authService: AuthService, private store: Store<UserState>) {
+    this.user = store.select('user');
+  }
+
   // naming it signUp gives us a JIT error?
   signUpAction() {
     this.authService.signUp(this.name, this.username, this.password)
-    .subscribe(this.handleResult);
+      .subscribe(x => this.handleResult(x));
   }
 
   login() {
     this.authService.login(this.username, this.password)
-    .subscribe(this.handleResult);
+      .subscribe(x => this.handleResult(x));
   }
 
   handleResult(x: ContainsUser) {
@@ -78,10 +82,6 @@ export class NavbarComponent implements OnInit {
     this.toggleNavbar = !this.toggleNavbar;
 
     this.navbarState = this.toggleNavbar ? 'open' : 'closed';
-  }
-
-  constructor(private modalService: NgbModal, private authService: AuthService, private store: Store<UserState>) { 
-    this.user = store.select('user');
   }
 
   ngOnInit() {
