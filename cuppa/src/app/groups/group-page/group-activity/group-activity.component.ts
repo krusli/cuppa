@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Group } from 'src/app/models/Group';
 
+type Action = 'Created' | 'Joined';
+
 @Component({
   selector: 'app-group-activity',
   templateUrl: './group-activity.component.html',
@@ -41,6 +43,21 @@ export class GroupActivityComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+
+  }
+
+  getDescriptionForAction(action: Action) {
+
+    switch (action) {
+      case 'Created':
+        return 'Created the group'
+      
+      case 'Joined':
+        return 'Joined the group'
+      
+      default:
+        return ''
+    }
 
   }
 

@@ -9,8 +9,9 @@
             {{ users[activity.user].name }}
           </div>
           
-          <div class="my-auto ml-3 my-auto" *ngIf="activity.action === 'Joined'">
-            Joined the group
+          <div class="my-auto ml-3 my-auto">
+            <!-- Joined the group -->
+            {{ getDescriptionForAction(activity.action) }}
           </div>
 
           <div class="ml-auto my-auto">

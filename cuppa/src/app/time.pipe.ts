@@ -13,6 +13,10 @@ export class MyTimePipe implements PipeTransform {
     transform(value: number): string {
         // console.log(value);
 
+        if (value < 60) {
+            return 'Now'
+        }
+
         if (value < 3600) { // 1 hour
             return Math.round(value / 60) + 'm';
         }
