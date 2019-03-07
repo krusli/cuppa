@@ -1,5 +1,5 @@
 import ActivityService from "../../common/activity";
-import GroupsService from "../../common";
+import GroupsService from "../../common/groups";
 import UsersService from "../../common/users";
 
 // TODO refactor

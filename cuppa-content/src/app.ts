@@ -1,6 +1,6 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import express, { Response, Request, NextFunction } from 'express';
+import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
 
 const app = express();
