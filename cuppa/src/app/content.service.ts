@@ -9,10 +9,9 @@ export class ContentService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-
   getFeaturedCommunities() {
     const headers = this.authService.getHeaders();
-
     return this.http.get('http://localhost:3003/communities/featured', { headers });
   }
+
 }
