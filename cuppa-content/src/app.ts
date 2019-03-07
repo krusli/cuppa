@@ -1,14 +1,7 @@
-// const express = require("express");
-// const helmet = require("helmet");
-// const bodyParser = require("body-parser");
-// const cors = require("cors");
 import bodyParser from "body-parser";
 import cors from "cors";
-import express, { NextFunction, Request, Response } from "express";
+import express, { Response, Request, NextFunction } from 'express';
 import helmet from "helmet";
-
-
-
 
 const app = express();
 app.use(cors());

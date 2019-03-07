@@ -1,7 +1,7 @@
-declare module 'express' {
+declare namespace Express {
 
     // https://stackoverflow.com/a/51114250
-    export interface Request {
+    interface Request {
         data?: {
             groups?: Array<import("../models/HydratedGroup").default>,
             group?: import("../models/HydratedGroup").default,
