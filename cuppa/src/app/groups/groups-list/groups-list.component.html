@@ -1,5 +1,6 @@
 <label class="emphasis">My Groups</label>
 
-<div *ngIf="myGroups">
-  <app-group [group]="group" [users]="myGroups.users" *ngFor="let group of myGroups.groups"></app-group>
-</div>
+<app-group [group]="group" 
+           [users]="(groups | async) ? (groups | async).users : {}" 
+           *ngFor="let group of (groups | async) ? (groups | async).groups : []">
+</app-group>

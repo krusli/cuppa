@@ -12,6 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   saveToken = map((value: any) => {
+    console.log('saveToken');
     if (value.token) {
       localStorage.setItem('token', value.token);
     }
@@ -30,6 +31,7 @@ export class AuthService {
 
   getHeaders() {
     const token = localStorage.getItem('token');
+    
     return new HttpHeaders({
       Authorization: `Bearer ${token}`
     });

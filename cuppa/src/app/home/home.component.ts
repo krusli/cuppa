@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GroupsService } from '../groups.service';
-import { Group } from '../models/Group';
-import { UserMap } from '../models/User';
+import { User } from '../models/User';
 import { ContentService } from '../content.service';
+import { UserState } from '../state/user.state';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +15,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   title = 'cuppa';
 
+  user: Observable<User>;
+
   featured: any;
 
-  constructor(private contentService: ContentService) { }
+  constructor(private contentService: ContentService, private store: Store<UserState>) { 
+    this.user = store.select('user');
+  }
 
   ngOnInit() {
-    this.contentService.getFeaturedCommunities()
+    this.user.pipe(
+      switchMap(x => {
+        return this.contentService.getFeaturedCommunities()
+      })
+    )
     .subscribe(data => {
       this.featured = data;
     });

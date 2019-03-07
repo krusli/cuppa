@@ -27,6 +27,9 @@ import { GroupActivityComponent } from './groups/group-page/group-activity/group
 import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
 import { GroupMembersComponent } from './groups/group-page/group-members/group-members.component';
 import { MyTimePipe } from './time.pipe';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './reducers/user.reducer';
+import { groupsReducer } from './reducers/groups.reducer';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,11 @@ import { MyTimePipe } from './time.pipe';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    StoreModule.forRoot({
+      user: userReducer,
+      groups: groupsReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

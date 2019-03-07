@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Group } from 'src/app/models/Group';
-import { UserMap } from 'src/app/models/User';
+import { GroupsAndUsers } from 'src/app/models/Group';
+import { UserMap, User } from 'src/app/models/User';
 import { GroupsService } from 'src/app/groups.service';
-
-interface GroupsAndUsers {
-  groups: Group[];
-  users: UserMap;
-}
+import { Store } from '@ngrx/store';
+import { UserState } from 'src/app/state/user.state';
+import { Observable, empty } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { GroupsState } from 'src/app/state/groups.state';
+import { AddGroupsAndUsers } from 'src/app/actions/groups.actions';
 
 @Component({
   selector: 'app-groups-list',
@@ -15,15 +16,13 @@ interface GroupsAndUsers {
 })
 export class GroupsListComponent implements OnInit {
 
-  myGroups: GroupsAndUsers;
+  user: Observable<User>;
+  groups: Observable<GroupsAndUsers>;
 
-  constructor(private groupsService: GroupsService) { }
-
-  ngOnInit() {
-    this.groupsService.getGroups()
-    .subscribe((data: GroupsAndUsers) => {
-      this.myGroups = data;
-    });
+  constructor(private groupsService: GroupsService, private groupsStore: Store<GroupsState>) { 
+    this.groups = groupsStore.select('groups');
   }
+
+  ngOnInit() { }
 
 }
