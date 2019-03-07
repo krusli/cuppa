@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Group, GroupsAndUsers } from 'src/app/models/Group';
-import { UserMap } from 'src/app/models/User';
+import { GroupsAndUsers } from 'src/app/models/Group';
 import { GroupsService } from 'src/app/groups.service';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -28,6 +27,10 @@ export class GroupsSidebarComponent implements OnInit, OnDestroy {
     this.subscription = this.groups.subscribe((data: GroupsAndUsers) => {
       this.myGroups = data;
     });
+  }
+
+  getLink(groupId: string) {
+    return `/groups/view/${groupId}`;
   }
 
   ngOnDestroy() {

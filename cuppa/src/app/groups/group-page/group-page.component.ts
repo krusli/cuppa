@@ -3,9 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { GroupsService } from 'src/app/groups.service';
 
 import { switchMap } from 'rxjs/operators';
-import { Group } from 'src/app/models/Group';
+import { Group, GroupsAndUsers } from 'src/app/models/Group';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { GroupsState } from 'src/app/state/groups.state';
 
 @Component({
   selector: 'app-group-page',
@@ -18,26 +21,27 @@ export class GroupPageComponent implements OnInit {
 
   navItems: NavItem[];
 
+  groupsAndUsers: Observable<GroupsAndUsers>;
   group: Group;
 
-  constructor(private route: ActivatedRoute, private groupsService: GroupsService) { }
+  constructor(private route: ActivatedRoute, 
+              private groupsService: GroupsService, 
+              private groupsStore: Store<GroupsState>) { 
+
+    this.groupsAndUsers = groupsStore.select('groups');
+  }
 
   ngOnInit() {
-    // like map, but switches the original observable with the inner observable
-    // when the original observable emits again, the inner observable is reset
-    // (since the values of the inner observable depend on the outer observable (map))
-    // https://blog.angular-university.io/rxjs-switchmap-operator/
-    this.route.paramMap
+    this.groupsStore
     .pipe(
+      switchMap(x => this.route.paramMap),
       switchMap(params => {
         const groupId = params.get('groupId');
         return this.groupsService.getGroup(groupId);
       })
     )
     .subscribe((groupAndUsers: any) => {
-      console.log(groupAndUsers);
       this.group = groupAndUsers.group;
-
       this.updateNavItems();
     });
   }
