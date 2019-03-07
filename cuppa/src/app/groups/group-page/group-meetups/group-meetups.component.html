@@ -1,5 +1,8 @@
-<div class="card" *ngFor="let meetup of (meetups | async)">
-  <div class="card-body">
-    {{ meetup | json }}
+<div class="container">
+  <div class="card" *ngFor="let meetup of (meetups | async)">
+    <div class="card-body">
+      {{ meetup | json }}
+    </div>
   </div>
 </div>
+

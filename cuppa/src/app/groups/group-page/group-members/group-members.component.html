@@ -1,3 +1,7 @@
-<p>
-  group-members works!
-</p>
+<div class="container">
+  <div class="card" *ngFor="let member of (members | async)">
+    <div class="card-body">
+      {{ (users | async)[member] | json }}
+    </div>
+  </div>
+</div>

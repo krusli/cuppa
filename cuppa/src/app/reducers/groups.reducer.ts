@@ -3,6 +3,7 @@ import { GroupsActions } from '../actions/groups.actions';
 import { ADD_GROUPS } from '../actions/groups.actions';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { GroupsState } from '../state/groups.state';
+import { UserMap } from '../models/User';
 
 const initialState: GroupsAndUsers = {
     groups: [],
@@ -39,7 +40,7 @@ export const getGroupAndUsers = createSelector(
     }
 )
 
-// NOTE assumes the group has already been 
+// NOTE: is actually efficient thanks to automatic memoization from NgRx
 export const getMeetups = createSelector(
     getGroupAndUsers,
     (state: GroupsAndUsers): any => {
@@ -49,3 +50,18 @@ export const getMeetups = createSelector(
         return state.groups[0].meetups;
     }
 )
+
+export const getMembers = createSelector(
+    getGroupAndUsers,
+    (state: GroupsAndUsers): any => {
+        if (!state.groups.length) {
+            return [];
+        }
+        return state.groups[0].members;
+    }
+)
+
+export const getUsers = createSelector(
+    getGroups,
+    (state: GroupsAndUsers): UserMap => state.users
+);
