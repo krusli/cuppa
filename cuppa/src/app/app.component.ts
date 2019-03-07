@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { UserState } from './state/user.state';
 import { Observable, Subscription } from 'rxjs';
 import { User } from './models/User';
-import { SignIn } from './actions/user.actions';
+import { AddUser } from './actions/user.actions';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authService.getUser()
     .subscribe((user: User) => {
-      this.store.dispatch(new SignIn(user));
+      this.store.dispatch(new AddUser(user));
     });
 
     this.userObservableSubscription = this.userObservable.subscribe((user: User) => {

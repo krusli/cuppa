@@ -40,13 +40,13 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
 
-    <div class="form-inline my-2 my-lg-0" *ngIf="!user; else profile">
+    <div class="form-inline my-2 my-lg-0" *ngIf="!(user | async); else profile">
       <button (click)="open(content)" class="btn btn-outline-primary my-2 my-sm-0">Log in</button>
     </div>
 
     <ng-template #profile>
       <ul class="navbar-nav">
-        <li class="nav-link">{{ user.name }}</li>
+        <li class="nav-link">{{ (user | async) ? (user | async).name : '' }}</li>
       </ul>
     </ng-template>
 
