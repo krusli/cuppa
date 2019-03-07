@@ -1,7 +1,11 @@
-const express = require("express");
-const helmet = require("helmet");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+// const express = require("express");
+// const helmet = require("helmet");
+// const bodyParser = require("body-parser");
+// const cors = require("cors");
+import bodyParser from "body-parser";
+import cors from "cors";
+import express, { NextFunction, Request, Response } from "express";
+import helmet from "helmet";
 
 const app = express();
 app.use(cors());
@@ -21,18 +25,19 @@ app.use(bodyParser.json());
  * Also handles client services and forwards them to the right server(s).
  */
 
-const sendData = (req, res) => res.json(req.data);
+const sendData = (req: Request, res: Response) => res.json(req.data);
 
-const middleware = require("./middleware");
+import middleware from "./middleware";
 app.get("/groups/", middleware.getGroups, sendData);
 app.get("/groups/:groupId", middleware.getGroup, sendData);
 
 // TODO move to controllers
-const getGroup = require("../../common/groups").getGroup;
-const joinGroup = require("../../common/groups").joinGroup;
+import GroupsService from "../../common/groups";
+const getGroup = GroupsService.getGroup;
+const joinGroup = GroupsService.joinGroup;
 
 /* Join a group */
-app.post("/me/groups", async (req, res, next) => {
+app.post("/me/groups", async (req: Request, res: Response, next: NextFunction) => {
   if (!req.body.group) {
     res.status(400).send({
       error: "bad_request",
@@ -46,12 +51,12 @@ app.post("/me/groups", async (req, res, next) => {
     const joined = await joinGroup(req, res, group._id);
     res.json(joined);
   } catch (err) {
-    console.error(err); // TODO use unified error handler
+    // console.error(err); // TODO use unified error handler
     next(err);
   }
 });
 
-app.get("/communities/featured", (req, res) => {
+app.get("/communities/featured", (req: Request, res: Response) => {
   res.json([
     {
       name: "Writing"
@@ -75,5 +80,6 @@ app.get("/communities/featured", (req, res) => {
 });
 
 app.listen(3003, () => {
+  // tslint:disable-next-line:no-console
   console.log("Server listening on port 3003.");
 });

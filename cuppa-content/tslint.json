@@ -5,7 +5,11 @@
     ],
     "jsRules": {},
     "rules": {
-        "trailing-comma": [ false ]
+        "trailing-comma": [ false ],
+        "interface-name": [
+            true,
+            "never-prefix"
+        ]
     },
     "rulesDirectory": []
 }
