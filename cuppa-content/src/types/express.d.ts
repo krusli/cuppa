@@ -1,4 +1,4 @@
-declare namespace Express {
+declare module 'express' {
 
     // https://stackoverflow.com/a/51114250
     export interface Request {
@@ -8,8 +8,8 @@ declare namespace Express {
             users?: import("../models/UsersMap").default
         },
 
+        body: any,
         params: any
     }
 
 }
-

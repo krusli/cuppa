@@ -4,7 +4,6 @@ import UsersService from "../../common/users";
 
 // TODO refactor
 import { NextFunction, Request, Response } from "express";
-
 import Group from "./models/Group";
 import HydratedGroup from "./models/HydratedGroup";
 import User from "./models/User";
