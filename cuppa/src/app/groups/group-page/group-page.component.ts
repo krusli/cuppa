@@ -36,6 +36,7 @@ export class GroupPageComponent implements OnInit {
     this.route.paramMap
     .subscribe(params => {
       const groupId = params.get('groupId');
+      this.updateNavItems(groupId);
 
       this.groupsAndUsers = this.groupsStore.pipe(
         select(getGroupAndUsers, { groupId })
@@ -47,13 +48,14 @@ export class GroupPageComponent implements OnInit {
 
     })
 
+
   }
 
-  updateNavItems() {
+  updateNavItems(groupId: string) {
     this.navItems = [
-      new NavItemImpl('Activity', `/groups/view/${this.group._id}`, { exact: true }),
-      new NavItemImpl('Meetups', `/groups/view/${this.group._id}/meetups`),
-      new NavItemImpl('Members', `/groups/view/${this.group._id}/members`)
+      new NavItemImpl('Activity', `/groups/view/${groupId}`, { exact: true }),
+      new NavItemImpl('Meetups', `/groups/view/${groupId}/meetups`),
+      new NavItemImpl('Members', `/groups/view/${groupId}/members`)
     ];
   }
 
