@@ -29,6 +29,7 @@ import { GroupMembersComponent } from './groups/group-page/group-members/group-m
 import { MyTimePipe } from './time.pipe';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './reducers/user.reducer';
+import { groupsReducer } from './reducers/groups.reducer';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { userReducer } from './reducers/user.reducer';
     NgbModule,
     FontAwesomeModule,
     StoreModule.forRoot({
-      user: userReducer
+      user: userReducer,
+      groups: groupsReducer
     })
   ],
   providers: [],

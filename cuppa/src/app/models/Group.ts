@@ -1,3 +1,4 @@
+import { UserMap } from './User';
 
 export interface Meetup {
   attendees: any[];
@@ -32,6 +33,11 @@ export interface Group {
   roles: any[];
   meetups: Meetup[];
   activity: Activity[];
+}
+
+export interface GroupsAndUsers {
+  groups: Group[];
+  users: UserMap;
 }
 
 /* used during group creation */
