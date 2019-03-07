@@ -30,7 +30,7 @@ const activitySchema = new Schema({
     enum: ['Created', 'Joined', 'Left'],
     required: true 
   },  // JOINED, INVITE
-  createdOn: { type: Date, default: Date.now() }
+  createdOn: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Activity', activitySchema);
