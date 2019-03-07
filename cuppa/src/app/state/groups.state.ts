@@ -1,5 +1,5 @@
-import { GroupsAndUsers } from '../models/Group';
+// import { GroupsAndUsers } from '../models/Group';
 
-export interface GroupsState {
-    readonly groups: GroupsAndUsers;
-}
+// export interface GroupsState {
+//     readonly groups: GroupsAndUsers;
+// }

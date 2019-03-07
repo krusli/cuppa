@@ -6,9 +6,10 @@ import { switchMap } from 'rxjs/operators';
 import { Group, GroupsAndUsers } from 'src/app/models/Group';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GroupsState } from 'src/app/state/groups.state';
+import { getGroupAndUsers } from 'src/app/reducers/groups.reducer';
 
 @Component({
   selector: 'app-group-page',
@@ -28,22 +29,24 @@ export class GroupPageComponent implements OnInit {
               private groupsService: GroupsService, 
               private groupsStore: Store<GroupsState>) { 
 
-    this.groupsAndUsers = groupsStore.select('groups');
   }
 
   ngOnInit() {
-    this.groupsStore
-    .pipe(
-      switchMap(x => this.route.paramMap),
-      switchMap(params => {
-        const groupId = params.get('groupId');
-        return this.groupsService.getGroup(groupId);
+
+    this.route.paramMap
+    .subscribe(params => {
+      const groupId = params.get('groupId');
+
+      this.groupsAndUsers = this.groupsStore.pipe(
+        select(getGroupAndUsers, { groupId })
+      )
+
+      this.groupsAndUsers.subscribe((data: GroupsAndUsers) => {
+        this.group = data.groups[0];
       })
-    )
-    .subscribe((groupAndUsers: any) => {
-      this.group = groupAndUsers.group;
-      this.updateNavItems();
-    });
+
+    })
+
   }
 
   updateNavItems() {
