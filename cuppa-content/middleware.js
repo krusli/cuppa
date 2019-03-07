@@ -38,7 +38,6 @@ const hydrateGroup = async (req, res, group, users) => {
 
 module.exports = {
   getGroups: async (req, res, next) => {
-    console.log('middleware.getGroups()')
     try {
       // const user = await getUserMe(req, res);
       const groups = await getGroupsMe(req, res);
@@ -47,8 +46,6 @@ module.exports = {
         groups.map(group => hydrateGroup(req, res, group, users))
       );
 
-      console.log('Got final');
-      
       req.data = {
         groups: finalGroups,
         users
