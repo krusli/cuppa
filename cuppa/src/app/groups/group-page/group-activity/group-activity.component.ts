@@ -46,7 +46,6 @@ export class GroupActivityComponent implements OnInit, OnDestroy {
   }
 
   toDate(dateString) {
-    console.log(dateString, new Date(dateString));
     return new Date(dateString);
   }
 
