@@ -30,7 +30,7 @@ const activitySchema = new Schema({
   // base subject should be in .subject
   // any more subjects (hierarchical) should be in subSubjects
   // e.g. Group -> Meetup
-  subSubjects: { type: [mongoose.Types.ObjectId], required: true, default: [] },
+  subSubjects: { type: [String], required: true, default: [] }, // NOTE can't support ObjectId for some reason?
   subSubjectTypes: {
     type: [String],
     required: true, 
