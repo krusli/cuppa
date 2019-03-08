@@ -25,6 +25,19 @@ const activitySchema = new Schema({
     enum: ['User', 'Group', 'Meetup'],  // TODO Team, Role, Event (part of Timeline)
     required: true 
   },  // USER, GROUP, MEETUP
+
+  // TODO define check
+  // base subject should be in .subject
+  // any more subjects (hierarchical) should be in subSubjects
+  // e.g. Group -> Meetup
+  subSubjects: { type: [mongoose.Types.ObjectId], required: true, default: [] },
+  subSubjectTypes: {
+    type: [String],
+    required: true, 
+    default: []
+  },
+
+
   action: { 
     type: String, 
     enum: ['Created', 'Joined', 'Left'],
