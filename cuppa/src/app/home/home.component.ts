@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.user.pipe(
       switchMap(x => {
-        return this.contentService.getFeaturedCommunities()
+        return this.contentService.getFeaturedCommunities();
       })
     )
     .subscribe(data => {

@@ -1,4 +1,4 @@
-import { GroupsAndUsers } from "../models/Group";
+import { GroupsAndUsers } from '../models/Group';
 import { GroupsActions } from '../actions/groups.actions';
 import { ADD_GROUPS } from '../actions/groups.actions';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
@@ -31,14 +31,14 @@ export const getGroupAndUsers = createSelector(
             return {
                 groups: [],
                 users: state.users
-            }
+            };
         }
         return {
             groups: [group],
             users: state.users
-        }
+        };
     }
-)
+);
 
 // NOTE: is actually efficient thanks to automatic memoization from NgRx
 export const getMeetups = createSelector(
@@ -49,7 +49,7 @@ export const getMeetups = createSelector(
         }
         return state.groups[0].meetups;
     }
-)
+);
 
 export const getMembers = createSelector(
     getGroupAndUsers,
@@ -59,7 +59,7 @@ export const getMembers = createSelector(
         }
         return state.groups[0].members;
     }
-)
+);
 
 export const getUsers = createSelector(
     getGroups,

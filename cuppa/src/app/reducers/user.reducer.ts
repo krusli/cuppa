@@ -1,4 +1,4 @@
-import { User } from "../models/User";
+import { User } from '../models/User';
 import { UserActions, ADD_USER, CLEAR_USER } from '../actions/user.actions';
 
 export type Nullable<T> = T | null;
