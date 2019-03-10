@@ -2,6 +2,9 @@ const express = require('express');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
+// setup service discover
+require('./consul');
+
 // security layer
 const cors = require('cors');
 const passport = require('./auth').passport; // pre-configured
@@ -21,7 +24,7 @@ app.use(passport.initialize());
 const User = require('./models/user');
 const controllers = require('./controllers')(User);
 
-app.get('/healthCheck', (req, res) => res.send());
+app.get('/health-check', (req, res) => res.send());
 
 // signup and login
 app.post('/users', controllers.newUser);
