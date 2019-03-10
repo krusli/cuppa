@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 
 const Group = require('./models/group');
 
+// register service, set up connection w/ consul server
+require('./consul');
+
 const app = express();
 app.use(helmet());
 app.use(cors());
@@ -37,7 +40,7 @@ const errorHandler = (res, err, next) => {
     }
 };
 
-app.get('/healthCheck', (req, res) => res.send());
+app.get('/health-check', (req, res) => res.send());
 
 const ActivityService = require('../common/activity');
 

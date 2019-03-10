@@ -3,12 +3,12 @@ const consul = require('consul')();
 
 const register = () => {
     const options = {
-        name: 'cuppa-users',
+        name: 'cuppa-groups',
         tags: ['node', 'mongo'],
-        port: 3000,
+        port: 3001,
         check: {
             notes: 'HTTP Health Check',
-            http: 'http://localhost:3000/health-check',
+            http: 'http://localhost:3001/health-check',
             interval: '10s'
         }
     }

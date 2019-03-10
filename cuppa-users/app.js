@@ -2,7 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
-// setup service discover
+// register service, set up connection w/ consul server
 require('./consul');
 
 // security layer
