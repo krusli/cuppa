@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../models/User';
 import { ContentService } from '../content.service';
-import { UserState } from '../state/user.state';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -19,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   featured: any;
 
-  constructor(private contentService: ContentService, private store: Store<UserState>) { 
+  constructor(private contentService: ContentService, private store: Store<any>) {
     this.user = store.select('user');
   }
 

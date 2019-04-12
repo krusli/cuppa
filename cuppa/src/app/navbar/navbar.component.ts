@@ -4,9 +4,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth.service';
 import { User } from '../models/User';
 import { Store } from '@ngrx/store';
-import { UserState } from '../state/user.state';
 import { Observable } from 'rxjs';
-import { AddUser } from '../actions/user.actions';
+import { LoadUser } from '../store/actions/user.actions';
+import { selectUser } from '../store/selectors/user.selectors';
 
 interface ContainsUser {
   user: User;
@@ -36,8 +36,8 @@ export class NavbarComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private modalService: NgbModal, private authService: AuthService, private store: Store<UserState>) {
-    this.user = store.select('user');
+  constructor(private modalService: NgbModal, private authService: AuthService, private store: Store<any>) {
+    this.user = store.select(selectUser);
   }
 
   // naming it signUp gives us a JIT error?
@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
   }
 
   handleResult(x: ContainsUser) {
-    this.store.dispatch(new AddUser(x.user));
+    this.store.dispatch(new LoadUser(x.user));
     this.modalService.dismissAll('Logged in');
   }
 

@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Store } from '@ngrx/store';
-import { UserState } from './state/user.state';
 import { Observable, Subscription, empty } from 'rxjs';
 import { User } from './models/User';
-import { AddUser } from './actions/user.actions';
 import { GroupsService } from './groups.service';
 import { switchMap } from 'rxjs/operators';
 import { AddGroupsAndUsers } from './actions/groups.actions';
 import { GroupsAndUsers } from './models/Group';
 import { GroupsState } from './state/groups.state';
+import { LoadUser } from './store/actions/user.actions';
 
 @Component({
   selector: 'app-root',
@@ -22,17 +21,17 @@ export class AppComponent implements OnInit, OnDestroy {
   userObservable: Observable<User>;
   userObservableSubscription: Subscription;
 
-  constructor(private authService: AuthService, 
+  constructor(private authService: AuthService,
               private groupsService: GroupsService,
-              private store: Store<UserState>,
-              private groupsStore: Store<GroupsState>) { 
+              private store: Store<any>,
+              private groupsStore: Store<GroupsState>) {
     this.userObservable = store.select('user');
   }
 
   ngOnInit() {
     this.authService.getUser()
     .subscribe((user: User) => {
-      this.store.dispatch(new AddUser(user));
+      this.store.dispatch(new LoadUser(user));
     });
 
     // no need to unsubscribe, is base Component (tied to browser window lifecycle)
@@ -47,8 +46,8 @@ export class AppComponent implements OnInit, OnDestroy {
       })
     )
     .subscribe((data: GroupsAndUsers) => {
-      this.groupsStore.dispatch(new AddGroupsAndUsers(data))
-    })
+      this.groupsStore.dispatch(new AddGroupsAndUsers(data));
+    });
 
   }
 
