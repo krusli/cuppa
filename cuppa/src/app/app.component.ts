@@ -10,6 +10,7 @@ import { GroupsAndUsers } from './models/Group';
 import { GroupsState } from './state/groups.state';
 import { LoadUser } from './store/actions/user.actions';
 import { selectUser } from './store/selectors/user.selectors';
+import { LoadGroups } from './store/actions/groups.actions';
 
 @Component({
   selector: 'app-root',
@@ -47,7 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
       })
     )
     .subscribe((data: GroupsAndUsers) => {
-      this.groupsStore.dispatch(new AddGroupsAndUsers(data));
+      // TODO: dispatch LoadUsers
+      this.groupsStore.dispatch(new LoadGroups(data.groups));
     });
 
   }
