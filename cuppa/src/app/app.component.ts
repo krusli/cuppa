@@ -9,6 +9,7 @@ import { AddGroupsAndUsers } from './actions/groups.actions';
 import { GroupsAndUsers } from './models/Group';
 import { GroupsState } from './state/groups.state';
 import { LoadUser } from './store/actions/user.actions';
+import { selectUser } from './store/selectors/user.selectors';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private groupsService: GroupsService,
               private store: Store<any>,
               private groupsStore: Store<GroupsState>) {
-    this.userObservable = store.select('user');
+    this.userObservable = store.select(selectUser);
   }
 
   ngOnInit() {
