@@ -30,6 +30,9 @@ import { MyTimePipe } from './time.pipe';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './reducers/user.reducer';
 import { groupsReducer } from './reducers/groups.reducer';
+import { reducers, metaReducers } from './store/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import { groupsReducer } from './reducers/groups.reducer';
     StoreModule.forRoot({
       user: userReducer,
       groups: groupsReducer
-    })
+    }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
   bootstrap: [AppComponent]
