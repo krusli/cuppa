@@ -14,4 +14,4 @@ RUN npm i -g nodemon
 
 EXPOSE 3000
 
-CMD [ "nodemon", "app" ]
+CMD [ "nodemon", "src/app" ]

@@ -7,7 +7,7 @@ services:
         links:
             - db:mongo
         volumes:
-            - "./cuppa-users:/usr/src/app"
+            - "./cuppa-users:/usr/src/app/src"
     groups:
         build: './cuppa-groups'
         ports:
@@ -16,7 +16,7 @@ services:
             - db:mongo
             - users:users
         volumes:
-            - "./cuppa-groups:/usr/src/app"
+            - "./cuppa-groups:/usr/src/app/src"
     db:
         image: mongo
         ports:
