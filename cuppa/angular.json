@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "cuppa"
+  "defaultProject": "cuppa",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

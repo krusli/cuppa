@@ -1,0 +1,25 @@
+version: '3'
+services:
+    users:
+        build: './cuppa-users'
+        ports:
+            - 3000:3000
+        links:
+            - db:mongo
+        volumes:
+            - "./cuppa-users:/usr/src/app/src"
+    groups:
+        build: './cuppa-groups'
+        ports:
+            - 3001:3001
+        links:
+            - db:mongo
+            - users:users
+        volumes:
+            - "./cuppa-groups:/usr/src/app/src"
+    db:
+        image: mongo
+        ports:
+            - 27017:27017
+        volumes:
+            - "./db:/data/db"
