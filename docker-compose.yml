@@ -22,4 +22,9 @@ services:
         ports:
             - 27017:27017
         volumes:
-            - "./db:/data/db"
+            # - "./db:/data/db" # MongoDB is not compatible with VirtualBox shared volumes
+            - "mongo:/data/db"
+
+volumes:
+    mongo:
+        driver: local
