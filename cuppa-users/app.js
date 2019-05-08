@@ -2,8 +2,8 @@ const express = require('express');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
-// setup service discover
-require('./consul');
+// setup service discovery
+// require('./consul');
 
 // security layer
 const cors = require('cors');
@@ -13,16 +13,8 @@ const jwtAuthenticator = passport.authenticate('jwt', { session: false });
 // mongoose
 const mongoose = require('mongoose');
 
-const connectWithRetry = () => {
-    mongoose.connect('mongodb://mongo:27017/cuppa-users', { useNewUrlParser: true })
-        .then(() => console.log('Connected to MongoDB'), err => console.log(err))
-        .catch(err => {
-            console.error(err);
-            console.log('Reconnecting to MongoDB');
-            connectWithRetry();
-        });
-}
-connectWithRetry();
+mongoose.connect('mongodb://mongo:27017/cuppa-users', { useNewUrlParser: true, reconnectTries: 30 })
+    .then(() => console.log('Connected to MongoDB'), err => console.log(err));
 
 
 const app = express();

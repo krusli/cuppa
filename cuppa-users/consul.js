@@ -1,8 +1,6 @@
 // consul (service discovery)
 const consul = require('consul')();
 
-
-
 const register = () => {
     const options = {
         name: 'cuppa-users',
