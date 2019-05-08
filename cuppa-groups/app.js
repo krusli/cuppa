@@ -26,6 +26,7 @@ const setupConnection = () => {
 };
 setupConnection();
 
+
 const groupsService = new GroupsService(UsersService, Group);
 
 const errorHandler = (res, err, next) => {

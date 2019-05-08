@@ -6,6 +6,8 @@ services:
             - 3000:3000
         links:
             - db:mongo
+        volumes:
+            - "./cuppa-users:/usr/src/app"
     groups:
         build: './cuppa-groups'
         ports:
@@ -13,6 +15,8 @@ services:
         links:
             - db:mongo
             - users:users
+        volumes:
+            - "./cuppa-groups:/usr/src/app"
     db:
         image: mongo
         ports:
