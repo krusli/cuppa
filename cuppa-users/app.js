@@ -12,8 +12,18 @@ const jwtAuthenticator = passport.authenticate('jwt', { session: false });
 
 // mongoose
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/cuppa-users', {useNewUrlParser: true})
-.then(() => console.log('Connected to MongoDB'), err => console.log(err));
+
+const connectWithRetry = () => {
+    mongoose.connect('mongodb://mongo:27017/cuppa-users', { useNewUrlParser: true })
+        .then(() => console.log('Connected to MongoDB'), err => console.log(err))
+        .catch(err => {
+            console.error(err);
+            console.log('Reconnecting to MongoDB');
+            connectWithRetry();
+        });
+}
+connectWithRetry();
+
 
 const app = express();
 app.use(helmet());
