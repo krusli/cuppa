@@ -114,8 +114,8 @@ module.exports = Model => {
                     // generate a JWT (signed by us)
                     const token = getToken(user);
                     res.json({ user: getUserPublic(user), token });
-                })
-            })
+                });
+            });
 
             middleware(req, res);   // call it (we don't need next though)
         },
