@@ -1,6 +1,7 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Group } from 'src/app/models/Group';
 import { GroupsActionTypes, GroupsActions } from '../actions/groups.actions';
+import { createFeatureSelector } from '@ngrx/store';
 
 export const groupsAdapter = createEntityAdapter<Group>({
   // MongoDB uses ._id, not .id
@@ -22,3 +23,13 @@ export function reducer(state = initialState, action: GroupsActions): State {
       return state;
   }
 }
+
+/* TODO move to Selectors */
+export const selectGroupsFeature = createFeatureSelector<State>('groups');
+
+export const {
+  selectIds: selectGroupsIds,
+  selectEntities: selectGroupsEntities,
+  selectAll: selectGroupsAll,
+  selectTotal: selectGroupsTotal,
+} = groupsAdapter.getSelectors(selectGroupsFeature);
