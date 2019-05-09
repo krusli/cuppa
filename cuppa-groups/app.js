@@ -4,6 +4,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const Group = require('./models/group');
+const GroupsService = require('./services/groupsService');
+
+/* External */
+const ActivityService = require('./common/activity');
+const UsersService = require('./common/users');
 
 const app = express();
 app.use(helmet());
@@ -11,11 +16,17 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/cuppa-groups', { useNewUrlParser: true })
-    .then(() => console.log('Connected to MongoDB'), err => console.log(err));
+const setupConnection = () => {
+    mongoose.connect('mongodb://mongo:27017/cuppa-users', { useNewUrlParser: true })
+    .then(() => console.log('Connected to MongoDB'),
+        err => {
+            console.error(err);
+            setTimeout(() => setupConnection(), 1000);  // wait 1s, reconnect
+        });
+};
+setupConnection();
 
-const UsersService = require('../common/users');
-const GroupsService = require('./services/GroupsService');
+
 const groupsService = new GroupsService(UsersService, Group);
 
 const errorHandler = (res, err, next) => {
@@ -39,7 +50,6 @@ const errorHandler = (res, err, next) => {
 
 app.get('/healthCheck', (req, res) => res.send());
 
-const ActivityService = require('../common/activity');
 
 app.post('/groups', async (req, res, next) => {
     // validate request

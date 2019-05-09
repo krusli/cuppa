@@ -1,6 +1,6 @@
-import ActivityService from "../../common/activity";
-import GroupsService from "../../common/groups";
-import UsersService from "../../common/users";
+import ActivityService from "../common/activity";
+import GroupsService from "../common/groups";
+import UsersService from "../common/users";
 
 // TODO refactor
 import { NextFunction, Request, Response } from "express";

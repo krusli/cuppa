@@ -1,4 +1,4 @@
-const interservice = require('../../common/interservice');
+const interservice = require('../common/interservice');
 const getGroups = interservice.getGroups;
 
 const Meetup = require('../models/meetup');

@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container ml-0">
   <div *ngIf="group">
-    <div class="card" height="3em" *ngFor="let activity of group.activity">
+    <div class="card mb-2" height="3em" *ngFor="let activity of group.activity">
 
       <div class="card-body">
         <div class="d-flex" style="flex-direction: row">
@@ -9,8 +9,9 @@
             {{ users[activity.user].name }}
           </div>
           
-          <div class="my-auto ml-3 my-auto" *ngIf="activity.action === 'Joined'">
-            Joined the group
+          <div class="my-auto ml-3 my-auto">
+            <!-- Joined the group -->
+            {{ getDescriptionForAction(activity.action) }}
           </div>
 
           <div class="ml-auto my-auto">

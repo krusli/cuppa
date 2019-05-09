@@ -1,5 +1,5 @@
 
-const getUserMe = require('../../common/interservice').getUserMe;
+const getUserMe = require('../common/interservice').getUserMe;
 
 module.exports = {
     getTeams: async (req, res) => {

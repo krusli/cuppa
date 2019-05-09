@@ -1,4 +1,4 @@
-const interservice = require('../../common/interservice'); // inter-service comms
+const interservice = require('../common/interservice'); // inter-service comms
 const getGroup = interservice.getGroup;
 const getGroups = interservice.getGroups;
 const getUser = interservice.getUser;

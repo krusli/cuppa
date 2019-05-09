@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <ul class="navbar-nav mr-auto" [ngClass]="!alignLeft ? 'ml-auto' : ''">
     <li class="nav-item" *ngFor="let item of navItems"
-        [routerLink]="item.link" 
+        [routerLink]="item.link"
         routerLinkActive="active"
         [ngClass]="item.additionalTest(router.url) ? 'active' : ''"
         [routerLinkActiveOptions]="item.routerLinkActiveOptions">

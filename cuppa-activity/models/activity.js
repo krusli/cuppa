@@ -25,12 +25,25 @@ const activitySchema = new Schema({
     enum: ['User', 'Group', 'Meetup'],  // TODO Team, Role, Event (part of Timeline)
     required: true 
   },  // USER, GROUP, MEETUP
+
+  // TODO define check
+  // base subject should be in .subject
+  // any more subjects (hierarchical) should be in subSubjects
+  // e.g. Group -> Meetup
+  subSubjects: { type: [String], required: true, default: [] }, // NOTE can't support ObjectId for some reason?
+  subSubjectTypes: {
+    type: [String],
+    required: true, 
+    default: []
+  },
+
+
   action: { 
     type: String, 
     enum: ['Created', 'Joined', 'Left'],
     required: true 
   },  // JOINED, INVITE
-  createdOn: { type: Date, default: Date.now() }
+  createdOn: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Activity', activitySchema);
