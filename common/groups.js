@@ -10,7 +10,7 @@ const getGroupsMe = (req, res) =>
   getPromiseForRequest(req, res, 'http://groups:3001/me/groups');
 
 const getMeetupsForGroup = (req, res, groupId) =>
-  getPromiseForRequest(req, res, `http://groups:3002/meetups?groupId=${groupId}`);
+  getPromiseForRequest(req, res, `http://meetups:3002/meetups?groupId=${groupId}`);
 
 const joinGroup = async (req, res, groupId) => {
   const user = await getUserMe(req, res);
