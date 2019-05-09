@@ -7,7 +7,7 @@ services:
         networks:
             - servers
         volumes:
-            - "./cuppa-users:/usr/src/app/src"
+            - './cuppa-users:/usr/src/app/src'
     groups:
         build: './cuppa-groups'
         ports:
@@ -16,6 +16,7 @@ services:
             - servers
         volumes:
             - "./cuppa-groups:/usr/src/app/src"
+            - './common:/usr/src/app/src/common'
     meetups:
         build: './cuppa-meetups'
         ports: 
@@ -24,6 +25,7 @@ services:
             - servers
         volumes:
             - './cuppa-meetups:/usr/src/app/src'
+            - './common:/usr/src/app/src/common'
     mongo:
         image: mongo
         ports:

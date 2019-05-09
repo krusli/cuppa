@@ -5,10 +5,10 @@ const getPromiseForRequest = require('./utils').getPromiseForRequest;
 
 module.exports = {
   getActivityForGroup(req, res, groupId) {
-    return getPromiseForRequest(req, res, `http://localhost:3004/activity?subjectType=Group&subject=${groupId}`)
+    return getPromiseForRequest(req, res, `http://activity:3004/activity?subjectType=Group&subject=${groupId}`)
   },
 
   newActivity(req, res, activity) {
-    return getPromiseForRequest(req, res, `http://localhost:3004/activity`, 'POST', activity);
+    return getPromiseForRequest(req, res, `http://activity:3004/activity`, 'POST', activity);
   }
 }
