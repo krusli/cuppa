@@ -16,6 +16,14 @@ services:
             - servers
         volumes:
             - "./cuppa-groups:/usr/src/app/src"
+    meetups:
+        build: './cuppa-meetups'
+        ports: 
+            - 3002:3002
+        networks: 
+            - servers
+        volumes:
+            - './cuppa-meetups:/usr/src/app/src'
     mongo:
         image: mongo
         ports:
