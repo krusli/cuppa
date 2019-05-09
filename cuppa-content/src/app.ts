@@ -28,7 +28,7 @@ app.get("/groups/", middleware.getGroups, sendData);
 app.get("/groups/:groupId", middleware.getGroup, sendData);
 
 // TODO move to controllers
-import GroupsService from "../../common/groups";
+import GroupsService from "../common/groups";
 const getGroup = GroupsService.getGroup;
 const joinGroup = GroupsService.joinGroup;
 

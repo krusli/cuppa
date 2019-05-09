@@ -12,7 +12,7 @@ RUN npm i -g nodemon
 # of cached Docker layers
 # COPY . .
 
-EXPOSE 3000
+EXPOSE 3003
 
 WORKDIR /usr/src/app/src
-CMD [ "nodemon", "app" ]
+CMD [ "npm", "start" ]
