@@ -4,23 +4,24 @@ services:
         build: './cuppa-users'
         ports:
             - 3000:3000
-        links:
-            - db:mongo
+        networks:
+            - servers
         volumes:
             - "./cuppa-users:/usr/src/app/src"
     groups:
         build: './cuppa-groups'
         ports:
             - 3001:3001
-        links:
-            - db:mongo
-            - users:users
+        networks:
+            - servers
         volumes:
             - "./cuppa-groups:/usr/src/app/src"
-    db:
+    mongo:
         image: mongo
         ports:
             - 27017:27017
+        networks:
+            - servers
         volumes:
             # - "./db:/data/db" # MongoDB is not compatible with VirtualBox shared volumes (https://github.com/docker-library/mongo/issues/74)
             - "mongo:/data/db"  # run `docker volume create --name=mongo` first.
@@ -28,3 +29,7 @@ services:
 volumes:
     mongo:
         driver: local
+
+networks:
+    servers:
+    
