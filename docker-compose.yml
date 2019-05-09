@@ -35,6 +35,15 @@ services:
         volumes:
             - './cuppa-content:/usr/src/app/src'
             - './common:/usr/src/app/src/common'
+    activity:
+        build: './cuppa-activity'
+        ports:
+            - 3004:3004
+        networks:
+            - servers
+        volumes:
+            - './cuppa-activity:/usr/src/app/src'
+            - './common:/usr/src/app/src/common'
     mongo:
         image: mongo
         ports:

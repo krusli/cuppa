@@ -9,8 +9,15 @@ app.use(helmet());
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/cuppa-activity', { useNewUrlParser: true })
-  .then(() => console.log('Connected to MongoDB'), err => console.log(err));
+const setupConnection = () => {
+  mongoose.connect('mongodb://mongo:27017/cuppa-users', { useNewUrlParser: true })
+    .then(() => console.log('Connected to MongoDB'),
+      err => {
+        console.error(err);
+        setTimeout(() => setupConnection(), 1000);  // wait 1s, reconnect
+      });
+};
+setupConnection();
 
 /**
  * Activity Microservice [Internal]
