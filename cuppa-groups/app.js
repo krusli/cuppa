@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 const setupConnection = () => {
-    mongoose.connect('mongodb://mongo:27017/cuppa-users', { useNewUrlParser: true })
+    mongoose.connect('mongodb://mongo:27017/cuppa-groups', { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB'),
         err => {
             console.error(err);
