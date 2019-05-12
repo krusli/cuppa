@@ -19,13 +19,11 @@ export class GroupsListComponent implements OnInit {
   groups$: Observable<Group[]>;
 
   constructor(private groupsService: GroupsService,
-    private store: Store<fromRoot.State>
-    ) {
+              private store: Store<fromRoot.State>) {
     this.groups$ = store.pipe(
       select('groups'),
       select(GroupsSelectors.selectAll)
     )
-
   }
 
   ngOnInit() { }
