@@ -15,7 +15,7 @@ import { GroupsSelectors } from 'src/app/store/reducers/groups.reducer';
   templateUrl: './groups-sidebar.component.html',
   styleUrls: ['./groups-sidebar.component.scss']
 })
-export class GroupsSidebarComponent implements OnInit, OnDestroy {
+export class GroupsSidebarComponent implements OnInit {
 
   groups$: Observable<Group[]>;
 
@@ -32,10 +32,6 @@ export class GroupsSidebarComponent implements OnInit, OnDestroy {
 
   getLink(groupId: string) {
     return `/groups/view/${groupId}`;
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
 }
