@@ -81,7 +81,6 @@ export class NavbarComponent implements OnInit {
 
   toggle() {
     this.toggleNavbar = !this.toggleNavbar;
-
     this.navbarState = this.toggleNavbar ? 'open' : 'closed';
   }
 
