@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GroupsService } from 'src/app/groups.service';
 
-import { switchMap } from 'rxjs/operators';
 import { Group, GroupsAndUsers } from 'src/app/models/Group';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
-import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 @Component({
