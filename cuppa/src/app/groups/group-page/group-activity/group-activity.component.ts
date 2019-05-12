@@ -2,8 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GroupsService } from 'src/app/groups.service';
 import { ActivatedRoute } from '@angular/router';
 
+import * as fromRoot from 'src/app/store/reducers';
+
 import { switchMap } from 'rxjs/operators';
 import { Group } from 'src/app/models/Group';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Dictionary } from '@ngrx/entity';
+import { User } from 'src/app/models/User';
+import { GroupsSelectors } from 'src/app/store/reducers/groups.reducer';
+import { UsersSelectors } from 'src/app/store/reducers/users.reducer';
 
 type Action = 'Created' | 'Joined';
 
@@ -14,32 +22,52 @@ type Action = 'Created' | 'Joined';
 })
 export class GroupActivityComponent implements OnInit, OnDestroy {
 
-  group: Group;
-  users: any; // k -> v // TODO
+  // group: Group;
+  // users: any; // k -> v // TODO
+
+  group$: Observable<Group>;
+  users$: Observable<Dictionary<User>>;
 
   now: Date = new Date();
   nowTimer: any
 
-  constructor(private groupsService: GroupsService, private route: ActivatedRoute) { }
+  constructor(private groupsService: GroupsService,
+              private route: ActivatedRoute,
+              private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
+
     // TODO use NgRx Store, so parent and child can share data + react to events without
     // bulky event emitting and handling code.
-    this.route.paramMap
-      .pipe(
-        switchMap(params => {
-          const groupId = params.get('groupId');
-          return this.groupsService.getGroup(groupId);
-        })
-      )
-      .subscribe((groupAndUsers: any) => {
-        this.group = groupAndUsers.group;
-        this.users = groupAndUsers.users;
-      });
+    // this.route.paramMap
+    // .pipe(
+    //   switchMap(params => {
+    //     const groupId = params.get('groupId');
+    //     return this.groupsService.getGroup(groupId);
+    //   })
+    // )
+    // .subscribe((groupAndUsers: any) => {
+    //   this.group = groupAndUsers.group;
+    //   this.users = groupAndUsers.users;
+    // });
+
+    const groupId = this.route.snapshot.paramMap.get('groupId');
+
+    this.group$ = this.store.pipe(
+      select('groups'),
+      select(GroupsSelectors.selectEntities),
+      select(x => x[groupId])
+    );
+
+    this.users$ = this.store.pipe(
+      select('users'),
+      select(UsersSelectors.selectEntities)
+    );
+
 
     this.nowTimer = setInterval(() => {
       this.now = new Date();
-    }, 60000);
+    }, 60000);  // update every minute
   }
 
   ngOnDestroy() {
@@ -51,10 +79,10 @@ export class GroupActivityComponent implements OnInit, OnDestroy {
     switch (action) {
       case 'Created':
         return 'Created the group'
-      
+
       case 'Joined':
         return 'Joined the group'
-      
+
       default:
         return ''
     }
