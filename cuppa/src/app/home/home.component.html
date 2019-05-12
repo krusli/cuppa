@@ -7,22 +7,25 @@
         Find and plan meetups.<br>
         Together.
       </div>
-  
+
       <form class="mt-4">
         <!-- TODO: prevent default-->
-        <div class="form-group">
-          <label class="emphasis" for="search">Search</label>
+        <label class="emphasis" for="search">Search</label>
+        <div class="d-flex w-100">
           <input type="text" class="form-control" id="search" name="search" autocomplete="name"
             placeholder="Location, activity, group or community">
+          <button class="btn btn-primary">
+            Search
+          </button>
         </div>
       </form>
-  
+
       <div class="mt-4">
         <label class="emphasis">Find your interests</label>
         <!-- TODO refactor to own component with < and > buttons -->
         <!-- Inject content via transclusion -->
         <app-shelf>
-          <div class="card item d-flex mr-3" style="height: 200px; width: 200px" 
+          <div class="card item d-flex mr-3" style="height: 200px; width: 200px"
               *ngFor="let feature of featured">
             <span class="ml-auto mt-auto mr-2">
               <h6>{{ feature.name }}</h6>
@@ -33,7 +36,7 @@
         <div class="w-100 text-right">
           Shift + scroll to scroll horizontally.
         </div>
-  
+
         <div class="mt-4">
           <app-groups-list></app-groups-list>
         </div>
