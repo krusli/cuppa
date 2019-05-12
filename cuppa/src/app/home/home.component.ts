@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../models/User';
 import { ContentService } from '../content.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -14,16 +14,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   title = 'cuppa';
 
-  user: Observable<User>;
+  user$: Observable<User>;
 
   featured: any;
 
   constructor(private contentService: ContentService, private store: Store<any>) {
-    // this.user = store.select(selectUser);
+    this.user$ = store.pipe(
+      select('auth'),
+      select('user')
+    );
   }
 
   ngOnInit() {
-    this.user.pipe(
+    this.user$.pipe(
       switchMap(x => {
         return this.contentService.getFeaturedCommunities();
       })

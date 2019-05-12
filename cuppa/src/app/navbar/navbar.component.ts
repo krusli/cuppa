@@ -3,7 +3,7 @@ import { navbarAnimation } from '../animations/navbar';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth.service';
 import { User } from '../models/User';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LoadUser } from '../store/actions/auth.actions';
 interface ContainsUser {
@@ -18,7 +18,7 @@ interface ContainsUser {
 })
 export class NavbarComponent implements OnInit {
 
-  user: Observable<User>;
+  user$: Observable<User>;
 
   toggleNavbar = false;
   isLogin = true;
@@ -35,7 +35,10 @@ export class NavbarComponent implements OnInit {
   password: string;
 
   constructor(private modalService: NgbModal, private authService: AuthService, private store: Store<any>) {
-    // this.user = store.select(selectUser);
+    this.user$ = store.pipe(
+      select('auth'),
+      select('user')
+    )
   }
 
   // naming it signUp gives us a JIT error?
