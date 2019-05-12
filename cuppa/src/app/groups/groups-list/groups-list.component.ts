@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupsAndUsers } from 'src/app/models/Group';
+import { GroupsAndUsers, Group } from 'src/app/models/Group';
 import { UserMap, User } from 'src/app/models/User';
 import { GroupsService } from 'src/app/groups.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable, empty } from 'rxjs';
+
+import * as fromRoot from 'src/app/store/reducers';
+import { GroupsSelectors } from 'src/app/store/reducers/groups.reducer';
 
 @Component({
   selector: 'app-groups-list',
@@ -13,12 +16,16 @@ import { Observable, empty } from 'rxjs';
 export class GroupsListComponent implements OnInit {
 
   user: Observable<User>;
-  groups: Observable<GroupsAndUsers>;
+  groups$: Observable<Group[]>;
 
   constructor(private groupsService: GroupsService,
-    // private groupsStore: Store<GroupsState>
+    private store: Store<fromRoot.State>
     ) {
-    // this.groups = groupsStore.select('groups');
+    this.groups$ = store.pipe(
+      select('groups'),
+      select(GroupsSelectors.selectAll)
+    )
+
   }
 
   ngOnInit() { }

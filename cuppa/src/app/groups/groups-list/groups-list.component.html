@@ -1,6 +1,9 @@
 <label class="emphasis">My Groups</label>
 
-<app-group [group]="group" 
-           [users]="(groups | async) ? (groups | async).users : {}" 
-           *ngFor="let group of (groups | async) ? (groups | async).groups : []">
+<!-- TODO: add back! -->
+<!-- [users]="(groups | async) ? (groups | async).users : {}" -->
+
+<app-group [group]="group"
+           [users]="{}"
+           *ngFor="let group of (groups$ | async)">
 </app-group>
