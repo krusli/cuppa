@@ -13,7 +13,7 @@ export class ContentService {
 
   getFeaturedCommunities() {
     const headers = this.authService.getHeaders();
-    return this.http.get(`http://${Consts.BASE_URL}:3003/communities/featured`, { headers });
+    return this.http.get(`${Consts.BASE_URL}:3003/communities/featured`, { headers });
   }
 
 }

@@ -15,16 +15,16 @@ export class GroupsService {
   getGroups() {
     // get auth header
     const headers = this.authService.getHeaders();
-    return this.http.get(`http://${Consts.BASE_URL}:3003/groups`, { headers });
+    return this.http.get(`${Consts.BASE_URL}:3003/groups`, { headers });
   }
 
   getGroup(groupId: string) {
     const headers = this.authService.getHeaders();
-    return this.http.get(`http://${Consts.BASE_URL}:3003/groups/${groupId}`, { headers });
+    return this.http.get(`${Consts.BASE_URL}:3003/groups/${groupId}`, { headers });
   }
 
   newGroup(group: GroupDTO) {
     const headers = this.authService.getHeaders();
-    return this.http.post(`http://${Consts.BASE_URL}:3001/groups`, group, { headers });
+    return this.http.post(`${Consts.BASE_URL}:3001/groups`, group, { headers });
   }
 }
