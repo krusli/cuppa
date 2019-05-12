@@ -24,3 +24,5 @@ export function reducer(state = initialState, action: UsersActions): State {
       return state;
   }
 }
+
+export const UsersSelectors = usersAdapter.getSelectors();

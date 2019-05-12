@@ -7,6 +7,8 @@ import { Observable, empty } from 'rxjs';
 
 import * as fromRoot from 'src/app/store/reducers';
 import { GroupsSelectors } from 'src/app/store/reducers/groups.reducer';
+import { Dictionary } from '@ngrx/entity';
+import { UsersSelectors } from 'src/app/store/reducers/users.reducer';
 
 @Component({
   selector: 'app-groups-list',
@@ -15,7 +17,8 @@ import { GroupsSelectors } from 'src/app/store/reducers/groups.reducer';
 })
 export class GroupsListComponent implements OnInit {
 
-  user: Observable<User>;
+  // user: Observable<User>;
+  users$: Observable<Dictionary<User>>;
   groups$: Observable<Group[]>;
 
   constructor(private groupsService: GroupsService,
@@ -23,6 +26,11 @@ export class GroupsListComponent implements OnInit {
     this.groups$ = store.pipe(
       select('groups'),
       select(GroupsSelectors.selectAll)
+    )
+
+    this.users$ = store.pipe(
+      select('users'),
+      select(UsersSelectors.selectEntities)
     )
   }
 
