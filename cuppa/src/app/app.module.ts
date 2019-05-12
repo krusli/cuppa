@@ -64,9 +64,9 @@ import { AppEffects } from './store/effects/app.effects';
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [],
   bootstrap: [AppComponent]
