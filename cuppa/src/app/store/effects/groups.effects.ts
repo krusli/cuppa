@@ -5,6 +5,7 @@ import { GroupsActionTypes, LoadGroupsSuccess, LoadGroupsFailure } from '../acti
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { Group, GroupsAndUsers } from 'src/app/models/Group';
 import { of } from 'rxjs';
+import { LoadUsers } from '../actions/users.actions';
 
 
 
@@ -19,7 +20,7 @@ export class GroupsEffects {
     }),
     switchMap((res: GroupsAndUsers) => [
       new LoadGroupsSuccess(res.groups),
-      // new LoadUsersSuccess(groupsAndUsers.users);
+      new LoadUsers(res.users)
     ]),
     catchError(err =>
       // return a new Observable containing the Error Action

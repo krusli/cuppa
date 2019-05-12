@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupsAndUsers, Group } from 'src/app/models/Group';
-import { UserMap, User } from 'src/app/models/User';
+import { User } from 'src/app/models/User';
 import { GroupsService } from 'src/app/groups.service';
 import { Store, select } from '@ngrx/store';
 import { Observable, empty } from 'rxjs';

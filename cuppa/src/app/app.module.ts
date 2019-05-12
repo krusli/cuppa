@@ -34,7 +34,6 @@ import { reducers, metaReducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/effects/app.effects';
 import { GroupsEffects } from './store/effects/groups.effects';
-import { UsersEffects } from './store/effects/users.effects';
 
 @NgModule({
   declarations: [
@@ -67,7 +66,7 @@ import { UsersEffects } from './store/effects/users.effects';
     NgbModule,
     FontAwesomeModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects, GroupsEffects, UsersEffects]),
+    EffectsModule.forRoot([AppEffects, GroupsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [],

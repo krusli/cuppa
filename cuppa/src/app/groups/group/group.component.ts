@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Group } from 'src/app/models/Group';
-import { UserMap } from 'src/app/models/User';
+// import { UserMap } from 'src/app/models/User';
 
 @Component({
   selector: 'app-group',
@@ -14,7 +14,7 @@ export class GroupComponent implements OnInit {
   LIMIT_ATTENDEE = 2;
 
   @Input() group: Group;
-  @Input() users: UserMap;
+  @Input() users: any;
 
   constructor() { }
 
