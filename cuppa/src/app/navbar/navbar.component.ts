@@ -6,6 +6,7 @@ import { User } from '../models/User';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LoadUser } from '../store/actions/auth.actions';
+
 interface ContainsUser {
   user: User;
 }
