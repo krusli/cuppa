@@ -8,8 +8,6 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { GroupsState } from 'src/app/state/groups.state';
-import { getGroupAndUsers } from 'src/app/reducers/groups.reducer';
 
 @Component({
   selector: 'app-group-page',
@@ -25,9 +23,10 @@ export class GroupPageComponent implements OnInit {
   groupsAndUsers: Observable<GroupsAndUsers>;
   group: Group;
 
-  constructor(private route: ActivatedRoute, 
-              private groupsService: GroupsService, 
-              private groupsStore: Store<GroupsState>) { 
+  constructor(private route: ActivatedRoute,
+              private groupsService: GroupsService,
+              // private groupsStore: Store<GroupsState>
+              ) {
 
   }
 
@@ -38,13 +37,13 @@ export class GroupPageComponent implements OnInit {
       const groupId = params.get('groupId');
       this.updateNavItems(groupId);
 
-      this.groupsAndUsers = this.groupsStore.pipe(
-        select(getGroupAndUsers, { groupId })
-      )
+      // this.groupsAndUsers = this.groupsStore.pipe(
+      //   select(getGroupAndUsers, { groupId })
+      // )
 
-      this.groupsAndUsers.subscribe((data: GroupsAndUsers) => {
-        this.group = data.groups[0];
-      })
+      // this.groupsAndUsers.subscribe((data: GroupsAndUsers) => {
+      //   this.group = data.groups[0];
+      // })
 
     })
 

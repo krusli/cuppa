@@ -4,7 +4,6 @@ import { ContentService } from '../content.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { selectUser } from '../store/selectors/user.selectors';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   featured: any;
 
   constructor(private contentService: ContentService, private store: Store<any>) {
-    this.user = store.select(selectUser);
+    // this.user = store.select(selectUser);
   }
 
   ngOnInit() {

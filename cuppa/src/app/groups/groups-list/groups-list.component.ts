@@ -4,7 +4,6 @@ import { UserMap, User } from 'src/app/models/User';
 import { GroupsService } from 'src/app/groups.service';
 import { Store } from '@ngrx/store';
 import { Observable, empty } from 'rxjs';
-import { GroupsState } from 'src/app/state/groups.state';
 
 @Component({
   selector: 'app-groups-list',
@@ -16,8 +15,10 @@ export class GroupsListComponent implements OnInit {
   user: Observable<User>;
   groups: Observable<GroupsAndUsers>;
 
-  constructor(private groupsService: GroupsService, private groupsStore: Store<GroupsState>) {
-    this.groups = groupsStore.select('groups');
+  constructor(private groupsService: GroupsService,
+    // private groupsStore: Store<GroupsState>
+    ) {
+    // this.groups = groupsStore.select('groups');
   }
 
   ngOnInit() { }

@@ -4,7 +4,7 @@ import { GroupsAndUsers } from 'src/app/models/Group';
 import { GroupsService } from 'src/app/groups.service';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { GroupsState } from 'src/app/state/groups.state';
+// import { GroupsState } from 'src/app/state/groups.state';
 
 
 @Component({
@@ -19,8 +19,10 @@ export class GroupsSidebarComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  constructor(private groupsService: GroupsService, private groupsStore: Store<GroupsState>) {
-    this.groups = groupsStore.select('groups');
+  constructor(private groupsService: GroupsService,
+    // private groupsStore: Store<GroupsState>
+    ) {
+    // this.groups = groupsStore.select('groups');
   }
 
   ngOnInit() {

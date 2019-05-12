@@ -28,8 +28,6 @@ import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-m
 import { GroupMembersComponent } from './groups/group-page/group-members/group-members.component';
 import { MyTimePipe } from './time.pipe';
 import { StoreModule } from '@ngrx/store';
-import { groupsReducer } from './reducers/groups.reducer';
-import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
@@ -63,7 +61,6 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
