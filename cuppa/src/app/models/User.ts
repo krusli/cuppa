@@ -5,6 +5,6 @@ export interface User {
   __v: number;
 }
 
-export interface UserMap {
-  [key: string]: User;
-}
+// export interface UserMap {
+//   [key: string]: User;
+// }

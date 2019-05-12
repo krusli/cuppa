@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GroupsService } from 'src/app/groups.service';
 
-import { switchMap } from 'rxjs/operators';
 import { Group, GroupsAndUsers } from 'src/app/models/Group';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
-import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,31 +20,13 @@ export class GroupPageComponent implements OnInit {
   groupsAndUsers: Observable<GroupsAndUsers>;
   group: Group;
 
-  constructor(private route: ActivatedRoute,
-              private groupsService: GroupsService,
-              // private groupsStore: Store<GroupsState>
-              ) {
-
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-
-    this.route.paramMap
-    .subscribe(params => {
-      const groupId = params.get('groupId');
-      this.updateNavItems(groupId);
-
-      // this.groupsAndUsers = this.groupsStore.pipe(
-      //   select(getGroupAndUsers, { groupId })
-      // )
-
-      // this.groupsAndUsers.subscribe((data: GroupsAndUsers) => {
-      //   this.group = data.groups[0];
-      // })
-
-    })
-
-
+    /* Assumption: Groups store already populated by parent Groups Component (routing parent) */
+    const groupId = this.route.snapshot.paramMap.get('groupId');
+    this.updateNavItems(groupId);
   }
 
   updateNavItems(groupId: string) {

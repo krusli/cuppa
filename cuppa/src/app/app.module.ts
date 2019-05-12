@@ -30,6 +30,10 @@ import { MyTimePipe } from './time.pipe';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { reducers, metaReducers } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './store/effects/app.effects';
+import { GroupsEffects } from './store/effects/groups.effects';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,9 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AppEffects, GroupsEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [],
   bootstrap: [AppComponent]

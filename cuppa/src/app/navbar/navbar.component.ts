@@ -3,8 +3,10 @@ import { navbarAnimation } from '../animations/navbar';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth.service';
 import { User } from '../models/User';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { LoadUser } from '../store/actions/auth.actions';
+
 interface ContainsUser {
   user: User;
 }
@@ -17,7 +19,7 @@ interface ContainsUser {
 })
 export class NavbarComponent implements OnInit {
 
-  user: Observable<User>;
+  user$: Observable<User>;
 
   toggleNavbar = false;
   isLogin = true;
@@ -34,7 +36,10 @@ export class NavbarComponent implements OnInit {
   password: string;
 
   constructor(private modalService: NgbModal, private authService: AuthService, private store: Store<any>) {
-    // this.user = store.select(selectUser);
+    this.user$ = store.pipe(
+      select('auth'),
+      select('user')
+    )
   }
 
   // naming it signUp gives us a JIT error?
@@ -49,7 +54,7 @@ export class NavbarComponent implements OnInit {
   }
 
   handleResult(x: ContainsUser) {
-    // this.store.dispatch(new LoadUser(x.user));
+    this.store.dispatch(new LoadUser(x.user));
     this.modalService.dismissAll('Logged in');
   }
 
@@ -77,7 +82,6 @@ export class NavbarComponent implements OnInit {
 
   toggle() {
     this.toggleNavbar = !this.toggleNavbar;
-
     this.navbarState = this.toggleNavbar ? 'open' : 'closed';
   }
 

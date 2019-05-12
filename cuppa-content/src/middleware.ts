@@ -24,7 +24,7 @@ const getUsers = UsersService.getUsers;
  * @param {*} group
  * @param {*} users
  */
-const hydrateGroup = async (req: Request, res: Response, group: Group, users: UsersMap): Promise<HydratedGroup> => {
+const hydrateGroup = async (req: Request, res: Response, group: Group, users: User[]): Promise<HydratedGroup> => {
   // look for all User entities in the group
   const members = await getUsers(req, res, group.members);
   const ownerUsers = await getUsers(req, res, [group.owner]);
@@ -36,8 +36,13 @@ const hydrateGroup = async (req: Request, res: Response, group: Group, users: Us
   group.activity = await getActivityForGroup(req, res, group._id);
 
   // fill in the map of IDs -> Users
-  members.map((x: User) => users[x._id] = x);
-  users[owner._id] = owner;
+  /* UsersMap version */
+  // members.map((x: User) => users[x._id] = x);
+  // users[owner._id] = owner;
+  
+  /* User[] version */
+  users.concat(members);
+  users.push(owner);
 
   // get all meetups for the group
   group.meetups = await getMeetupsForGroup(req, res, group._id);
@@ -50,7 +55,7 @@ export default {
     try {
       // const user = await getUserMe(req, res);
       const groups = await getGroupsMe(req, res);
-      const users = {};
+      const users: User[] = [];
 
       const promises: Array<Promise<HydratedGroup>> = groups.map((group: Group) =>
           hydrateGroup(req, res, group, users));
@@ -72,7 +77,7 @@ export default {
   getGroup: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const group = await getGroup(req, res, req.params.groupId);
-      const users = {};
+      const users: User[] = [];
 
       if (!group) {
         res.status(404).send({
