@@ -12,11 +12,11 @@ import { Dictionary } from '@ngrx/entity';
 import { User } from 'src/app/models/User';
 
 @Component({
-  selector: 'app-members-list',
-  templateUrl: './members-list.component.html',
-  styleUrls: ['./members-list.component.css']
+  selector: 'app-group-members-list',
+  templateUrl: './group-members-list.component.html',
+  styleUrls: ['./group-members-list.component.css']
 })
-export class MembersListComponent implements OnInit {
+export class GroupMembersListComponent implements OnInit {
 
   group$: Observable<Group>;
   users$: Observable<Dictionary<User>>;
@@ -42,6 +42,17 @@ export class MembersListComponent implements OnInit {
       select('users'),
       select(UsersSelectors.selectEntities)
     );
+  }
+
+  hydrateUserData(userIds: string[], userData: Dictionary<User>) {
+    if (!userIds || !userData) {
+      return [];
+    }
+
+    const retVal = userIds.map((entry: string) => 
+      userData[entry]
+    );
+    return retVal;
   }
 
 }

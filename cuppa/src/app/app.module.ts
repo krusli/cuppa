@@ -33,7 +33,8 @@ import { reducers, metaReducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/effects/app.effects';
 import { GroupsEffects } from './store/effects/groups.effects';
-import { MembersListComponent } from './groups/group-page/members/members-list/members-list.component';
+import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
+import { UsersListComponent } from './common/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MembersListComponent } from './groups/group-page/members/members-list/m
     GroupActivityComponent,
     GroupMeetupsComponent,
     MyTimePipe,
-    MembersListComponent
+    GroupMembersListComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
