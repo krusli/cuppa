@@ -17,7 +17,6 @@ import { UsersSelectors } from 'src/app/store/reducers/users.reducer';
 })
 export class GroupsListComponent implements OnInit {
 
-  // user: Observable<User>;
   users$: Observable<Dictionary<User>>;
   groups$: Observable<Group[]>;
 
