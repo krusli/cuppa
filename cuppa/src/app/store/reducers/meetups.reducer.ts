@@ -25,3 +25,5 @@ export function reducer(state = initialState, action: MeetupsActions): State {
       return state;
   }
 }
+
+export const MeetupsSelectors = meetupsAdapter.getSelectors();

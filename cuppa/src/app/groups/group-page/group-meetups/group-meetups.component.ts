@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Meetup } from 'src/app/models/Group';
+
+import * as fromRoot from 'src/app/store/reducers';
+import { MeetupsSelectors } from 'src/app/store/reducers/meetups.reducer';
 
 @Component({
   selector: 'app-group-meetups',
@@ -10,22 +14,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GroupMeetupsComponent implements OnInit {
 
-  meetups: Observable<any>;
+  meetups$: Observable<Meetup[]>;
 
-  constructor(private route: ActivatedRoute,
-    // private groupsStore: Store<GroupsState>
-    ) { }
+  constructor(
+    private store: Store<fromRoot.State>
+  ) { }
 
   ngOnInit() {
-
-    this.route.parent.paramMap
-    .subscribe(params => {
-      const groupId = params.get('groupId');
-      // this.meetups = this.groupsStore.pipe(
-        // select(getMeetups, { groupId })
-      // );
-    });
-
+    this.meetups$ = this.store.pipe(
+      select(x => x.meetups), // TODO: use createFeatureSelector
+      select(MeetupsSelectors.selectAll)
+    );
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="container ml-0">
-  <div class="card w-100 mb-3" *ngFor="let meetup of (meetups | async)">
+  <div class="card w-100 mb-3" *ngFor="let meetup of (meetups$ | async)">
     <div class="card-body">
       <div class="d-flex w-100" style="flex-direction: row">
           <h3>{{ meetup.name }}</h3>
