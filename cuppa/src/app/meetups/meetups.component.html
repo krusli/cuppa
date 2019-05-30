@@ -4,7 +4,65 @@
   <div>
     <label class="emphasis">From Your Groups</label>
     <div class="row">
-      <app-meetup class="col-md-4 col-lg-3"></app-meetup>
+      <app-meetup-card class="col-md-4 col-lg-3"></app-meetup-card>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <label class="emphasis">Nearby</label>
+    <div class="row">
+      <app-meetup-card class="col-md-4 col-lg-3"></app-meetup-card>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <label class="emphasis">Find meetups</label>
+    <!-- TODO: step 1: interest/community picker -->
+
+    <!-- TODO refactor -->
+    <form>
+        <!-- TODO: prevent default-->
+        <div class="d-flex w-100">
+          <input type="text" class="form-control" id="search" name="search" autocomplete="name"
+            placeholder="Name, location, community or activity">
+          <button class="btn btn-primary">
+            Search
+          </button>
+        </div>
+      </form>
+  </div>
+
+  <div class="mt-5">
+    <label class="emphasis">Agenda</label>
+    <div class="d-flex">
+      <div style="width: 160px" class="text-right">
+        <h5>30 May</h5>
+      </div>
+
+      <div class="ml-3">
+        <h6>Tea and Tech Talks @ Kohicha</h6>
+        Secret Society BLANKET
+
+      </div>
+
+      <div class="ml-5">
+        <label class="emphasis">Attendees</label><br>
+        <code>TODO</code>
+      </div>
+
+      <div class="ml-5">
+        <label class="emphasis">Committee</label><br>
+        <table>
+          <tr>
+            <td class="text-right">Committee Head</td>
+            <td class="pl-3">Kenneth<br>@krusli</td>
+          </tr>
+          <tr>
+            <td class="text-right">Audio</td>
+            <td class="pl-3">TheLosser<br>@TheLosserLegacy</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 
