@@ -28,7 +28,6 @@ export class GroupsEffects {
     )
   )
 
-
   constructor(private actions$: Actions, private groupsService: GroupsService) {}
 
 }

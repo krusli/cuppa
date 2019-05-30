@@ -36,6 +36,7 @@ import { GroupsEffects } from './store/effects/groups.effects';
 import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
 import { UsersListComponent } from './common/users-list/users-list.component';
 import { MeetupCardComponent } from './meetups/meetup-card/meetup-card.component';
+import { MeetupsEffects } from './store/effects/meetups.effects';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import { MeetupCardComponent } from './meetups/meetup-card/meetup-card.component
     NgbModule,
     FontAwesomeModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects, GroupsEffects]),
+    EffectsModule.forRoot([AppEffects, GroupsEffects, MeetupsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [],
