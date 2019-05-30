@@ -35,6 +35,7 @@ import { AppEffects } from './store/effects/app.effects';
 import { GroupsEffects } from './store/effects/groups.effects';
 import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
 import { UsersListComponent } from './common/users-list/users-list.component';
+import { MeetupComponent } from './meetups/meetup/meetup.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { UsersListComponent } from './common/users-list/users-list.component';
     GroupMeetupsComponent,
     MyTimePipe,
     GroupMembersListComponent,
-    UsersListComponent
+    UsersListComponent,
+    MeetupComponent
   ],
   imports: [
     BrowserModule,
