@@ -37,6 +37,7 @@ import { GroupMembersListComponent } from './groups/group-page/members/members-l
 import { UsersListComponent } from './common/users-list/users-list.component';
 import { MeetupCardComponent } from './meetups/meetup-card/meetup-card.component';
 import { MeetupsEffects } from './store/effects/meetups.effects';
+import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { MeetupsEffects } from './store/effects/meetups.effects';
     MyTimePipe,
     GroupMembersListComponent,
     UsersListComponent,
-    MeetupCardComponent
+    MeetupCardComponent,
+    GroupSettingsComponent
   ],
   imports: [
     BrowserModule,

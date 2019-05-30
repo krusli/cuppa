@@ -11,6 +11,7 @@ import { GroupPageComponent } from './groups/group-page/group-page.component';
 import { GroupActivityComponent } from './groups/group-page/group-activity/group-activity.component';
 import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
 import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
+import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
           {
             path: 'members',
             component: GroupMembersListComponent
+          },
+          {
+            path: 'settings',
+            component: GroupSettingsComponent
           }
         ]
       },
