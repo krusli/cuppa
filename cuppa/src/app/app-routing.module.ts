@@ -32,7 +32,7 @@ const routes: Routes = [
         component: NewGroupComponent
       },
       {
-        path: 'view/:groupId',
+        path: ':groupId',
         component: GroupPageComponent,
         children: [
           {

@@ -59,10 +59,10 @@ export class GroupPageComponent implements OnInit, OnDestroy {
 
   updateNavItems(groupId: string) {
     this.navItems = [
-      new NavItemImpl('Activity', `/groups/view/${groupId}`, { exact: true }),
-      new NavItemImpl('Meetups', `/groups/view/${groupId}/meetups`),
-      new NavItemImpl('Members', `/groups/view/${groupId}/members`),
-      new NavItemImpl('Settings', `/groups/view/${groupId}/settings`)
+      new NavItemImpl('Activity', `/groups/${groupId}`, { exact: true }),
+      new NavItemImpl('Meetups', `/groups/${groupId}/meetups`),
+      new NavItemImpl('Members', `/groups/${groupId}/members`),
+      new NavItemImpl('Settings', `/groups/${groupId}/settings`)
     ];
   }
 

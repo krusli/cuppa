@@ -28,6 +28,8 @@ export class MeetupComponent implements OnInit {
       select(MeetupsSelectors.selectEntities),
       select(dict => dict[this.meetupId])
     );
+
+    // TODO: dispatch LoadMeetups if the Store is empty
   }
 
 }
