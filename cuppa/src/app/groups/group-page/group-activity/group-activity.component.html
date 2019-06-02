@@ -1,23 +1,21 @@
-<div class="container ml-0">
-  <div class="card mb-2" height="3em" *ngFor="let activity of (group$ | async)?.activity">
+<div class="card mb-2" height="3em" *ngFor="let activity of (group$ | async)?.activity">
 
-    <div class="card-body">
-      <div class="d-flex" style="flex-direction: row">
-        <div class="avatar"></div>
-        <div class="ml-1 my-auto" style="min-width: 20%;">
-          {{ (users$ | async)[activity.user].name }}
-        </div>
-
-        <div class="my-auto ml-3 my-auto">
-          <!-- Joined the group -->
-          {{ getDescriptionForAction(activity.action) }}
-        </div>
-
-        <div class="ml-auto my-auto">
-          {{ differenceInSeconds(now, toDate(activity.createdOn)) | myTime }}
-        </div>
-
+  <div class="card-body">
+    <div class="d-flex" style="flex-direction: row">
+      <div class="avatar"></div>
+      <div class="ml-1 my-auto" style="min-width: 20%;">
+        {{ (users$ | async)[activity.user].name }}
       </div>
+
+      <div class="my-auto ml-3 my-auto">
+        <!-- Joined the group -->
+        {{ getDescriptionForAction(activity.action) }}
+      </div>
+
+      <div class="ml-auto my-auto">
+        {{ differenceInSeconds(now, toDate(activity.createdOn)) | myTime }}
+      </div>
+
     </div>
   </div>
 </div>

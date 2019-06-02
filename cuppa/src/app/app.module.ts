@@ -39,6 +39,9 @@ import { MeetupCardComponent } from './meetups/meetup-card/meetup-card.component
 import { MeetupsEffects } from './store/effects/meetups.effects';
 import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
 import { MeetupComponent } from './meetups/meetup/meetup.component';
+import { MeetupJumbotronComponent } from './meetups/meetup-jumbotron/meetup-jumbotron.component';
+import { GroupJumbotronComponent } from './groups/group-jumbotron/group-jumbotron.component';
+import { JumbotronComponent } from './jumbotron/jumbotron.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,10 @@ import { MeetupComponent } from './meetups/meetup/meetup.component';
     UsersListComponent,
     MeetupCardComponent,
     GroupSettingsComponent,
-    MeetupComponent
+    MeetupComponent,
+    MeetupJumbotronComponent,
+    GroupJumbotronComponent,
+    JumbotronComponent
   ],
   imports: [
     BrowserModule,

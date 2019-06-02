@@ -1,4 +1,4 @@
-<div class="container ml-0" *ngIf="(meetup$ | async)">
+<div *ngIf="(meetup$ | async)">
   <h1>{{ (meetup$ | async).name }}</h1>
   <a [routerLink]="['/groups', (meetup$ | async).group]">{{ (meetup$ | async).group }}</a>
 

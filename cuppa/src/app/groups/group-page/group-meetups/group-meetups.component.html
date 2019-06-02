@@ -1,62 +1,60 @@
-<div class="container ml-0">
-  <div class="card w-100 mb-3" *ngFor="let meetup of (meetups$ | async)">
-    <div class="card-body">
-      <div class="d-flex w-100" style="flex-direction: row">
-          <h3 [routerLink]="['.', meetup._id]">{{ meetup.name }}</h3>
-          <div class="ml-auto mr-2">1 day to meetup</div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          <label class="secondary">Roles</label><br>
-          <a href="#">attendee</a>, <a href="#">organizer</a>
-        </div>
-
-      </div>
-
-      <div class="row mt-3">
-
-        <div class="col-12 col-md-3 mb-3 mb-md-0">
-          <label class="secondary">Details</label>
-
-          <ul class="group-list">
-            <li>Venue<br>Coffee Tree</li>
-            <li>Time<br>14.00 - 17.00</li>
-            <li>Created by<br>{{ meetup.owner }}</li>
-          </ul>
-        </div>
-
-        <div class="col-12 col-md-3 mb-3 mb-md-0">
-          <label class="secondary">Events</label>
-
-          <div>
-            No events yet. <a href="#">Create one?</a>
-            <ul class="group-list">
-            </ul>
-          </div>
-        </div>
-
-
-        <div class="col-12 col-md-3 mb-3 mb-md-0">
-          <label class="secondary">Teams</label>
-
-          <div>
-            No teams yet. <a href="#">Create one?</a>
-            <ul class="group-list">
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-3 mb-3 mb-md-0">
-          <label class="secondary">Actions</label>
-
-          <ul class="group-list">
-          </ul>
-        </div>
-
-      </div>
-      <!-- {{ meetup | json }} -->
+<div class="card w-100 mb-3" *ngFor="let meetup of (meetups$ | async)">
+  <div class="card-body">
+    <div class="d-flex w-100" style="flex-direction: row">
+        <h3 [routerLink]="['.', meetup._id]">{{ meetup.name }}</h3>
+        <div class="ml-auto mr-2">1 day to meetup</div>
     </div>
+
+    <div class="row">
+      <div class="col-12">
+        <label class="secondary">Roles</label><br>
+        <a href="#">attendee</a>, <a href="#">organizer</a>
+      </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <label class="secondary">Details</label>
+
+        <ul class="group-list">
+          <li>Venue<br>Coffee Tree</li>
+          <li>Time<br>14.00 - 17.00</li>
+          <li>Created by<br>{{ meetup.owner }}</li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <label class="secondary">Events</label>
+
+        <div>
+          No events yet. <a href="#">Create one?</a>
+          <ul class="group-list">
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <label class="secondary">Teams</label>
+
+        <div>
+          No teams yet. <a href="#">Create one?</a>
+          <ul class="group-list">
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <label class="secondary">Actions</label>
+
+        <ul class="group-list">
+        </ul>
+      </div>
+
+    </div>
+    <!-- {{ meetup | json }} -->
   </div>
 </div>
 

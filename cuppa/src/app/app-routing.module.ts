@@ -13,6 +13,8 @@ import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-m
 import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
 import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
 import { MeetupComponent } from './meetups/meetup/meetup.component';
+import { JumbotronComponent } from './jumbotron/jumbotron.component';
+import { GroupJumbotronComponent } from './groups/group-jumbotron/group-jumbotron.component';
 
 const routes: Routes = [
   {
@@ -35,6 +37,11 @@ const routes: Routes = [
         path: ':groupId',
         component: GroupPageComponent,
         children: [
+          {
+            path: '',
+            component: GroupJumbotronComponent,
+            outlet: 'jumbotron'
+          },
           {
             path: '',
             component: GroupActivityComponent
