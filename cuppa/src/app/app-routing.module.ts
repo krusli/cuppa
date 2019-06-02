@@ -12,6 +12,7 @@ import { GroupActivityComponent } from './groups/group-page/group-activity/group
 import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
 import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
 import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
+import { MeetupComponent } from './meetups/meetup/meetup.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
             component: GroupMeetupsComponent
           },
           {
+            path: 'meetups/:meetupId',
+            component: MeetupComponent
+          },
+          {
             path: 'members',
             component: GroupMembersListComponent
           },
@@ -65,6 +70,10 @@ const routes: Routes = [
   {
     path: 'meetups',
     component: MeetupsComponent
+  },
+  {
+    path: 'meetups/:meetupId',
+    component: MeetupComponent
   }
 ];
 

@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { Meetup } from 'src/app/models/Group';
 
 export enum MeetupsActionTypes {
-  LoadMeetups = '[Meetups] Load Meetupss',
+  LoadMeetups = '[Meetups] Load Meetups',
 }
 
 export class LoadMeetups implements Action {

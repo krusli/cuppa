@@ -2,7 +2,7 @@
   <div class="card w-100 mb-3" *ngFor="let meetup of (meetups$ | async)">
     <div class="card-body">
       <div class="d-flex w-100" style="flex-direction: row">
-          <h3>{{ meetup.name }}</h3>
+          <h3 [routerLink]="['.', meetup._id]">{{ meetup.name }}</h3>
           <div class="ml-auto mr-2">1 day to meetup</div>
       </div>
 

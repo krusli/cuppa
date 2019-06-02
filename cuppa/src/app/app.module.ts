@@ -38,6 +38,7 @@ import { UsersListComponent } from './common/users-list/users-list.component';
 import { MeetupCardComponent } from './meetups/meetup-card/meetup-card.component';
 import { MeetupsEffects } from './store/effects/meetups.effects';
 import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
+import { MeetupComponent } from './meetups/meetup/meetup.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { GroupSettingsComponent } from './groups/group-settings/group-settings.c
     GroupMembersListComponent,
     UsersListComponent,
     MeetupCardComponent,
-    GroupSettingsComponent
+    GroupSettingsComponent,
+    MeetupComponent
   ],
   imports: [
     BrowserModule,
