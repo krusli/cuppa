@@ -15,6 +15,7 @@ import { GroupSettingsComponent } from './groups/group-settings/group-settings.c
 import { MeetupComponent } from './meetups/meetup/meetup.component';
 import { JumbotronComponent } from './jumbotron/jumbotron.component';
 import { GroupJumbotronComponent } from './groups/group-jumbotron/group-jumbotron.component';
+import { MeetupJumbotronComponent } from './meetups/meetup-jumbotron/meetup-jumbotron.component';
 
 const routes: Routes = [
   {
@@ -39,11 +40,6 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: GroupJumbotronComponent,
-            outlet: 'jumbotron'
-          },
-          {
-            path: '',
             component: GroupActivityComponent
           },
           {
@@ -61,7 +57,19 @@ const routes: Routes = [
           {
             path: 'settings',
             component: GroupSettingsComponent
-          }
+          },
+
+          /* Jumbotron */
+          {
+            path: '',
+            component: GroupJumbotronComponent,
+            outlet: 'jumbotron'
+          },
+          {
+            path: 'meetups/:meetupId',
+            component: MeetupJumbotronComponent,
+            outlet: 'jumbotron'
+          },
         ]
       },
       {
@@ -71,7 +79,7 @@ const routes: Routes = [
       {
         path: 'friends',
         component: FriendsListComponent
-      }
+      },
     ]
   },
   {

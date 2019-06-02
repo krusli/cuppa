@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Meetup } from 'src/app/models/Group';
 
 import * as fromRoot from 'src/app/store/reducers';
@@ -17,7 +17,9 @@ export class GroupMeetupsComponent implements OnInit {
   meetups$: Observable<Meetup[]>;
 
   constructor(
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,6 +27,17 @@ export class GroupMeetupsComponent implements OnInit {
       select(x => x.meetups), // TODO: use createFeatureSelector
       select(MeetupsSelectors.selectAll)
     );
+  }
+
+  meetupClicked(meetup: Meetup) {
+    // https://github.com/angular/angular/issues/9957#issuecomment-441361269
+    const groupId = this.route.snapshot.paramMap.get('groupId');
+    this.router.navigate(['/groups', groupId, {
+      outlets: {
+        primary: ['meetups', meetup._id],
+        jumbotron: ['meetups', meetup._id]
+      }
+    }]);
   }
 
 }
