@@ -27,6 +27,14 @@ const routes: Routes = [
     component: GroupsComponent,
     children: [
       {
+        path: 'communities',
+        component: CommunitiesListComponent
+      },
+      {
+        path: 'friends',
+        component: FriendsListComponent
+      },
+      {
         path: '',
         component: GroupsListComponent
       },
@@ -71,14 +79,6 @@ const routes: Routes = [
             outlet: 'jumbotron'
           },
         ]
-      },
-      {
-        path: 'communities',
-        component: CommunitiesListComponent
-      },
-      {
-        path: 'friends',
-        component: FriendsListComponent
       },
     ]
   },
