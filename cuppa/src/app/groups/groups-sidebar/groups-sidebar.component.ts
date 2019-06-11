@@ -31,7 +31,7 @@ export class GroupsSidebarComponent implements OnInit {
   }
 
   getLink(groupId: string) {
-    return `/groups/view/${groupId}`;
+    return `/groups/${groupId}`;
   }
 
 }

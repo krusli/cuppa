@@ -35,6 +35,13 @@ import { AppEffects } from './store/effects/app.effects';
 import { GroupsEffects } from './store/effects/groups.effects';
 import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
 import { UsersListComponent } from './common/users-list/users-list.component';
+import { MeetupCardComponent } from './meetups/meetup-card/meetup-card.component';
+import { MeetupsEffects } from './store/effects/meetups.effects';
+import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
+import { MeetupComponent } from './meetups/meetup/meetup.component';
+import { MeetupJumbotronComponent } from './meetups/meetup-jumbotron/meetup-jumbotron.component';
+import { GroupJumbotronComponent } from './groups/group-jumbotron/group-jumbotron.component';
+import { JumbotronComponent } from './jumbotron/jumbotron.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +64,13 @@ import { UsersListComponent } from './common/users-list/users-list.component';
     GroupMeetupsComponent,
     MyTimePipe,
     GroupMembersListComponent,
-    UsersListComponent
+    UsersListComponent,
+    MeetupCardComponent,
+    GroupSettingsComponent,
+    MeetupComponent,
+    MeetupJumbotronComponent,
+    GroupJumbotronComponent,
+    JumbotronComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +81,7 @@ import { UsersListComponent } from './common/users-list/users-list.component';
     NgbModule,
     FontAwesomeModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects, GroupsEffects]),
+    EffectsModule.forRoot([AppEffects, GroupsEffects, MeetupsEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [],

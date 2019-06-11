@@ -1,0 +1,39 @@
+<div *ngIf="(meetup$ | async)">
+  <h1>{{ (meetup$ | async).name }}</h1>
+  <a [routerLink]="['/groups', (meetup$ | async).group]">{{ (meetup$ | async).group }}</a>
+
+  <br>
+  {{ meetup$ | async | json }}
+
+  <div class="mt-3">
+    <div class="d-flex flex-wrap">
+      <h3>Events</h3>
+      <button class="ml-auto my-auto btn btn-outline-secondary">New Event</button>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="mt-3">
+    <div class="d-flex flex-wrap">
+      <h3>Teams</h3>
+      <button class="ml-auto my-auto btn btn-outline-secondary">New Team</button>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="mt-3">
+    <div class="d-flex flex-wrap">
+      <h3>Attendees</h3>
+      <button class="ml-auto my-auto btn btn-outline-secondary">Invite</button>
+    </div>
+
+  </div>
+
+
+
+
+</div>

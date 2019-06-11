@@ -10,7 +10,7 @@ $theme-colors: (
 $font-family-sans-serif: 'Aileron', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-    
+
 body {
     color: map-get($colors, "main");
     font-weight: 300;
@@ -20,11 +20,33 @@ body {
   display: grid;
 }
 
+
+// responsive squares
+// https://spin.atomicobject.com/2015/07/14/css-responsive-square/
+// .square {
+//   :after {
+//     content: "";
+//     display: block;
+//     padding-bottom: 100%;
+//   }
+
+//   .content {
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
+
+
 // label style: all-caps accent color
 label.emphasis {
   color: map-get($colors, "primary");
   text-transform: uppercase;
   font-weight: 600;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 .card {
@@ -81,14 +103,14 @@ label.highlight {
   -webkit-overflow-scrolling: touch;
 
   scrollbar-width: none;  // Firefox 64+
-  &::-webkit-scrollbar { 
-    display: none; 
+  &::-webkit-scrollbar {
+    display: none;
   }
 
 
   // only 1 level down
   > * {
-    flex: 0 0 auto; 
+    flex: 0 0 auto;
   }
 }
 

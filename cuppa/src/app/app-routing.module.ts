@@ -11,6 +11,11 @@ import { GroupPageComponent } from './groups/group-page/group-page.component';
 import { GroupActivityComponent } from './groups/group-page/group-activity/group-activity.component';
 import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
 import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
+import { GroupSettingsComponent } from './groups/group-settings/group-settings.component';
+import { MeetupComponent } from './meetups/meetup/meetup.component';
+import { JumbotronComponent } from './jumbotron/jumbotron.component';
+import { GroupJumbotronComponent } from './groups/group-jumbotron/group-jumbotron.component';
+import { MeetupJumbotronComponent } from './meetups/meetup-jumbotron/meetup-jumbotron.component';
 
 const routes: Routes = [
   {
@@ -22,6 +27,14 @@ const routes: Routes = [
     component: GroupsComponent,
     children: [
       {
+        path: 'communities',
+        component: CommunitiesListComponent
+      },
+      {
+        path: 'friends',
+        component: FriendsListComponent
+      },
+      {
         path: '',
         component: GroupsListComponent
       },
@@ -30,7 +43,7 @@ const routes: Routes = [
         component: NewGroupComponent
       },
       {
-        path: 'view/:groupId',
+        path: ':groupId',
         component: GroupPageComponent,
         children: [
           {
@@ -42,24 +55,40 @@ const routes: Routes = [
             component: GroupMeetupsComponent
           },
           {
+            path: 'meetups/:meetupId',
+            component: MeetupComponent
+          },
+          {
             path: 'members',
             component: GroupMembersListComponent
-          }
+          },
+          {
+            path: 'settings',
+            component: GroupSettingsComponent
+          },
+
+          /* Jumbotron */
+          {
+            path: '',
+            component: GroupJumbotronComponent,
+            outlet: 'jumbotron'
+          },
+          {
+            path: 'meetups/:meetupId',
+            component: MeetupJumbotronComponent,
+            outlet: 'jumbotron'
+          },
         ]
       },
-      {
-        path: 'communities',
-        component: CommunitiesListComponent
-      },
-      {
-        path: 'friends',
-        component: FriendsListComponent
-      }
     ]
   },
   {
     path: 'meetups',
     component: MeetupsComponent
+  },
+  {
+    path: 'meetups/:meetupId',
+    component: MeetupComponent
   }
 ];
 

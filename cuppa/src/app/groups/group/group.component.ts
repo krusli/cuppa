@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Group } from 'src/app/models/Group';
+import { ActivatedRoute } from '@angular/router';
 // import { UserMap } from 'src/app/models/User';
 
 @Component({
@@ -18,7 +19,6 @@ export class GroupComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
