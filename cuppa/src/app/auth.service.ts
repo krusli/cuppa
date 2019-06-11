@@ -5,12 +5,15 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import Consts from 'src/app/consts';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -23,12 +26,12 @@ export class AuthService {
   });
 
   signUp(name: string, username: string, password: string): Observable<any> {
-    return this.http.post(`${Consts.BASE_URL}:3000/users`, { name, username, password })
+    return this.http.post(`${this.baseUrl}:3000/users`, { name, username, password })
     .pipe(this.saveToken);
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${Consts.BASE_URL}:3000/login`, { username, password })
+    return this.http.post(`${this.baseUrl}:3000/login`, { username, password })
     .pipe(this.saveToken);
   }
 
@@ -41,7 +44,7 @@ export class AuthService {
   }
 
   getUser() {
-    return this.http.get(`${Consts.BASE_URL}:3000/users/me`, {
+    return this.http.get(`${this.baseUrl}:3000/users/me`, {
       headers: this.getHeaders()
     });
   }

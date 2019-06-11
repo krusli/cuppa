@@ -7,14 +7,15 @@
         <label class="secondary">Members</label>
     
         <ul class="group-list">
+          <!-- TODO: replace with users-list -->
           <li *ngFor="let member of group.members.slice(0, LIMIT)" class="d-flex">
             <div class="avatar"></div>
             <div class="ml-1 my-auto">{{ users[member].name }}</div>
           </li>
 
           <div class="d-flex"></div>
-            <span class="more-text ml-1 my-auto" *ngIf="group.members.length > LIMIT">+ {{group.members.length - LIMIT}} more</span>
         </ul>
+        <span class="more-text ml-1 my-auto" *ngIf="group.members.length > LIMIT">+ {{group.members.length - LIMIT}} more</span>
     
       </div>
     

@@ -10,7 +10,7 @@ import { NewGroupComponent } from './groups/new-group/new-group.component';
 import { GroupPageComponent } from './groups/group-page/group-page.component';
 import { GroupActivityComponent } from './groups/group-page/group-activity/group-activity.component';
 import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
-import { GroupMembersComponent } from './groups/group-page/group-members/group-members.component';
+import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
 
 const routes: Routes = [
   {
@@ -43,7 +43,7 @@ const routes: Routes = [
           },
           {
             path: 'members',
-            component: GroupMembersComponent
+            component: GroupMembersListComponent
           }
         ]
       },
@@ -64,7 +64,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    paramsInheritanceStrategy: 'always'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

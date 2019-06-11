@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 # wildcard to also copy package-lock
 COPY package*.json ./
 RUN npm install
-RUN npm i -g nodemon
+RUN npm i -g typescript tsc-watch
 
 # Now bundle the app's source code inside the Docker image
 # NOTE: only copying package.json previously allows us to take advantage

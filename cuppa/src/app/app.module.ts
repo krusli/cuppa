@@ -25,7 +25,6 @@ import { GroupPageComponent } from './groups/group-page/group-page.component';
 import { TabBarComponent } from './common/tab-bar/tab-bar.component';
 import { GroupActivityComponent } from './groups/group-page/group-activity/group-activity.component';
 import { GroupMeetupsComponent } from './groups/group-page/group-meetups/group-meetups.component';
-import { GroupMembersComponent } from './groups/group-page/group-members/group-members.component';
 import { MyTimePipe } from './time.pipe';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -34,6 +33,8 @@ import { reducers, metaReducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/effects/app.effects';
 import { GroupsEffects } from './store/effects/groups.effects';
+import { GroupMembersListComponent } from './groups/group-page/members/members-list/group-members-list.component';
+import { UsersListComponent } from './common/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -54,8 +55,9 @@ import { GroupsEffects } from './store/effects/groups.effects';
     TabBarComponent,
     GroupActivityComponent,
     GroupMeetupsComponent,
-    GroupMembersComponent,
-    MyTimePipe
+    MyTimePipe,
+    GroupMembersListComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
