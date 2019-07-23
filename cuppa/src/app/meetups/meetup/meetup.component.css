@@ -1,0 +1,11 @@
+.round-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  border-radius: 50%;
+  border: 1px solid grey;
+}
+
+.round-button fa-icon {
+  margin: auto;
+}

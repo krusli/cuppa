@@ -6,6 +6,7 @@ import * as fromRoot from 'src/app/store/reducers';
 import { Observable } from 'rxjs';
 import { Meetup } from 'src/app/models/Group';
 import { MeetupsSelectors } from 'src/app/store/reducers/meetups.reducer';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-meetup',
@@ -13,6 +14,8 @@ import { MeetupsSelectors } from 'src/app/store/reducers/meetups.reducer';
   styleUrls: ['./meetup.component.css']
 })
 export class MeetupComponent implements OnInit {
+
+  faArrowLeft = faArrowLeft;
 
   meetupId: string;
 
