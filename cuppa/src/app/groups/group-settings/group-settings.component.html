@@ -1,3 +1,7 @@
-<p>
-  group-settings works!
-</p>
+<div *ngIf="group$ | async as group">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" [(ngModel)]="group.name">
+  </div>
+</div>
+

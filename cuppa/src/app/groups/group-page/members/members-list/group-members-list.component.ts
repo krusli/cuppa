@@ -10,6 +10,7 @@ import { GroupsSelectors } from 'src/app/store/reducers/groups.reducer';
 import { UsersSelectors } from 'src/app/store/reducers/users.reducer';
 import { Dictionary } from '@ngrx/entity';
 import { User } from 'src/app/models/User';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-group-members-list',
@@ -17,6 +18,8 @@ import { User } from 'src/app/models/User';
   styleUrls: ['./group-members-list.component.css']
 })
 export class GroupMembersListComponent implements OnInit {
+
+  faPlus = faPlus;
 
   group$: Observable<Group>;
   users$: Observable<Dictionary<User>>;
@@ -49,7 +52,7 @@ export class GroupMembersListComponent implements OnInit {
       return [];
     }
 
-    const retVal = userIds.map((entry: string) => 
+    const retVal = userIds.map((entry: string) =>
       userData[entry]
     );
     return retVal;

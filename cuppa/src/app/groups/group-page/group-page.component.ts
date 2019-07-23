@@ -7,7 +7,7 @@ import * as fromRoot from 'src/app/store/reducers';
 import { Group } from 'src/app/models/Group';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { GroupsSelectors } from 'src/app/store/reducers/groups.reducer';
 import { LoadMeetups } from 'src/app/store/actions/meetups.actions';
@@ -32,14 +32,19 @@ export class GroupPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /* Assumption: Groups store already populated by parent Groups Component (routing parent) */
-    const groupId = this.route.snapshot.paramMap.get('groupId');
-    this.updateNavItems(groupId);
 
-    this.group$ = this.store.pipe(
-      select('groups'),
-      select(GroupsSelectors.selectEntities),
-      select(x => x[groupId])
-    )
+    this.subs.push(
+      this.route.paramMap.subscribe(paramMap => {
+        const groupId = paramMap.get('groupId');
+        this.updateNavItems(groupId);
+
+        this.group$ = this.store.pipe(
+          select('groups'),
+          select(GroupsSelectors.selectEntities),
+          select(x => x[groupId])
+        );
+      })
+    );
 
     this.subs.push(
       this.group$.subscribe(

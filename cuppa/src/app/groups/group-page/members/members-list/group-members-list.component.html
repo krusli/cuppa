@@ -1,2 +1,9 @@
+<div class="w-100 text-right">
+  <button class="btn btn-outline-secondary">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    Invite
+  </button>
+</div>
+
 <app-users-list [users]="hydrateUserData((group$|async)?.members, (users$|async))">
 </app-users-list>
