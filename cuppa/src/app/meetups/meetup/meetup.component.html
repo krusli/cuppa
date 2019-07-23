@@ -24,7 +24,9 @@
 
 <app-meetup-jumbotron class="w-100"></app-meetup-jumbotron>
 
-<div class="container mt-3" *ngIf="meetup$ | async as meetup">
+<div class="container" *ngIf="meetup$ | async as meetup">
+  <app-tab-bar [navItems]="navItems" [alignLeft]="true"></app-tab-bar>
+  <div class="mt-3"></div>
   <h1>{{ meetup.name }}</h1>
 
   <br>

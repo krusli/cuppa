@@ -8,6 +8,7 @@ import { Meetup } from 'src/app/models/Group';
 import { MeetupsSelectors } from 'src/app/store/reducers/meetups.reducer';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { LoadMeetups, LoadMeetup } from 'src/app/store/actions/meetups.actions';
+import { NavItem, NavItemImpl } from 'src/app/common/tab-bar/tab-bar.component';
 
 @Component({
   selector: 'app-meetup',
@@ -22,10 +23,13 @@ export class MeetupComponent implements OnInit {
 
   meetup$: Observable<Meetup>;
 
+  navItems: NavItem[] = [];
+
   constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     this.meetupId = this.route.snapshot.paramMap.get('meetupId');
+    this.updateNavItems(this.meetupId);
 
     this.store.dispatch(new LoadMeetup({ meetupId: this.meetupId }));
 
@@ -36,6 +40,15 @@ export class MeetupComponent implements OnInit {
     );
 
     // TODO: dispatch LoadMeetups if the Store is empty
+  }
+
+  updateNavItems(meetupId: string) {
+    this.navItems = [
+      new NavItemImpl('Meetup', `/meetups/${meetupId}`, { exact: true }),
+      new NavItemImpl('Events', `/meetups/${meetupId}/events`),
+      new NavItemImpl('Teams', `/meetups/${meetupId}/teams`),
+      new NavItemImpl('Attendees', `/meetups/${meetupId}/attendees`)
+    ];
   }
 
 }
