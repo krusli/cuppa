@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Meetup } from 'src/app/models/Group';
 import { MeetupsSelectors } from 'src/app/store/reducers/meetups.reducer';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { LoadMeetups, LoadMeetup } from 'src/app/store/actions/meetups.actions';
 
 @Component({
   selector: 'app-meetup',
@@ -25,6 +26,8 @@ export class MeetupComponent implements OnInit {
 
   ngOnInit() {
     this.meetupId = this.route.snapshot.paramMap.get('meetupId');
+
+    this.store.dispatch(new LoadMeetup({ meetupId: this.meetupId }));
 
     this.meetup$ = this.store.pipe(
       select(x => x.meetups),

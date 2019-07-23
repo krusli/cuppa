@@ -31,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // TODO takeUntil
     this.authService.getUser()
     .subscribe((user: User) => {
       this.store.dispatch(new LoadUser(user));
@@ -38,7 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const subscription = this.user$.subscribe(
       user => {
-        if (!user) return;
+        if (!user) {
+          return;
+        }
 
         this.store.dispatch(new LoadGroups());
       }

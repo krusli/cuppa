@@ -37,20 +37,6 @@ export class GroupActivityComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    // TODO use NgRx Store, so parent and child can share data + react to events without
-    // bulky event emitting and handling code.
-    // this.route.paramMap
-    // .pipe(
-    //   switchMap(params => {
-    //     const groupId = params.get('groupId');
-    //     return this.groupsService.getGroup(groupId);
-    //   })
-    // )
-    // .subscribe((groupAndUsers: any) => {
-    //   this.group = groupAndUsers.group;
-    //   this.users = groupAndUsers.users;
-    // });
-
     const groupId = this.route.snapshot.paramMap.get('groupId');
 
     this.group$ = this.store.pipe(
@@ -78,13 +64,13 @@ export class GroupActivityComponent implements OnInit, OnDestroy {
 
     switch (action) {
       case 'Created':
-        return 'Created the group'
+        return 'Created the group';
 
       case 'Joined':
-        return 'Joined the group'
+        return 'Joined the group';
 
       default:
-        return ''
+        return '';
     }
 
   }

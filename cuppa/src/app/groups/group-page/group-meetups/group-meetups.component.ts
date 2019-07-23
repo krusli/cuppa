@@ -35,12 +35,13 @@ export class GroupMeetupsComponent implements OnInit {
   meetupClicked(meetup: Meetup) {
     // https://github.com/angular/angular/issues/9957#issuecomment-441361269
     const groupId = this.route.snapshot.paramMap.get('groupId');
-    this.router.navigate(['/groups', groupId, {
-      outlets: {
-        primary: ['meetups', meetup._id],
-        jumbotron: ['meetups', meetup._id]
-      }
-    }]);
+    // this.router.navigate(['/groups', groupId, {
+    //   outlets: {
+    //     primary: ['meetups', meetup._id],
+    //     jumbotron: ['meetups', meetup._id]
+    //   }
+    // }]);
+    this.router.navigate(['/meetups', meetup._id]);
   }
 
 }

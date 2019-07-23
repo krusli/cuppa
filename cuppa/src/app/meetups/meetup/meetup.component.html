@@ -1,46 +1,51 @@
-<div class="mb-3">
-  <div class="round-button">
-    <fa-icon [icon]="faArrowLeft"></fa-icon>
+<div class="container mt-3" *ngIf="meetup$ | async as meetup">
+  <div class="mb-3">
+    <a [routerLink]="['/groups', meetup.group]">
+      <div class="round-button">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+      </div>
+      Back to group
+    </a>
   </div>
-  Back to group
-</div>
+  <!-- <a [routerLink]="['/groups', (meetup$ | async).group]">{{ (meetup$ | async).group }}</a> -->
 
-<div *ngIf="(meetup$ | async)">
-  <h1>{{ (meetup$ | async).name }}</h1>
-  <a [routerLink]="['/groups', (meetup$ | async).group]">{{ (meetup$ | async).group }}</a>
+  <div>
+    <h1>{{ meetup.name }}</h1>
 
-  <br>
-  {{ meetup$ | async | json }}
+    <br>
+    {{ meetup | json }}
 
-  <div class="mt-3">
-    <div class="d-flex flex-wrap">
-      <h3>Events</h3>
-      <button class="ml-auto my-auto btn btn-outline-secondary">New Event</button>
+    <div class="mt-3">
+      <div class="d-flex flex-wrap">
+        <h3>Events</h3>
+        <button class="ml-auto my-auto btn btn-outline-secondary">New Event</button>
+      </div>
+
     </div>
 
-  </div>
+    <hr>
 
-  <hr>
+    <div class="mt-3">
+      <div class="d-flex flex-wrap">
+        <h3>Teams</h3>
+        <button class="ml-auto my-auto btn btn-outline-secondary">New Team</button>
+      </div>
 
-  <div class="mt-3">
-    <div class="d-flex flex-wrap">
-      <h3>Teams</h3>
-      <button class="ml-auto my-auto btn btn-outline-secondary">New Team</button>
     </div>
 
-  </div>
+    <hr>
 
-  <hr>
+    <div class="mt-3">
+      <div class="d-flex flex-wrap">
+        <h3>Attendees</h3>
+        <button class="ml-auto my-auto btn btn-outline-secondary">Invite</button>
+      </div>
 
-  <div class="mt-3">
-    <div class="d-flex flex-wrap">
-      <h3>Attendees</h3>
-      <button class="ml-auto my-auto btn btn-outline-secondary">Invite</button>
     </div>
 
+
+
+
   </div>
-
-
-
 
 </div>

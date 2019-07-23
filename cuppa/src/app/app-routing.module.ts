@@ -16,6 +16,7 @@ import { MeetupComponent } from './meetups/meetup/meetup.component';
 import { JumbotronComponent } from './jumbotron/jumbotron.component';
 import { GroupJumbotronComponent } from './groups/group-jumbotron/group-jumbotron.component';
 import { MeetupJumbotronComponent } from './meetups/meetup-jumbotron/meetup-jumbotron.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
@@ -54,10 +55,10 @@ const routes: Routes = [
             path: 'meetups',
             component: GroupMeetupsComponent
           },
-          {
-            path: 'meetups/:meetupId',
-            component: MeetupComponent
-          },
+          // {
+          //   path: 'meetups/:meetupId',
+          //   component: MeetupComponent
+          // },
           {
             path: 'members',
             component: GroupMembersListComponent
@@ -73,23 +74,28 @@ const routes: Routes = [
             component: GroupJumbotronComponent,
             outlet: 'jumbotron'
           },
-          {
-            path: 'meetups/:meetupId',
-            component: MeetupJumbotronComponent,
-            outlet: 'jumbotron'
-          },
+          // {
+          //   path: 'meetups/:meetupId',
+          //   component: MeetupJumbotronComponent,
+          //   outlet: 'jumbotron'
+          // },
         ]
       },
     ]
   },
   {
     path: 'meetups',
-    component: MeetupsComponent
+    children: [
+      {
+        path: '',
+        component: MeetupsComponent
+      },
+      {
+        path: ':meetupId',
+        component: MeetupComponent
+      }
+    ]
   },
-  {
-    path: 'meetups/:meetupId',
-    component: MeetupComponent
-  }
 ];
 
 @NgModule({

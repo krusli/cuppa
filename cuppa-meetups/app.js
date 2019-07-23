@@ -1,10 +1,12 @@
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
 app.use(helmet());
 app.use(bodyParser.json());
+app.use(cors());
 
 const mongoose = require('mongoose');
 const setupConnection = () => {

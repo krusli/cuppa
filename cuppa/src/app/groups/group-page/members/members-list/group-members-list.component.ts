@@ -38,8 +38,7 @@ export class GroupMembersListComponent implements OnInit {
       select('groups'),
       select(GroupsSelectors.selectEntities),
       select(x => x[groupId])
-    )
-    this.group$.subscribe(x => console.log(x));
+    );
 
     this.users$ = this.store.pipe(
       select('users'),

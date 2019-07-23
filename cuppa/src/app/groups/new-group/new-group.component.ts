@@ -14,7 +14,7 @@ export class NewGroupComponent implements OnInit {
 
   name: string;
   description: string;
-  
+
   constructor(private groupsService: GroupsService, private router: Router) { }
 
   ngOnInit() {
@@ -26,12 +26,15 @@ export class NewGroupComponent implements OnInit {
       return;
     }
 
+    // TODO cleanup
     this.groupsService.newGroup({
       name: this.name,
       description: this.description
     })
     .subscribe(x => {
       console.log(x);
+
+      // TODO this.router.navigate('../x.id', relative to this route)
       // TODO: add an action to add a new group + users in the new group
       // without replacing the existing items
       // groups.actions.ts and groups.reducer.ts

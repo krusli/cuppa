@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import Consts from 'src/app/consts';
 import { environment } from 'src/environments/environment';
 
+// TODO: write a Http interceptor
 
 @Injectable({
   providedIn: 'root'
