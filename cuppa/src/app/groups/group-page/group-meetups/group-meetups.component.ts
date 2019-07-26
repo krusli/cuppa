@@ -7,6 +7,7 @@ import { Meetup } from 'src/app/models/Group';
 import * as fromRoot from 'src/app/store/reducers';
 import { MeetupsSelectors } from 'src/app/store/reducers/meetups.reducer';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-group-meetups',
@@ -22,7 +23,8 @@ export class GroupMeetupsComponent implements OnInit {
   constructor(
     private store: Store<fromRoot.State>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public modal: NgbModal
   ) { }
 
   ngOnInit() {

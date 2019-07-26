@@ -71,7 +71,7 @@
       </div>
 
       <div class="modal-body">
-        <form>
+        <form (ngSubmit)="isLogin ? login() : signUpAction()">
           <div class="form-group" *ngIf="!isLogin">
             <label for="name">Name</label>
             <div class="input-group">
@@ -105,11 +105,11 @@
 
           <div class="w-100 text-center">
             <div *ngIf="isLogin; else signUpButton">
-              <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+              <button type="button" class="btn btn-primary" type="submit">Login</button>
             </div>
           </div>
           <ng-template #signUpButton>
-            <button type="button" class="btn btn-primary" (click)="signUpAction()">Sign up</button>
+            <button type="button" class="btn btn-primary" type="submit">Sign up</button>
           </ng-template>
 
           <div class="w-100" *ngIf="isLogin">
