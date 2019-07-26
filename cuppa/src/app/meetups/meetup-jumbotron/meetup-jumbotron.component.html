@@ -5,8 +5,11 @@
 
   <div class="jumbotron h-400 content mb-0 ml-0">
     <div class="h-100 d-flex container">
-      <div class="mt-auto ml-auto">
-        {{ meetup | json }}
+      <div>
+        <ng-content></ng-content>
+        <div class="mt-auto ml-auto">
+          {{ meetup | json }}
+        </div>
       </div>
     </div>
 
