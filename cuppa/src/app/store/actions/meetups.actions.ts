@@ -3,7 +3,9 @@ import { Meetup } from 'src/app/models/Group';
 
 export enum MeetupsActionTypes {
   LoadMeetups = '[Meetups] Load Meetups',
-  LoadMeetup = '[Meetups] Load Meetup'
+  LoadMeetup = '[Meetups] Load Meetup',
+  NewMeetup = '[Meetups] New Meetup',
+  NewMeetupSuccess = '[Meetups] New Meetup Success'
 }
 
 export class LoadMeetups implements Action {
@@ -18,5 +20,17 @@ export class LoadMeetup implements Action {
   constructor(public payload: { meetupId: string }) {}
 }
 
+export class NewMeetup implements Action {
+  readonly type = MeetupsActionTypes.NewMeetup;
 
-export type MeetupsActions = LoadMeetups | LoadMeetup;
+  constructor(public payload: { meetup: Meetup }) {}
+}
+
+export class NewMeetupSuccess implements Action {
+  readonly type = MeetupsActionTypes.NewMeetupSuccess;
+
+  constructor(public payload: { meetup: Meetup }) {}
+}
+
+
+export type MeetupsActions = LoadMeetups | LoadMeetup | NewMeetup | NewMeetupSuccess;
