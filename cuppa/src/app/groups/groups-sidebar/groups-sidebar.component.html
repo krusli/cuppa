@@ -1,9 +1,9 @@
 <div class="pl-4 w-100 d-flex">
-  <div class="ml-auto">
+  <!-- <div class="ml-auto"> -->
 
     <div class="groups list">
       <label class="emphasis">Groups</label>
-      <ul class="nav">
+      <ul class="nav text-right">
         <!-- routerLinkActive for dynamic links -->
         <!-- https://stackoverflow.com/a/42295902 -->
         <li class="nav-item" *ngFor="let group of groups$ | async" [routerLink]="getLink(group._id)"
@@ -24,7 +24,7 @@
         <li class="nav-link">Headphones</li>
       </ul>
     </div> -->
-  </div>
+  <!-- </div> -->
 
 
 
