@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { concatMap, switchMap, map } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { MeetupsActionTypes, MeetupsActions, LoadMeetups } from '../actions/meetups.actions';
+import { MeetupsActionTypes, MeetupsActions, LoadMeetups, NewMeetupSuccess } from '../actions/meetups.actions';
 import { EffectsRootModule } from '@ngrx/effects/src/effects_root_module';
 import { MeetupsService } from 'src/app/meetups.service';
 
@@ -26,6 +26,12 @@ export class MeetupsEffects {
     concatMap(() => EMPTY)
   );
 
+  @Effect()
+  newMeetup$ = this.actions$.pipe(
+    ofType(MeetupsActionTypes.NewMeetup),
+    switchMap(action => this.meetupsService.newMeetup(action.payload.meetup)),
+    map(result => new NewMeetupSuccess({ meetup: result }))
+  );
 
   constructor(private actions$: Actions<MeetupsActions>, private meetupsService: MeetupsService) {}
 

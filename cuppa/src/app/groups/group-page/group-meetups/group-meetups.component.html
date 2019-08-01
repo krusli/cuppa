@@ -1,8 +1,39 @@
+<ng-template #newMeetupModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Meetup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        {{ meetupTemp | json }}
+        <hr>
+        <label for="name">Name</label>
+        <!-- <div class="input-group"> -->
+          <input class="form-control" id="name" name="name" type="text" [(ngModel)]="meetupTemp.name">
+          <!-- <div class="input-group-append"> -->
+            <!-- <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); saveMeetup()">Save</button>
+  </div>
+</ng-template>
+
 <div class="w-100 text-right">
-  <button class="btn btn-outline-secondary">
-    <fa-icon [icon]="faPlus"></fa-icon>
-    New Meetup
-  </button>
+  <ng-container *ngIf="group$ | async as group">
+    <ng-container *ngIf="account$ | async as account">
+      <button class="btn btn-outline-secondary" (click)="newMeetup(group, account); modal.open(newMeetupModal)">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        New Meetup
+      </button>
+    </ng-container>
+  </ng-container>
 </div>
 
 <div class="card w-100 my-3" *ngFor="let meetup of (meetups$ | async)">

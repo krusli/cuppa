@@ -19,4 +19,9 @@ export class MeetupsService {
     return this.http.get<Meetup>(`${this.baseUrl}:3002/meetups/${meetupId}`, { headers });
   }
 
+  newMeetup(meetup: Meetup): Observable<Meetup> {
+    const headers = this.authService.getHeaders();
+    return this.http.post<Meetup>(`${this.baseUrl}:3002/meetups`, meetup, { headers });
+  }
+
 }

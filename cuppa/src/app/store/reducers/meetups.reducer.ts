@@ -21,6 +21,9 @@ export function reducer(state = initialState, action: MeetupsActions): State {
     case MeetupsActionTypes.LoadMeetups:
       return meetupsAdapter.addAll(action.payload, state);  // also clears out meetups from other group if already previously loaded.
 
+    case MeetupsActionTypes.NewMeetupSuccess:
+      return meetupsAdapter.addOne(action.payload.meetup, state);
+
     default:
       return state;
   }

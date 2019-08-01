@@ -1,28 +1,31 @@
-<div class="container mt-3" *ngIf="meetup$ | async as meetup">
-  <div class="mb-3 d-flex">
-    <div class="mr-4">
-      <a [routerLink]="['/groups', meetup.group]">
-        <div class="round-button">
-          <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </div>
-        Back to group
-      </a>
-    </div>
 
-    <div class="mr-4">
-      <a routerLink="..">
-        <div class="round-button">
-          <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </div>
-        Back to Meetups
-      </a>
-    </div>
-
-  </div>
-</div>
   <!-- <a [routerLink]="['/groups', (meetup$ | async).group]">{{ (meetup$ | async).group }}</a> -->
 
-<app-meetup-jumbotron class="w-100"></app-meetup-jumbotron>
+<app-meetup-jumbotron class="w-100">
+  <!-- <div class="container mt-3" *ngIf="meetup$ | async as meetup"> -->
+  <div *ngIf="meetup$ | async as meetup">
+    <div class="mb-3 d-flex">
+      <div class="mr-4">
+        <a [routerLink]="['/groups', meetup.group]">
+          <div class="round-button">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+          </div>
+          Back to group
+        </a>
+      </div>
+  
+      <div class="mr-4">
+        <a routerLink="..">
+          <div class="round-button">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+          </div>
+          Back to Meetups
+        </a>
+      </div>
+  
+    </div>
+  </div>
+</app-meetup-jumbotron>
 
 <div class="container" *ngIf="meetup$ | async as meetup">
   <app-tab-bar [navItems]="navItems" [alignLeft]="true"></app-tab-bar>

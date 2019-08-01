@@ -1,16 +1,16 @@
 // import { UserMap } from './User';
 
 export interface Meetup {
-  attendees: any[];
-  _id: string;
+  _id?: string;
   name: string;
   group: string;
   owner: string;
-  createdOn: Date | string;
-  events: any[];
-  teams: any[];
-  roles: any[];
-  __v: number;
+  createdOn?: Date | string;
+  attendees?: any[];
+  events?: any[];
+  teams?: any[];
+  roles?: any[];
+  __v?: number;
 }
 
 export interface Activity {
